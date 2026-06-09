@@ -857,14 +857,17 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   // the day table into page-sized chunks (each its own table with its own header)
   // and force a page break before each, so every printed page gets a header.
   const IS_WEBKIT = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
-  const ROWS_PER_PAGE = 18;   // conservative lane-rows that fit one landscape page
+  // Lane-rows that fit one landscape page. The first page is shorter because the
+  // title + color key print above the table there, so it gets a smaller budget.
+  const FIRST_PAGE_ROWS = 11;
+  const PAGE_ROWS = 17;
   function buildPrintChunks() {
     if (!dayWrap) return;
     const chunks = [];
-    let cur = [], rows = 0;
+    let cur = [], rows = 0, budget = FIRST_PAGE_ROWS;
     daySlots.forEach(s => {
       const L = slotLaneCount(s.min);
-      if (cur.length && rows + L > ROWS_PER_PAGE) { chunks.push(cur); cur = []; rows = 0; }
+      if (cur.length && rows + L > budget) { chunks.push(cur); cur = []; rows = 0; budget = PAGE_ROWS; }
       cur.push(s); rows += L;
     });
     if (cur.length) chunks.push(cur);
