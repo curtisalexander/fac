@@ -405,6 +405,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     --evening: #bb6bd9;
     --shadow: 0 6px 20px rgba(0,0,0,.35);
     --radius: 14px;
+    --band: #212e3e;          /* alternating time-slot band on the day grid */
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -493,10 +494,12 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .tg-corner { position: sticky; left: 0; z-index: 3; background: var(--panel-2); }
   .tg-time {
     position: sticky; left: 0; z-index: 2; background: var(--panel-2);
-    font-weight: 700; font-size: .72rem; color: var(--accent-2);
-    padding: 6px; display: flex; align-items: center; justify-content: flex-end; text-align: right;
+    font-weight: 700; font-size: .76rem; color: var(--accent-2);
+    padding: 6px 8px; display: flex; align-items: center; justify-content: flex-end; text-align: right;
   }
   .tg-cell { padding: 5px; display: flex; flex-direction: column; gap: 5px; min-height: 32px; }
+  /* Alternate time-slot banding so each time block reads as one unit. */
+  .tg-time.band, .tg-cell.band { background: var(--band); }
   .card-compact { padding: 6px 8px; }
   .card-compact .cname { font-size: .82rem; font-weight: 600; }
   .card-compact .meta { color: var(--muted); font-size: .72rem; margin-top: 2px; }
@@ -637,6 +640,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     }
     .tg-corner, .tg-dayhead, .tg-time, .tg-cell, .group, .day-block, .card, .row { background: #fff !important; color: #000 !important; }
     .tg-dayhead, .tg-time, .group > h3, .day-block > h3, .daysep { background: #eee !important; color: #000 !important; }
+    .tg-cell.band { background: #f1f1f1 !important; }
+    .tg-time.band { background: #e3e3e3 !important; }
     .tg-dayhead { font-size: 10px; padding: 3px 2px; }
     .tg-time { font-size: 8.5px; padding: 3px; }
     .tg-cell { padding: 2px; gap: 2px; min-height: 0; }
@@ -718,6 +723,12 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   "use strict";
   const DATA = JSON.parse(document.getElementById("schedule-data").textContent);
   const classes = DATA.classes;
+  // Global lane priority: busiest activities first, so each class keeps the same
+  // relative lane position in every time slot it appears in (consistent rows).
+  const famRank = {};
+  (DATA.families || []).slice()
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+    .forEach((f, i) => { famRank[f.family] = i; });
   const DAY_ORDER = ["MON","TUE","WED","THU","FRI","SAT","SUN"];
   const DAY_FULL = {MON:"Mon",TUE:"Tue",WED:"Wed",THU:"Thu",FRI:"Fri",SAT:"Sat",SUN:"Sun"};
 
@@ -761,23 +772,22 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const grid = el("div", "timegrid");
     grid.appendChild(el("div", "tg-corner", "&nbsp;"));
     DAY_ORDER.forEach(day => grid.appendChild(el("div", "tg-dayhead", esc(fullDayName(day)))));
-    slots.forEach(min => {
+    slots.forEach((min, si) => {
+      const band = si % 2 === 1 ? " band" : "";   // alternate slot banding
       const byDay = {};
       DAY_ORDER.forEach(d => { byDay[d] = classes.filter(c => c.day === d && c.timeMin === min); });
-      // Lanes = families present at this slot, ordered by how many days they span
-      // (the most-recurring class sits in the top lane).
-      const laneDays = new Map(), laneLabel = new Map();
+      // Lanes = families present at this slot, ordered by a single global priority
+      // so each class keeps the same relative position in every slot.
+      const laneDays = new Map();
       DAY_ORDER.forEach(d => byDay[d].forEach(c => {
         if (!laneDays.has(c.family)) laneDays.set(c.family, new Set());
         laneDays.get(c.family).add(d);
-        laneLabel.set(c.family, c.familyLabel);
       }));
       const lanes = Array.from(laneDays.keys()).sort((a, b) =>
-        laneDays.get(b).size - laneDays.get(a).size ||
-        laneLabel.get(a).localeCompare(laneLabel.get(b)));
+        (famRank[a] ?? 999) - (famRank[b] ?? 999));
       const L = Math.max(lanes.length, 1);
       // Time label spans all lanes of this slot (column 1).
-      const t = el("div", "tg-time", esc(slotLabel.get(min)));
+      const t = el("div", "tg-time" + band, esc(slotLabel.get(min)));
       t.style.gridColumn = "1";
       t.style.gridRow = "span " + L;
       grid.appendChild(t);
@@ -786,11 +796,11 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
         DAY_ORDER.forEach(d => {
           const here = byDay[d].filter(c => c.family === fam);
           if (here.length) {
-            const cell = el("div", "tg-cell");
+            const cell = el("div", "tg-cell" + band);
             here.forEach(c => cell.appendChild(gridCard(c)));
             grid.appendChild(cell);
           } else {
-            grid.appendChild(el("div", "tg-cell tg-empty"));
+            grid.appendChild(el("div", "tg-cell tg-empty" + band));
           }
         });
       });
