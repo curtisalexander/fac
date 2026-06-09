@@ -602,28 +602,56 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     main { padding: 0 14px; }
   }
 
-  /* ---- Print ---- */
+  /* ---- Print (landscape, fits the page at any orientation) ---- */
   @media print {
-    @page { size: landscape; margin: .4in; }
+    @page { size: landscape; margin: .35in; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body { background: #fff; color: #000; padding: 0; }
-    header.site { position: static; background: #fff; border: none; padding: 0 0 8px; }
-    .tabs, .toolbar, .print-btn, .colorkey { display: none !important; }
+    html, body { background: #fff; color: #000; padding: 0; }
+    body { font-size: 11px; }
+    header.site { position: static; background: #fff; border: none; padding: 0 0 6px; }
+    h1 { font-size: 16px; }
+    .head-row { margin-bottom: 2px; }
+    .head-row .sub { font-size: 10px; }
+    .tabs, .toolbar, .print-btn { display: none !important; }
     main { max-width: none; padding: 0; }
     a { color: #000; text-decoration: none; }
+
+    /* Print a compact color key so the colors stay meaningful on paper. */
+    .colorkey { display: block !important; max-width: none; margin: 0 0 6px; padding: 0; border: none; }
+    .colorkey > summary { padding: 1px 0; font-size: 10px; font-weight: 700; list-style: none; pointer-events: none; }
+    .colorkey > summary::before, .colorkey > summary .hint { display: none; }
+    .colorkey > summary::after { content: ":"; }
+    .key-items { display: flex !important; max-height: none !important; overflow: visible !important; padding: 0; gap: 2px 9px; }
+    .key-item { border: none !important; background: none !important; box-shadow: none !important; padding: 0; font-size: 9px; }
+    .key-item .swatch { width: 9px; height: 9px; }
+    .key-item .kcount { display: none; }
+
     /* Always print the aligned grid for By Day (not the mobile stack). */
     .timegrid-wrap { display: block !important; overflow: visible !important; }
     .day-stack { display: none !important; }
-    .timegrid { min-width: 0 !important; background: #ccc; border-color: #999; }
+    /* minmax(0,1fr) makes the 7 day columns shrink to fit the paper — no clipping. */
+    .timegrid {
+      min-width: 0 !important;
+      grid-template-columns: 50px repeat(7, minmax(0, 1fr)) !important;
+      background: #bbb; border-color: #999;
+    }
     .tg-corner, .tg-dayhead, .tg-time, .tg-cell, .group, .day-block, .card, .row { background: #fff !important; color: #000 !important; }
     .tg-dayhead, .tg-time, .group > h3, .day-block > h3, .daysep { background: #eee !important; color: #000 !important; }
+    .tg-dayhead { font-size: 10px; padding: 3px 2px; }
+    .tg-time { font-size: 8.5px; padding: 3px; }
+    .tg-cell { padding: 2px; gap: 2px; min-height: 0; }
+    .card-compact { padding: 2px 3px; }
+    .card-compact .cname { font-size: 9px; }
+    .card-compact .meta { font-size: 8px; }
     /* keep the family-color left border (set inline); neutral elsewhere */
-    .card { border: 1px solid #bbb; border-left-width: 5px; box-shadow: none !important; }
-    .row { border-bottom: 1px solid #ddd; }
+    .card { border: 1px solid #bbb; border-left-width: 4px; box-shadow: none !important; }
+    .card .badge { font-size: 7px; }
+    .row { border-bottom: 1px solid #ddd; padding: 3px 8px; }
     .card .meta, .row .rsub, .group > h3 .count, .group > h3 .caret { color: #333 !important; }
     .badge { color: #000 !important; border-color: #888 !important; }
-    .card, .row, .tg-cell, .group, .day-block { break-inside: avoid; }
-    footer.site { color: #333; border-color: #bbb; }
+    .tg-cell, .card, .row, .daysep, .group, .day-block { break-inside: avoid; }
+    .groups { gap: 8px; }
+    footer.site { color: #333; border-color: #bbb; margin-top: 10px; padding: 8px 0 0; font-size: 9px; }
   }
 </style>
 </head>
