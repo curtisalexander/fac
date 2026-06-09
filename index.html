@@ -253,6 +253,8 @@
     /* Repeat the day-name header on every page; keep each time block intact. */
     .timegrid thead { display: table-header-group; }
     .timegrid tbody.slot { break-inside: avoid; }
+    /* Safari chunking: each chunk table starts a new page (header at its top). */
+    .timegrid.page-break { break-before: page; }
     .tg-corner, .tg-time { width: 44px !important; }
     .tg-corner, .tg-dayhead, .tg-time, .tg-cell, .group, .day-block, .card, .row { background: #fff !important; color: #000 !important; }
     .tg-dayhead, .tg-time, .group > h3, .day-block > h3, .daysep { background: #eee !important; color: #000 !important; }
@@ -325,7 +327,7 @@
 </main>
 
 <footer class="site">
-  <div>Last updated: <b>June 9, 2026 at 5:59 PM</b></div>
+  <div>Last updated: <b>June 9, 2026 at 6:05 PM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -335,8 +337,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-09T17:59:43",
-  "updatedHuman": "June 9, 2026 at 5:59 PM",
+  "updated": "2026-06-09T18:05:59",
+  "updatedHuman": "June 9, 2026 at 6:05 PM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -2582,6 +2584,12 @@
     .forEach((f, i) => { famRank[f.family] = i; });
   const DAY_ORDER = ["MON","TUE","WED","THU","FRI","SAT","SUN"];
   const DAY_FULL = {MON:"Mon",TUE:"Tue",WED:"Wed",THU:"Thu",FRI:"Fri",SAT:"Sat",SUN:"Sun"};
+  // Distinct weekly start times (sorted) with a display label, shared by the
+  // By Day table builder and the Safari print-chunking workaround.
+  const slotLabel = new Map();
+  classes.forEach(c => { if (!slotLabel.has(c.timeMin)) slotLabel.set(c.timeMin, c.time); });
+  const slots = Array.from(slotLabel.keys()).sort((a, b) => a - b);
+  let daySlots = [], dayWrap = null;
 
   function el(tag, cls, html) {
     const e = document.createElement(tag);
@@ -2608,19 +2616,53 @@
   const DAY_NAME = {MON:"Monday",TUE:"Tuesday",WED:"Wednesday",THU:"Thursday",FRI:"Friday",SAT:"Saturday",SUN:"Sunday"};
   function fullDayName(day) { return DAY_NAME[day] || day; }
 
-  function buildDay() {
-    const root = document.getElementById("view-day");
-
-    // Distinct time slots across the whole week, sorted, so every day lines up.
-    const slotLabel = new Map();
-    classes.forEach(c => { if (!slotLabel.has(c.timeMin)) slotLabel.set(c.timeMin, c.time); });
-    const slots = Array.from(slotLabel.keys()).sort((a, b) => a - b);
-
-    // Desktop: aligned time grid rendered as a real <table> so the day-name
-    // header (<thead>) repeats on every printed page. Within a slot, each family
-    // gets a lane (<tr>); the time label spans the slot's lanes via rowspan, and
-    // each slot is its own <tbody> so a time block won't split across a page.
-    const wrap = el("div", "timegrid-wrap");
+  // Distinct activity families present at a given time slot (lane count).
+  function slotLaneCount(min) {
+    const fams = new Set();
+    classes.forEach(c => { if (c.timeMin === min) fams.add(c.family); });
+    return Math.max(fams.size, 1);
+  }
+  // One <tbody> per time slot: each family is a lane (<tr>), the time label spans
+  // the slot's lanes via rowspan, and days with nothing in a lane stay blank.
+  function slotTbody(min, si) {
+    const band = si % 2 === 1 ? " band" : "";   // alternate slot banding
+    const byDay = {};
+    DAY_ORDER.forEach(d => { byDay[d] = classes.filter(c => c.day === d && c.timeMin === min); });
+    // Lanes ordered by a single global priority so each class keeps the same
+    // relative position in every slot.
+    const laneDays = new Map();
+    DAY_ORDER.forEach(d => byDay[d].forEach(c => {
+      if (!laneDays.has(c.family)) laneDays.set(c.family, new Set());
+      laneDays.get(c.family).add(d);
+    }));
+    const lanes = Array.from(laneDays.keys()).sort((a, b) =>
+      (famRank[a] ?? 999) - (famRank[b] ?? 999));
+    const L = Math.max(lanes.length, 1);
+    const tbody = el("tbody", "slot");
+    lanes.forEach((fam, li) => {
+      const top = li === 0 ? " slot-top" : "";
+      const tr = el("tr", li === 0 ? "slot-top" : null);
+      if (li === 0) {
+        const th = el("th", "tg-time" + band + " slot-top", esc(slotLabel.get(min)));
+        th.rowSpan = L;
+        tr.appendChild(th);
+      }
+      DAY_ORDER.forEach(d => {
+        const here = byDay[d].filter(c => c.family === fam);
+        if (here.length) {
+          const cell = el("td", "tg-cell" + band + top);
+          here.forEach(c => cell.appendChild(gridCard(c)));
+          tr.appendChild(cell);
+        } else {
+          tr.appendChild(el("td", "tg-cell tg-empty" + band + top));
+        }
+      });
+      tbody.appendChild(tr);
+    });
+    return tbody;
+  }
+  // Build one <table> for the given slots, each with a day-name <thead>.
+  function dayTableFor(slotList) {
     const table = el("table", "timegrid");
     const thead = el("thead");
     const hr = el("tr");
@@ -2628,47 +2670,19 @@
     DAY_ORDER.forEach(day => hr.appendChild(el("th", "tg-dayhead", esc(fullDayName(day)))));
     thead.appendChild(hr);
     table.appendChild(thead);
+    slotList.forEach(s => table.appendChild(slotTbody(s.min, s.si)));
+    return table;
+  }
 
-    slots.forEach((min, si) => {
-      const band = si % 2 === 1 ? " band" : "";   // alternate slot banding
-      const byDay = {};
-      DAY_ORDER.forEach(d => { byDay[d] = classes.filter(c => c.day === d && c.timeMin === min); });
-      // Lanes = families present at this slot, ordered by a single global priority
-      // so each class keeps the same relative position in every slot.
-      const laneDays = new Map();
-      DAY_ORDER.forEach(d => byDay[d].forEach(c => {
-        if (!laneDays.has(c.family)) laneDays.set(c.family, new Set());
-        laneDays.get(c.family).add(d);
-      }));
-      const lanes = Array.from(laneDays.keys()).sort((a, b) =>
-        (famRank[a] ?? 999) - (famRank[b] ?? 999));
-      const L = Math.max(lanes.length, 1);
-      const tbody = el("tbody", "slot");
-      lanes.forEach((fam, li) => {
-        const top = li === 0 ? " slot-top" : "";
-        const tr = el("tr", li === 0 ? "slot-top" : null);
-        if (li === 0) {
-          // Time label spans this slot's lanes; heavier top border = new block.
-          const th = el("th", "tg-time" + band + " slot-top", esc(slotLabel.get(min)));
-          th.rowSpan = L;
-          tr.appendChild(th);
-        }
-        DAY_ORDER.forEach(d => {
-          const here = byDay[d].filter(c => c.family === fam);
-          if (here.length) {
-            const cell = el("td", "tg-cell" + band + top);
-            here.forEach(c => cell.appendChild(gridCard(c)));
-            tr.appendChild(cell);
-          } else {
-            tr.appendChild(el("td", "tg-cell tg-empty" + band + top));
-          }
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
-    });
-    wrap.appendChild(table);
-    root.appendChild(wrap);
+  function buildDay() {
+    const root = document.getElementById("view-day");
+
+    // Desktop: a single aligned <table>. The <thead> repeats across printed
+    // pages natively (Chrome/Firefox/Edge); Safari uses the chunking below.
+    daySlots = slots.map((min, si) => ({ min, si }));
+    dayWrap = el("div", "timegrid-wrap");
+    dayWrap.appendChild(dayTableFor(daySlots));
+    root.appendChild(dayWrap);
 
     // Mobile: stacked day sections (time shown on each card).
     const stack = el("div", "day-stack");
@@ -2684,6 +2698,39 @@
     });
     root.appendChild(stack);
   }
+
+  // ---- Safari print workaround ----
+  // WebKit doesn't repeat a <thead> on each printed page. For WebKit only, split
+  // the day table into page-sized chunks (each its own table with its own header)
+  // and force a page break before each, so every printed page gets a header.
+  const IS_WEBKIT = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+  const ROWS_PER_PAGE = 18;   // conservative lane-rows that fit one landscape page
+  function buildPrintChunks() {
+    if (!dayWrap) return;
+    const chunks = [];
+    let cur = [], rows = 0;
+    daySlots.forEach(s => {
+      const L = slotLaneCount(s.min);
+      if (cur.length && rows + L > ROWS_PER_PAGE) { chunks.push(cur); cur = []; rows = 0; }
+      cur.push(s); rows += L;
+    });
+    if (cur.length) chunks.push(cur);
+    dayWrap.textContent = "";
+    chunks.forEach((ch, i) => {
+      const t = dayTableFor(ch);
+      if (i > 0) t.classList.add("page-break");
+      dayWrap.appendChild(t);
+    });
+    applyHighlight();   // re-apply any active spotlight to the rebuilt nodes
+  }
+  function restoreDayTable() {
+    if (!dayWrap) return;
+    dayWrap.textContent = "";
+    dayWrap.appendChild(dayTableFor(daySlots));
+    applyHighlight();
+  }
+  function enterPrint() { if (IS_WEBKIT) buildPrintChunks(); }
+  function exitPrint() { if (IS_WEBKIT) restoreDayTable(); }
 
   // Compact card for the grid — time is carried by the row label.
   function gridCard(c) {
@@ -2887,6 +2934,15 @@
 
   // ---- Print ----
   document.getElementById("printBtn").addEventListener("click", () => window.print());
+  // Safari: swap to page-chunked tables for printing, then restore.
+  const mqlPrint = window.matchMedia && window.matchMedia("print");
+  if (mqlPrint) {
+    const onChange = e => (e.matches ? enterPrint() : exitPrint());
+    if (mqlPrint.addEventListener) mqlPrint.addEventListener("change", onChange);
+    else if (mqlPrint.addListener) mqlPrint.addListener(onChange);  // older Safari
+  }
+  window.addEventListener("beforeprint", enterPrint);
+  window.addEventListener("afterprint", exitPrint);
 
   // ---- Init ----
   buildLegend();
