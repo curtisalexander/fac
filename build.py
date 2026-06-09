@@ -479,26 +479,25 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .view.active { display: block; }
 
   /* ---- By Day: aligned time grid (desktop) ---- */
-  .timegrid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .timegrid-wrap {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line); border-radius: var(--radius);
+  }
   .timegrid {
-    display: grid;
-    grid-template-columns: 76px repeat(7, minmax(96px, 1fr));
-    gap: 1px; background: var(--line);
-    border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
-    min-width: 760px;
+    border-collapse: collapse; table-layout: fixed; width: 100%; min-width: 720px;
+    background: var(--panel);
   }
-  .tg-corner, .tg-dayhead, .tg-time, .tg-cell { background: var(--panel); }
-  .tg-dayhead {
-    background: var(--panel-2); text-align: center; font-weight: 600;
-    font-size: .85rem; padding: 9px 4px;
-  }
-  .tg-corner { position: sticky; left: 0; z-index: 3; background: var(--panel-2); }
+  .timegrid th, .timegrid td { border: 1px solid var(--line); vertical-align: top; }
+  .tg-corner, .tg-dayhead { background: var(--panel-2); }
+  .tg-corner { width: 72px; position: sticky; left: 0; z-index: 3; }
+  .tg-dayhead { text-align: center; font-weight: 600; font-size: .85rem; padding: 9px 4px; }
   .tg-time {
-    position: sticky; left: 0; z-index: 2; background: var(--panel-2);
+    width: 72px; position: sticky; left: 0; z-index: 1; background: var(--panel-2);
     font-weight: 700; font-size: .76rem; color: var(--accent-2);
-    padding: 6px 8px; display: flex; align-items: center; justify-content: flex-end; text-align: right;
+    padding: 6px 8px; text-align: right; vertical-align: middle; white-space: nowrap;
   }
-  .tg-cell { padding: 5px; display: flex; flex-direction: column; gap: 5px; min-height: 32px; }
+  .tg-cell { padding: 5px; }
+  .tg-cell > * + * { margin-top: 5px; }   /* space between stacked cards in a cell */
   /* Alternate time-slot banding so each time block reads as one unit. */
   .tg-time.band, .tg-cell.band { background: var(--band); }
   /* Heavier divider line at each time-slot boundary. */
@@ -633,14 +632,14 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     .key-item .kcount { display: none; }
 
     /* Always print the aligned grid for By Day (not the mobile stack). */
-    .timegrid-wrap { display: block !important; overflow: visible !important; }
+    .timegrid-wrap { display: block !important; overflow: visible !important; border: none; }
     .day-stack { display: none !important; }
-    /* minmax(0,1fr) makes the 7 day columns shrink to fit the paper — no clipping. */
-    .timegrid {
-      min-width: 0 !important;
-      grid-template-columns: 50px repeat(7, minmax(0, 1fr)) !important;
-      background: #bbb; border-color: #999;
-    }
+    .timegrid { min-width: 0 !important; width: 100% !important; background: #fff; }
+    .timegrid th, .timegrid td { border-color: #bbb !important; }
+    /* Repeat the day-name header on every page; keep each time block intact. */
+    .timegrid thead { display: table-header-group; }
+    .timegrid tbody.slot { break-inside: avoid; }
+    .tg-corner, .tg-time { width: 44px !important; }
     .tg-corner, .tg-dayhead, .tg-time, .tg-cell, .group, .day-block, .card, .row { background: #fff !important; color: #000 !important; }
     .tg-dayhead, .tg-time, .group > h3, .day-block > h3, .daysep { background: #eee !important; color: #000 !important; }
     .tg-cell.band { background: #f1f1f1 !important; }
@@ -648,7 +647,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     .tg-time.slot-top, .tg-cell.slot-top { border-top: 1.5px solid #888 !important; }
     .tg-dayhead { font-size: 10px; padding: 3px 2px; }
     .tg-time { font-size: 8.5px; padding: 3px; }
-    .tg-cell { padding: 2px; gap: 2px; min-height: 0; }
+    .tg-cell { padding: 2px; }
+    .tg-cell > * + * { margin-top: 2px; }
     .card-compact { padding: 2px 3px; }
     .card-compact .cname { font-size: 9px; }
     .card-compact .meta { font-size: 8px; }
@@ -658,7 +658,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     .row { border-bottom: 1px solid #ddd; padding: 3px 8px; }
     .card .meta, .row .rsub, .group > h3 .count, .group > h3 .caret { color: #333 !important; }
     .badge { color: #000 !important; border-color: #888 !important; }
-    .tg-cell, .card, .row, .daysep, .group, .day-block { break-inside: avoid; }
+    .timegrid tr, .tg-cell, .card, .row, .daysep, .group, .day-block { break-inside: avoid; }
     .groups { gap: 8px; }
     footer.site { color: #333; border-color: #bbb; margin-top: 10px; padding: 8px 0 0; font-size: 9px; }
   }
@@ -769,13 +769,19 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     classes.forEach(c => { if (!slotLabel.has(c.timeMin)) slotLabel.set(c.timeMin, c.time); });
     const slots = Array.from(slotLabel.keys()).sort((a, b) => a - b);
 
-    // Desktop: aligned time grid (rows = times, columns = days). Within each
-    // slot, every activity family gets a fixed lane (sub-row) so the same class
-    // lines up horizontally across days; days with nothing in a lane stay blank.
+    // Desktop: aligned time grid rendered as a real <table> so the day-name
+    // header (<thead>) repeats on every printed page. Within a slot, each family
+    // gets a lane (<tr>); the time label spans the slot's lanes via rowspan, and
+    // each slot is its own <tbody> so a time block won't split across a page.
     const wrap = el("div", "timegrid-wrap");
-    const grid = el("div", "timegrid");
-    grid.appendChild(el("div", "tg-corner", "&nbsp;"));
-    DAY_ORDER.forEach(day => grid.appendChild(el("div", "tg-dayhead", esc(fullDayName(day)))));
+    const table = el("table", "timegrid");
+    const thead = el("thead");
+    const hr = el("tr");
+    hr.appendChild(el("th", "tg-corner", "&nbsp;"));
+    DAY_ORDER.forEach(day => hr.appendChild(el("th", "tg-dayhead", esc(fullDayName(day)))));
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
     slots.forEach((min, si) => {
       const band = si % 2 === 1 ? " band" : "";   // alternate slot banding
       const byDay = {};
@@ -790,28 +796,31 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       const lanes = Array.from(laneDays.keys()).sort((a, b) =>
         (famRank[a] ?? 999) - (famRank[b] ?? 999));
       const L = Math.max(lanes.length, 1);
-      // Time label spans all lanes of this slot (column 1); a heavier top border
-      // on the slot's first row separates one time block from the next.
-      const t = el("div", "tg-time" + band + " slot-top", esc(slotLabel.get(min)));
-      t.style.gridColumn = "1";
-      t.style.gridRow = "span " + L;
-      grid.appendChild(t);
-      // One sub-row per lane; fill every day cell (card or blank) to keep alignment.
+      const tbody = el("tbody", "slot");
       lanes.forEach((fam, li) => {
         const top = li === 0 ? " slot-top" : "";
+        const tr = el("tr", li === 0 ? "slot-top" : null);
+        if (li === 0) {
+          // Time label spans this slot's lanes; heavier top border = new block.
+          const th = el("th", "tg-time" + band + " slot-top", esc(slotLabel.get(min)));
+          th.rowSpan = L;
+          tr.appendChild(th);
+        }
         DAY_ORDER.forEach(d => {
           const here = byDay[d].filter(c => c.family === fam);
           if (here.length) {
-            const cell = el("div", "tg-cell" + band + top);
+            const cell = el("td", "tg-cell" + band + top);
             here.forEach(c => cell.appendChild(gridCard(c)));
-            grid.appendChild(cell);
+            tr.appendChild(cell);
           } else {
-            grid.appendChild(el("div", "tg-cell tg-empty" + band + top));
+            tr.appendChild(el("td", "tg-cell tg-empty" + band + top));
           }
         });
+        tbody.appendChild(tr);
       });
+      table.appendChild(tbody);
     });
-    wrap.appendChild(grid);
+    wrap.appendChild(table);
     root.appendChild(wrap);
 
     // Mobile: stacked day sections (time shown on each card).
