@@ -560,8 +560,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Color key (activity-type legend) ---- */
   .colorkey {
+    max-width: 1200px; margin: 0 auto 12px; padding: 0 14px;
     background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-    margin: 0 0 16px; padding: 0 14px;
   }
   .colorkey > summary {
     list-style: none; cursor: pointer; padding: 11px 0; font-weight: 600; font-size: .92rem;
@@ -572,7 +572,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .colorkey:not([open]) > summary::before { content: "▸"; }
   .colorkey > summary .hint { color: var(--muted); font-weight: 400; font-size: .8rem; }
   .key-items {
-    display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 14px;
+    display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 12px;
+    max-height: 32vh; overflow-y: auto;
   }
   .key-item {
     display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
@@ -659,13 +660,13 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       <b>Morning</b> before 11:00 AM · <b>Midday</b> 11:00 AM–4:00 PM · <b>Evening</b> 4:00 PM+
     </span>
   </div>
-</header>
-
-<main>
   <details class="colorkey" id="colorkey" open>
     <summary>Class colors <span class="hint">— click a type to spotlight it everywhere</span></summary>
     <div class="key-items" id="keyItems"></div>
   </details>
+</header>
+
+<main>
   <section id="view-day" class="view active"></section>
   <section id="view-class" class="view"></section>
   <section id="view-instructor" class="view"></section>

@@ -174,8 +174,8 @@
 
   /* ---- Color key (activity-type legend) ---- */
   .colorkey {
+    max-width: 1200px; margin: 0 auto 12px; padding: 0 14px;
     background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-    margin: 0 0 16px; padding: 0 14px;
   }
   .colorkey > summary {
     list-style: none; cursor: pointer; padding: 11px 0; font-weight: 600; font-size: .92rem;
@@ -186,7 +186,8 @@
   .colorkey:not([open]) > summary::before { content: "▸"; }
   .colorkey > summary .hint { color: var(--muted); font-weight: 400; font-size: .8rem; }
   .key-items {
-    display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 14px;
+    display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 12px;
+    max-height: 32vh; overflow-y: auto;
   }
   .key-item {
     display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
@@ -273,13 +274,13 @@
       <b>Morning</b> before 11:00 AM · <b>Midday</b> 11:00 AM–4:00 PM · <b>Evening</b> 4:00 PM+
     </span>
   </div>
-</header>
-
-<main>
   <details class="colorkey" id="colorkey" open>
     <summary>Class colors <span class="hint">— click a type to spotlight it everywhere</span></summary>
     <div class="key-items" id="keyItems"></div>
   </details>
+</header>
+
+<main>
   <section id="view-day" class="view active"></section>
   <section id="view-class" class="view"></section>
   <section id="view-instructor" class="view"></section>
@@ -287,7 +288,7 @@
 </main>
 
 <footer class="site">
-  <div>Last updated: <b>June 9, 2026 at 3:09 PM</b></div>
+  <div>Last updated: <b>June 9, 2026 at 4:34 PM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -297,8 +298,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-09T15:09:35",
-  "updatedHuman": "June 9, 2026 at 3:09 PM",
+  "updated": "2026-06-09T16:34:02",
+  "updatedHuman": "June 9, 2026 at 4:34 PM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
