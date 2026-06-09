@@ -1,0 +1,2234 @@
+{
+  "updated": "2026-06-09T15:09:35",
+  "updatedHuman": "June 9, 2026 at 3:09 PM",
+  "source": "https://www.fayac.com/strength-and-cardio/",
+  "families": [
+    {
+      "family": "AQUA",
+      "label": "Aqua Aerobics",
+      "color": "#06b6d4",
+      "count": 3
+    },
+    {
+      "family": "BARRE",
+      "label": "Barre",
+      "color": "#0ea5e9",
+      "count": 3
+    },
+    {
+      "family": "CYCLING",
+      "label": "Cycling",
+      "color": "#f97316",
+      "count": 13
+    },
+    {
+      "family": "DANCEFIIT",
+      "label": "DanceFIIT",
+      "color": "#14b8a6",
+      "count": 4
+    },
+    {
+      "family": "FAST_FEED",
+      "label": "Fast Feed",
+      "color": "#22c55e",
+      "count": 11
+    },
+    {
+      "family": "FULL_BODY_TONE",
+      "label": "Full Body Tone",
+      "color": "#fb7185",
+      "count": 1
+    },
+    {
+      "family": "HOT_CARDIO_SCULPT",
+      "label": "Hot Cardio Sculpt",
+      "color": "#3b82f6",
+      "count": 3
+    },
+    {
+      "family": "BODYATTACK",
+      "label": "Les Mills BODYATTACK",
+      "color": "#d946ef",
+      "count": 2
+    },
+    {
+      "family": "BODYPUMP",
+      "label": "Les Mills BODYPUMP",
+      "color": "#ef4444",
+      "count": 16
+    },
+    {
+      "family": "CEREMONY",
+      "label": "Les Mills Ceremony",
+      "color": "#f59e0b",
+      "count": 12
+    },
+    {
+      "family": "CORE",
+      "label": "Les Mills CORE",
+      "color": "#ec4899",
+      "count": 2
+    },
+    {
+      "family": "GRIT",
+      "label": "Les Mills GRIT",
+      "color": "#6366f1",
+      "count": 3
+    },
+    {
+      "family": "SHAPES",
+      "label": "Les Mills SHAPES",
+      "color": "#10b981",
+      "count": 5
+    },
+    {
+      "family": "STRENGTH_DEV",
+      "label": "Les Mills Strength Development",
+      "color": "#f43f5e",
+      "count": 2
+    },
+    {
+      "family": "TONE",
+      "label": "Les Mills TONE",
+      "color": "#34d399",
+      "count": 1
+    },
+    {
+      "family": "PILATES",
+      "label": "Pilates",
+      "color": "#8b5cf6",
+      "count": 3
+    },
+    {
+      "family": "WAYMO_HYROX",
+      "label": "WAYMO HYROX",
+      "color": "#eab308",
+      "count": 12
+    },
+    {
+      "family": "YOGA",
+      "label": "Yoga",
+      "color": "#84cc16",
+      "count": 12
+    },
+    {
+      "family": "YAH",
+      "label": "Young At Heart",
+      "color": "#a855f7",
+      "count": 3
+    }
+  ],
+  "classes": [
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "LM ATTACK 45",
+      "family": "BODYATTACK",
+      "familyLabel": "Les Mills BODYATTACK",
+      "displayName": "Les Mills BODYATTACK (45)",
+      "reservationRequired": false,
+      "instructor": "Corinne",
+      "instructors": [
+        "Corinne"
+      ],
+      "studio": "Small",
+      "color": "#d946ef"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Rick",
+      "instructors": [
+        "Rick"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "Waymo HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "6:30 AM",
+      "timeMin": 390,
+      "bucket": "morning",
+      "classRaw": "LM SHAPES (hot)",
+      "family": "SHAPES",
+      "familyLabel": "Les Mills SHAPES",
+      "displayName": "Les Mills SHAPES (Hot)",
+      "reservationRequired": false,
+      "instructor": "Amanda",
+      "instructors": [
+        "Amanda"
+      ],
+      "studio": "Small",
+      "color": "#10b981"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Tamara",
+      "instructors": [
+        "Tamara"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Aqua Aerobics (75min)",
+      "family": "AQUA",
+      "familyLabel": "Aqua Aerobics",
+      "displayName": "Aqua Aerobics (75 min)",
+      "reservationRequired": false,
+      "instructor": "Sue",
+      "instructors": [
+        "Sue"
+      ],
+      "studio": "Pool",
+      "color": "#06b6d4"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Precision Cycling",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Precision Cycling",
+      "reservationRequired": false,
+      "instructor": "Sharon",
+      "instructors": [
+        "Sharon"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "Team",
+      "instructors": [
+        "Team"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Jennifer",
+      "instructors": [
+        "Jennifer"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "Barre",
+      "family": "BARRE",
+      "familyLabel": "Barre",
+      "displayName": "Barre",
+      "reservationRequired": false,
+      "instructor": "Jodelle",
+      "instructors": [
+        "Jodelle"
+      ],
+      "studio": "Large",
+      "color": "#0ea5e9"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "Hot Cardio Sculpt",
+      "family": "HOT_CARDIO_SCULPT",
+      "familyLabel": "Hot Cardio Sculpt",
+      "displayName": "Hot Cardio Sculpt",
+      "reservationRequired": false,
+      "instructor": "Brooke R.",
+      "instructors": [
+        "Brooke R."
+      ],
+      "studio": "Small",
+      "color": "#3b82f6"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "10:40 AM",
+      "timeMin": 640,
+      "bucket": "morning",
+      "classRaw": "YAH",
+      "family": "YAH",
+      "familyLabel": "Young At Heart",
+      "displayName": "Young At Heart",
+      "reservationRequired": false,
+      "instructor": "Reuben",
+      "instructors": [
+        "Reuben"
+      ],
+      "studio": "Large",
+      "color": "#a855f7"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Ben",
+      "instructors": [
+        "Ben"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "Warm Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Warm Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Jamie",
+      "instructors": [
+        "Jamie"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "4:30 PM",
+      "timeMin": 990,
+      "bucket": "evening",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:00 PM",
+      "timeMin": 1020,
+      "bucket": "evening",
+      "classRaw": "Warm Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Warm Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Ben P.",
+      "instructors": [
+        "Ben P."
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM GRIT",
+      "family": "GRIT",
+      "familyLabel": "Les Mills GRIT",
+      "displayName": "Les Mills GRIT",
+      "reservationRequired": false,
+      "instructor": "Mason",
+      "instructors": [
+        "Mason"
+      ],
+      "studio": "Large",
+      "color": "#6366f1"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "WAYMO HyROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "5:45 PM",
+      "timeMin": 1065,
+      "bucket": "evening",
+      "classRaw": "LM SPRINT",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills SPRINT",
+      "reservationRequired": false,
+      "instructor": "Ashley F.",
+      "instructors": [
+        "Ashley F."
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "DanceFIIT",
+      "family": "DANCEFIIT",
+      "familyLabel": "DanceFIIT",
+      "displayName": "DanceFIIT",
+      "reservationRequired": false,
+      "instructor": "Ashley K.",
+      "instructors": [
+        "Ashley K."
+      ],
+      "studio": "Large",
+      "color": "#14b8a6"
+    },
+    {
+      "day": "MON",
+      "dayFull": "Monday",
+      "dayIdx": 0,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "Precision Cycling",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Precision Cycling",
+      "reservationRequired": false,
+      "instructor": "Liz",
+      "instructors": [
+        "Liz"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY S",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Stations",
+      "reservationRequired": false,
+      "instructor": "Kim",
+      "instructors": [
+        "Kim"
+      ],
+      "studio": "Large",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:45 AM",
+      "timeMin": 345,
+      "bucket": "morning",
+      "classRaw": "Warm Morning Flow",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Warm Morning Flow",
+      "reservationRequired": false,
+      "instructor": "Lara",
+      "instructors": [
+        "Lara"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "6:30 AM",
+      "timeMin": 390,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Ashley F.",
+      "instructors": [
+        "Ashley F."
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM GRIT",
+      "family": "GRIT",
+      "familyLabel": "Les Mills GRIT",
+      "displayName": "Les Mills GRIT",
+      "reservationRequired": false,
+      "instructor": "Caroline",
+      "instructors": [
+        "Caroline"
+      ],
+      "studio": "Court",
+      "color": "#6366f1"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "Pilates Plus",
+      "family": "PILATES",
+      "familyLabel": "Pilates",
+      "displayName": "Pilates Plus",
+      "reservationRequired": false,
+      "instructor": "Liz",
+      "instructors": [
+        "Liz"
+      ],
+      "studio": "Large",
+      "color": "#8b5cf6"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "9:15 AM",
+      "timeMin": 555,
+      "bucket": "morning",
+      "classRaw": "LM SHAPES",
+      "family": "SHAPES",
+      "familyLabel": "Les Mills SHAPES",
+      "displayName": "Les Mills SHAPES",
+      "reservationRequired": false,
+      "instructor": "Betsy",
+      "instructors": [
+        "Betsy"
+      ],
+      "studio": "Small",
+      "color": "#10b981"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "LM RPM",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills RPM",
+      "reservationRequired": false,
+      "instructor": "Rayna",
+      "instructors": [
+        "Rayna"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "DanceFIIT",
+      "family": "DANCEFIIT",
+      "familyLabel": "DanceFIIT",
+      "displayName": "DanceFIIT",
+      "reservationRequired": false,
+      "instructor": "Bianca",
+      "instructors": [
+        "Bianca"
+      ],
+      "studio": "Large",
+      "color": "#14b8a6"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "LM STRENGTH DEVELOPMENT",
+      "family": "STRENGTH_DEV",
+      "familyLabel": "Les Mills Strength Development",
+      "displayName": "Les Mills Strength Development",
+      "reservationRequired": false,
+      "instructor": "Susan",
+      "instructors": [
+        "Susan"
+      ],
+      "studio": "Large",
+      "color": "#f43f5e"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Nicole",
+      "instructors": [
+        "Nicole"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "11:00 AM",
+      "timeMin": 660,
+      "bucket": "midday",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Ben",
+      "instructors": [
+        "Ben"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM SPRINT (30min)",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills SPRINT (30 min)",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "Mat Pilates",
+      "family": "PILATES",
+      "familyLabel": "Pilates",
+      "displayName": "Mat Pilates",
+      "reservationRequired": false,
+      "instructor": "Anna L.",
+      "instructors": [
+        "Anna L."
+      ],
+      "studio": "Small",
+      "color": "#8b5cf6"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "12:15 PM",
+      "timeMin": 735,
+      "bucket": "midday",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Betsy",
+      "instructors": [
+        "Betsy"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "12:35 PM",
+      "timeMin": 755,
+      "bucket": "midday",
+      "classRaw": "LM CORE",
+      "family": "CORE",
+      "familyLabel": "Les Mills CORE",
+      "displayName": "Les Mills CORE",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Large",
+      "color": "#ec4899"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "4:30 PM",
+      "timeMin": 990,
+      "bucket": "evening",
+      "classRaw": "LM CEREMONY S",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Stations",
+      "reservationRequired": false,
+      "instructor": "Susan",
+      "instructors": [
+        "Susan"
+      ],
+      "studio": "Large",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:00 PM",
+      "timeMin": 1020,
+      "bucket": "evening",
+      "classRaw": "LM RPM",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills RPM",
+      "reservationRequired": false,
+      "instructor": "Virtual",
+      "instructors": [
+        "Virtual"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "Hot Cardio Sculpt",
+      "family": "HOT_CARDIO_SCULPT",
+      "familyLabel": "Hot Cardio Sculpt",
+      "displayName": "Hot Cardio Sculpt",
+      "reservationRequired": false,
+      "instructor": "Brooke R.",
+      "instructors": [
+        "Brooke R."
+      ],
+      "studio": "Small",
+      "color": "#3b82f6"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Mason",
+      "instructors": [
+        "Mason"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "LM BP HEAVY",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP — Heavy",
+      "reservationRequired": false,
+      "instructor": "Rick",
+      "instructors": [
+        "Rick"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "6:30 AM",
+      "timeMin": 390,
+      "bucket": "morning",
+      "classRaw": "LM SHAPES (hot)",
+      "family": "SHAPES",
+      "familyLabel": "Les Mills SHAPES",
+      "displayName": "Les Mills SHAPES (Hot)",
+      "reservationRequired": false,
+      "instructor": "Amanda",
+      "instructors": [
+        "Amanda"
+      ],
+      "studio": "Small",
+      "color": "#10b981"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Corinne",
+      "instructors": [
+        "Corinne"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Aqua Aerobics (75min)",
+      "family": "AQUA",
+      "familyLabel": "Aqua Aerobics",
+      "displayName": "Aqua Aerobics (75 min)",
+      "reservationRequired": false,
+      "instructor": "Sue",
+      "instructors": [
+        "Sue"
+      ],
+      "studio": "Pool",
+      "color": "#06b6d4"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Precision Cycle",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Precision Cycling",
+      "reservationRequired": false,
+      "instructor": "Sharon",
+      "instructors": [
+        "Sharon"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Emily",
+      "instructors": [
+        "Emily"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "LM TONE",
+      "family": "TONE",
+      "familyLabel": "Les Mills TONE",
+      "displayName": "Les Mills TONE",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "Large",
+      "color": "#34d399"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "10:40 AM",
+      "timeMin": 640,
+      "bucket": "morning",
+      "classRaw": "YAH",
+      "family": "YAH",
+      "familyLabel": "Young At Heart",
+      "displayName": "Young At Heart",
+      "reservationRequired": false,
+      "instructor": "Rueben",
+      "instructors": [
+        "Rueben"
+      ],
+      "studio": "Large",
+      "color": "#a855f7"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM BP HEAVY",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP — Heavy",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Ben G.",
+      "instructors": [
+        "Ben G."
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "Hot Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Hot Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Jennifer K.",
+      "instructors": [
+        "Jennifer K."
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "4:30 PM",
+      "timeMin": 990,
+      "bucket": "evening",
+      "classRaw": "LM PUMP EXPRESS/LM CORE",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP Express + CORE",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "4:45 PM",
+      "timeMin": 1005,
+      "bucket": "evening",
+      "classRaw": "Hot Cardio Sculpt (45)",
+      "family": "HOT_CARDIO_SCULPT",
+      "familyLabel": "Hot Cardio Sculpt",
+      "displayName": "Hot Cardio Sculpt (45)",
+      "reservationRequired": false,
+      "instructor": "Kate",
+      "instructors": [
+        "Kate"
+      ],
+      "studio": "Small",
+      "color": "#3b82f6"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM BP HEAVY",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP — Heavy",
+      "reservationRequired": false,
+      "instructor": "Shannon",
+      "instructors": [
+        "Shannon"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Hot Yoga Flow",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Hot Yoga Flow",
+      "reservationRequired": false,
+      "instructor": "Emily Ann",
+      "instructors": [
+        "Emily Ann"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "Precision Cycle",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Precision Cycling",
+      "reservationRequired": false,
+      "instructor": "Steve V",
+      "instructors": [
+        "Steve V"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "Full Body Tone",
+      "family": "FULL_BODY_TONE",
+      "familyLabel": "Full Body Tone",
+      "displayName": "Full Body Tone",
+      "reservationRequired": false,
+      "instructor": "Melissa",
+      "instructors": [
+        "Melissa"
+      ],
+      "studio": "Large",
+      "color": "#fb7185"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:45 AM",
+      "timeMin": 345,
+      "bucket": "morning",
+      "classRaw": "Warm Morning Flow",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Warm Morning Flow",
+      "reservationRequired": false,
+      "instructor": "Lara",
+      "instructors": [
+        "Lara"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "6:30 AM",
+      "timeMin": 390,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Susan",
+      "instructors": [
+        "Susan"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM GRIT",
+      "family": "GRIT",
+      "familyLabel": "Les Mills GRIT",
+      "displayName": "Les Mills GRIT",
+      "reservationRequired": false,
+      "instructor": "Caroline",
+      "instructors": [
+        "Caroline"
+      ],
+      "studio": "Small",
+      "color": "#6366f1"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "Pilates Plus",
+      "family": "PILATES",
+      "familyLabel": "Pilates",
+      "displayName": "Pilates Plus",
+      "reservationRequired": false,
+      "instructor": "Liz",
+      "instructors": [
+        "Liz"
+      ],
+      "studio": "Large",
+      "color": "#8b5cf6"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "LM RPM",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills RPM",
+      "reservationRequired": false,
+      "instructor": "Rayna",
+      "instructors": [
+        "Rayna"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "9:15 AM",
+      "timeMin": 555,
+      "bucket": "morning",
+      "classRaw": "LM SHAPES",
+      "family": "SHAPES",
+      "familyLabel": "Les Mills SHAPES",
+      "displayName": "Les Mills SHAPES",
+      "reservationRequired": false,
+      "instructor": "Susan",
+      "instructors": [
+        "Susan"
+      ],
+      "studio": "Small",
+      "color": "#10b981"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "DanceFIIT",
+      "family": "DANCEFIIT",
+      "familyLabel": "DanceFIIT",
+      "displayName": "DanceFIIT",
+      "reservationRequired": false,
+      "instructor": "Anne",
+      "instructors": [
+        "Anne"
+      ],
+      "studio": "Large",
+      "color": "#14b8a6"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "LM STRENGTH DEVELOPMENT",
+      "family": "STRENGTH_DEV",
+      "familyLabel": "Les Mills Strength Development",
+      "displayName": "Les Mills Strength Development",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "Large",
+      "color": "#f43f5e"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Catherine",
+      "instructors": [
+        "Catherine"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "11:00 AM",
+      "timeMin": 660,
+      "bucket": "midday",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Cate",
+      "instructors": [
+        "Cate"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM SPRINT",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills SPRINT",
+      "reservationRequired": false,
+      "instructor": "Ashley F.",
+      "instructors": [
+        "Ashley F."
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "Hot Power Flow",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Hot Power Flow",
+      "reservationRequired": false,
+      "instructor": "Jennifer K.",
+      "instructors": [
+        "Jennifer K."
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "12:15 PM",
+      "timeMin": 735,
+      "bucket": "midday",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "12:35 PM",
+      "timeMin": 755,
+      "bucket": "midday",
+      "classRaw": "LM CORE",
+      "family": "CORE",
+      "familyLabel": "Les Mills CORE",
+      "displayName": "Les Mills CORE",
+      "reservationRequired": false,
+      "instructor": "Shannon",
+      "instructors": [
+        "Shannon"
+      ],
+      "studio": "Large",
+      "color": "#ec4899"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:00 PM",
+      "timeMin": 1020,
+      "bucket": "evening",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Caroline",
+      "instructors": [
+        "Caroline"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM RPM",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills RPM",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Sharon",
+      "instructors": [
+        "Sharon"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "THU",
+      "dayFull": "Thursday",
+      "dayIdx": 3,
+      "time": "6:00 PM",
+      "timeMin": 1080,
+      "bucket": "evening",
+      "classRaw": "Hot Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Hot Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "Jill",
+      "instructors": [
+        "Jill"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "LM PUMP EXPRESS/CORE",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP Express + CORE",
+      "reservationRequired": false,
+      "instructor": "Kim P.",
+      "instructors": [
+        "Kim P."
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "5:30 AM",
+      "timeMin": 330,
+      "bucket": "morning",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Spencer",
+      "instructors": [
+        "Spencer"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Caroline",
+      "instructors": [
+        "Caroline"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Aqua Aerobics",
+      "family": "AQUA",
+      "familyLabel": "Aqua Aerobics",
+      "displayName": "Aqua Aerobics",
+      "reservationRequired": false,
+      "instructor": "Sue",
+      "instructors": [
+        "Sue"
+      ],
+      "studio": "Pool",
+      "color": "#06b6d4"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "9:00 AM",
+      "timeMin": 540,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Jennifer R.",
+      "instructors": [
+        "Jennifer R."
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "Barre Intensity",
+      "family": "BARRE",
+      "familyLabel": "Barre",
+      "displayName": "Barre Intensity",
+      "reservationRequired": false,
+      "instructor": "Brooke R./Kate",
+      "instructors": [
+        "Brooke R.",
+        "Kate"
+      ],
+      "studio": "Large",
+      "color": "#0ea5e9"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "10:30 AM",
+      "timeMin": 630,
+      "bucket": "morning",
+      "classRaw": "LM SHAPES (hot)",
+      "family": "SHAPES",
+      "familyLabel": "Les Mills SHAPES",
+      "displayName": "Les Mills SHAPES (Hot)",
+      "reservationRequired": false,
+      "instructor": "Betsy",
+      "instructors": [
+        "Betsy"
+      ],
+      "studio": "Small",
+      "color": "#10b981"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "10:40 AM",
+      "timeMin": 640,
+      "bucket": "morning",
+      "classRaw": "YAH",
+      "family": "YAH",
+      "familyLabel": "Young At Heart",
+      "displayName": "Young At Heart",
+      "reservationRequired": false,
+      "instructor": "Reuben",
+      "instructors": [
+        "Reuben"
+      ],
+      "studio": "Large",
+      "color": "#a855f7"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Steve",
+      "instructors": [
+        "Steve"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Ben G.",
+      "instructors": [
+        "Ben G."
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "8:15 AM",
+      "timeMin": 495,
+      "bucket": "morning",
+      "classRaw": "LM BODY PUMP",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Rick",
+      "instructors": [
+        "Rick"
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM RPM",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Les Mills RPM",
+      "reservationRequired": false,
+      "instructor": "Tiffany",
+      "instructors": [
+        "Tiffany"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "8:30 AM",
+      "timeMin": 510,
+      "bucket": "morning",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Betsy",
+      "instructors": [
+        "Betsy"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "Fast Feed",
+      "family": "FAST_FEED",
+      "familyLabel": "Fast Feed",
+      "displayName": "Fast Feed",
+      "reservationRequired": true,
+      "instructor": "TBA",
+      "instructors": [
+        "TBA"
+      ],
+      "studio": "Tennis",
+      "color": "#22c55e"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "LM BODY ATTACK",
+      "family": "BODYATTACK",
+      "familyLabel": "Les Mills BODYATTACK",
+      "displayName": "Les Mills BODYATTACK",
+      "reservationRequired": false,
+      "instructor": "Brooke R.",
+      "instructors": [
+        "Brooke R."
+      ],
+      "studio": "Large",
+      "color": "#d946ef"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "WAYMO HYROX",
+      "family": "WAYMO_HYROX",
+      "familyLabel": "WAYMO HYROX",
+      "displayName": "WAYMO HYROX",
+      "reservationRequired": false,
+      "instructor": "Ben",
+      "instructors": [
+        "Ben"
+      ],
+      "studio": "WAYMO",
+      "color": "#eab308"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "9:30 AM",
+      "timeMin": 570,
+      "bucket": "morning",
+      "classRaw": "Warm Flow Yoga",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Warm Flow Yoga",
+      "reservationRequired": false,
+      "instructor": "EmilyAnn",
+      "instructors": [
+        "EmilyAnn"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "SAT",
+      "dayFull": "Saturday",
+      "dayIdx": 5,
+      "time": "10:45 AM",
+      "timeMin": 645,
+      "bucket": "morning",
+      "classRaw": "DanceFIIT",
+      "family": "DANCEFIIT",
+      "familyLabel": "DanceFIIT",
+      "displayName": "DanceFIIT",
+      "reservationRequired": false,
+      "instructor": "Ashley",
+      "instructors": [
+        "Ashley"
+      ],
+      "studio": "Large",
+      "color": "#14b8a6"
+    },
+    {
+      "day": "SUN",
+      "dayFull": "Sunday",
+      "dayIdx": 6,
+      "time": "12:30 PM",
+      "timeMin": 750,
+      "bucket": "midday",
+      "classRaw": "LM CEREMONY H",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Kim P/Shannon",
+      "instructors": [
+        "Kim P",
+        "Shannon"
+      ],
+      "studio": "WAYMO",
+      "color": "#f59e0b"
+    },
+    {
+      "day": "SUN",
+      "dayFull": "Sunday",
+      "dayIdx": 6,
+      "time": "1:30 PM",
+      "timeMin": 810,
+      "bucket": "midday",
+      "classRaw": "Barre Intensity",
+      "family": "BARRE",
+      "familyLabel": "Barre",
+      "displayName": "Barre Intensity",
+      "reservationRequired": false,
+      "instructor": "Jordan",
+      "instructors": [
+        "Jordan"
+      ],
+      "studio": "Large",
+      "color": "#0ea5e9"
+    },
+    {
+      "day": "SUN",
+      "dayFull": "Sunday",
+      "dayIdx": 6,
+      "time": "1:30 PM",
+      "timeMin": 810,
+      "bucket": "midday",
+      "classRaw": "Precision Cycle",
+      "family": "CYCLING",
+      "familyLabel": "Cycling",
+      "displayName": "Precision Cycling",
+      "reservationRequired": false,
+      "instructor": "Tiffany",
+      "instructors": [
+        "Tiffany"
+      ],
+      "studio": "Cycle",
+      "color": "#f97316"
+    },
+    {
+      "day": "SUN",
+      "dayFull": "Sunday",
+      "dayIdx": 6,
+      "time": "1:30 PM",
+      "timeMin": 810,
+      "bucket": "midday",
+      "classRaw": "Hot Flow Yoga (90min)",
+      "family": "YOGA",
+      "familyLabel": "Yoga",
+      "displayName": "Hot Flow Yoga (90 min)",
+      "reservationRequired": false,
+      "instructor": "Jill",
+      "instructors": [
+        "Jill"
+      ],
+      "studio": "Small",
+      "color": "#84cc16"
+    },
+    {
+      "day": "SUN",
+      "dayFull": "Sunday",
+      "dayIdx": 6,
+      "time": "2:30 PM",
+      "timeMin": 870,
+      "bucket": "midday",
+      "classRaw": "LM Body Pump",
+      "family": "BODYPUMP",
+      "familyLabel": "Les Mills BODYPUMP",
+      "displayName": "Les Mills BODYPUMP",
+      "reservationRequired": false,
+      "instructor": "Kim P.",
+      "instructors": [
+        "Kim P."
+      ],
+      "studio": "Large",
+      "color": "#ef4444"
+    }
+  ]
+}
