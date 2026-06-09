@@ -406,6 +406,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     --shadow: 0 6px 20px rgba(0,0,0,.35);
     --radius: 14px;
     --band: #212e3e;          /* alternating time-slot band on the day grid */
+    --divider: #4a5f82;       /* heavier line between time slots */
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -500,6 +501,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .tg-cell { padding: 5px; display: flex; flex-direction: column; gap: 5px; min-height: 32px; }
   /* Alternate time-slot banding so each time block reads as one unit. */
   .tg-time.band, .tg-cell.band { background: var(--band); }
+  /* Heavier divider line at each time-slot boundary. */
+  .tg-time.slot-top, .tg-cell.slot-top { border-top: 2px solid var(--divider); }
   .card-compact { padding: 6px 8px; }
   .card-compact .cname { font-size: .82rem; font-weight: 600; }
   .card-compact .meta { color: var(--muted); font-size: .72rem; margin-top: 2px; }
@@ -642,6 +645,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     .tg-dayhead, .tg-time, .group > h3, .day-block > h3, .daysep { background: #eee !important; color: #000 !important; }
     .tg-cell.band { background: #f1f1f1 !important; }
     .tg-time.band { background: #e3e3e3 !important; }
+    .tg-time.slot-top, .tg-cell.slot-top { border-top: 1.5px solid #888 !important; }
     .tg-dayhead { font-size: 10px; padding: 3px 2px; }
     .tg-time { font-size: 8.5px; padding: 3px; }
     .tg-cell { padding: 2px; gap: 2px; min-height: 0; }
@@ -786,21 +790,23 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       const lanes = Array.from(laneDays.keys()).sort((a, b) =>
         (famRank[a] ?? 999) - (famRank[b] ?? 999));
       const L = Math.max(lanes.length, 1);
-      // Time label spans all lanes of this slot (column 1).
-      const t = el("div", "tg-time" + band, esc(slotLabel.get(min)));
+      // Time label spans all lanes of this slot (column 1); a heavier top border
+      // on the slot's first row separates one time block from the next.
+      const t = el("div", "tg-time" + band + " slot-top", esc(slotLabel.get(min)));
       t.style.gridColumn = "1";
       t.style.gridRow = "span " + L;
       grid.appendChild(t);
       // One sub-row per lane; fill every day cell (card or blank) to keep alignment.
-      lanes.forEach(fam => {
+      lanes.forEach((fam, li) => {
+        const top = li === 0 ? " slot-top" : "";
         DAY_ORDER.forEach(d => {
           const here = byDay[d].filter(c => c.family === fam);
           if (here.length) {
-            const cell = el("div", "tg-cell" + band);
+            const cell = el("div", "tg-cell" + band + top);
             here.forEach(c => cell.appendChild(gridCard(c)));
             grid.appendChild(cell);
           } else {
-            grid.appendChild(el("div", "tg-cell tg-empty" + band));
+            grid.appendChild(el("div", "tg-cell tg-empty" + band + top));
           }
         });
       });
