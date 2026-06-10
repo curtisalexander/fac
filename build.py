@@ -212,6 +212,7 @@ INSTRUCTOR_FIX = {
     "ASHLEY": "Ashley K.",       # bare Ashley is Ashley K.
     "BEN": "Ben G.",             # bare Ben is Ben G.
     "JENNIFER": "Jennifer R.",   # bare Jennifer is Jennifer R.
+    "TEAM": "TBA",               # unassigned/placeholder, same as TBA
 }
 
 
