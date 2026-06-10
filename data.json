@@ -283,9 +283,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Hyrox",
       "reservationRequired": false,
-      "instructor": "Jennifer",
+      "instructor": "Jennifer R.",
       "instructors": [
-        "Jennifer"
+        "Jennifer R."
       ],
       "studio": "WAYMO",
       "color": "#f59e0b"
@@ -378,9 +378,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -568,9 +568,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Stations",
       "reservationRequired": false,
-      "instructor": "Kim",
+      "instructor": "Kim P.",
       "instructors": [
-        "Kim"
+        "Kim P."
       ],
       "studio": "Large",
       "color": "#f59e0b"
@@ -777,9 +777,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -1157,9 +1157,9 @@
       "familyLabel": "Young At Heart",
       "displayName": "Young At Heart",
       "reservationRequired": false,
-      "instructor": "Rueben",
+      "instructor": "Reuben",
       "instructors": [
-        "Rueben"
+        "Reuben"
       ],
       "studio": "Large",
       "color": "#a855f7"
@@ -1347,9 +1347,9 @@
       "familyLabel": "Cycling",
       "displayName": "Precision Cycling",
       "reservationRequired": false,
-      "instructor": "Steve V",
+      "instructor": "Steve V.",
       "instructors": [
-        "Steve V"
+        "Steve V."
       ],
       "studio": "Cycle",
       "color": "#f97316"
@@ -1879,7 +1879,7 @@
       "familyLabel": "Barre",
       "displayName": "Barre Intensity",
       "reservationRequired": false,
-      "instructor": "Brooke R./Kate",
+      "instructor": "Brooke R. / Kate",
       "instructors": [
         "Brooke R.",
         "Kate"
@@ -2089,9 +2089,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -2108,9 +2108,9 @@
       "familyLabel": "Yoga",
       "displayName": "Warm Flow Yoga",
       "reservationRequired": false,
-      "instructor": "EmilyAnn",
+      "instructor": "Emily Ann",
       "instructors": [
-        "EmilyAnn"
+        "Emily Ann"
       ],
       "studio": "Small",
       "color": "#84cc16"
@@ -2127,9 +2127,9 @@
       "familyLabel": "DanceFIIT",
       "displayName": "DanceFIIT",
       "reservationRequired": false,
-      "instructor": "Ashley",
+      "instructor": "Ashley K.",
       "instructors": [
-        "Ashley"
+        "Ashley K."
       ],
       "studio": "Large",
       "color": "#14b8a6"
@@ -2146,9 +2146,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Hyrox",
       "reservationRequired": false,
-      "instructor": "Kim P/Shannon",
+      "instructor": "Kim P. / Shannon",
       "instructors": [
-        "Kim P",
+        "Kim P.",
         "Shannon"
       ],
       "studio": "WAYMO",

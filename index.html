@@ -123,7 +123,15 @@
   /* ---- By Day: stacked sections (mobile) ---- */
   .day-stack { display: none; }
   .day-block { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
-  .day-block > h3 { margin: 0; padding: 10px 12px; font-size: 1rem; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .day-block > h3 {
+    margin: 0; padding: 11px 14px; font-size: 1rem; cursor: pointer;
+    background: var(--panel-2); border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .day-block > h3 .caret { color: var(--muted); font-size: .75rem; margin-right: 6px; }
+  .day-block > h3 .count { color: var(--muted); font-size: .8rem; font-weight: 400; }
+  .day-block.collapsed > h3 { border-bottom: none; }
+  .day-block.collapsed .db-body { display: none; }
   .db-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
   .db-body .empty { color: var(--muted); font-size: .85rem; text-align: center; padding: 12px; }
 
@@ -214,11 +222,21 @@
   @media (max-width: 760px) {
     .timegrid-wrap { display: none; }
     .day-stack { display: block; }
-    .legend { width: 100%; margin: 4px 0 0; order: 5; }
-    h1 { font-size: 1.25rem; }
+    /* Trim the sticky header so it doesn't eat half the screen. */
+    .legend { display: none; }                 /* boundary text is redundant with the chips */
+    .head-row .sub { display: none; }
+    h1 { font-size: 1.2rem; }
     .groups { grid-template-columns: 1fr; }
-    header.site { padding: 14px 14px 0; }
+    header.site { padding: 12px 14px 0; }
     main { padding: 0 14px; }
+    .tabs { margin-top: 10px; }
+    .toolbar { padding: 10px 0; gap: 8px 10px; }
+    /* Compact, collapsed-by-default color key (opened via JS only on desktop). */
+    .colorkey { margin-bottom: 8px; }
+    .colorkey > summary { padding: 9px 0; font-size: .88rem; }
+    .colorkey > summary .hint { display: none; }
+    .key-items { max-height: 30vh; gap: 5px; }
+    .key-item { padding: 3px 9px 3px 7px; font-size: .76rem; }
   }
 
   /* ---- Print (landscape, fits the page at any orientation) ---- */
@@ -621,9 +639,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Hyrox",
       "reservationRequired": false,
-      "instructor": "Jennifer",
+      "instructor": "Jennifer R.",
       "instructors": [
-        "Jennifer"
+        "Jennifer R."
       ],
       "studio": "WAYMO",
       "color": "#f59e0b"
@@ -716,9 +734,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -906,9 +924,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Stations",
       "reservationRequired": false,
-      "instructor": "Kim",
+      "instructor": "Kim P.",
       "instructors": [
-        "Kim"
+        "Kim P."
       ],
       "studio": "Large",
       "color": "#f59e0b"
@@ -1115,9 +1133,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -1495,9 +1513,9 @@
       "familyLabel": "Young At Heart",
       "displayName": "Young At Heart",
       "reservationRequired": false,
-      "instructor": "Rueben",
+      "instructor": "Reuben",
       "instructors": [
-        "Rueben"
+        "Reuben"
       ],
       "studio": "Large",
       "color": "#a855f7"
@@ -1685,9 +1703,9 @@
       "familyLabel": "Cycling",
       "displayName": "Precision Cycling",
       "reservationRequired": false,
-      "instructor": "Steve V",
+      "instructor": "Steve V.",
       "instructors": [
-        "Steve V"
+        "Steve V."
       ],
       "studio": "Cycle",
       "color": "#f97316"
@@ -2217,7 +2235,7 @@
       "familyLabel": "Barre",
       "displayName": "Barre Intensity",
       "reservationRequired": false,
-      "instructor": "Brooke R./Kate",
+      "instructor": "Brooke R. / Kate",
       "instructors": [
         "Brooke R.",
         "Kate"
@@ -2427,9 +2445,9 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Ben",
+      "instructor": "Ben G.",
       "instructors": [
-        "Ben"
+        "Ben G."
       ],
       "studio": "WAYMO",
       "color": "#eab308"
@@ -2446,9 +2464,9 @@
       "familyLabel": "Yoga",
       "displayName": "Warm Flow Yoga",
       "reservationRequired": false,
-      "instructor": "EmilyAnn",
+      "instructor": "Emily Ann",
       "instructors": [
-        "EmilyAnn"
+        "Emily Ann"
       ],
       "studio": "Small",
       "color": "#84cc16"
@@ -2465,9 +2483,9 @@
       "familyLabel": "DanceFIIT",
       "displayName": "DanceFIIT",
       "reservationRequired": false,
-      "instructor": "Ashley",
+      "instructor": "Ashley K.",
       "instructors": [
-        "Ashley"
+        "Ashley K."
       ],
       "studio": "Large",
       "color": "#14b8a6"
@@ -2484,9 +2502,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Hyrox",
       "reservationRequired": false,
-      "instructor": "Kim P/Shannon",
+      "instructor": "Kim P. / Shannon",
       "instructors": [
-        "Kim P",
+        "Kim P.",
         "Shannon"
       ],
       "studio": "WAYMO",
@@ -2576,6 +2594,9 @@
   "use strict";
   const DATA = JSON.parse(document.getElementById("schedule-data").textContent);
   const classes = DATA.classes;
+  // On narrow screens, sections start collapsed so the page is a tidy list of
+  // headers you can drill into, and the color key starts closed to save space.
+  const COLLAPSE_DEFAULT = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
   // Global lane priority: busiest activities first, so each class keeps the same
   // relative lane position in every time slot it appears in (consistent rows).
   const famRank = {};
@@ -2688,12 +2709,23 @@
     const stack = el("div", "day-stack");
     DAY_ORDER.forEach(day => {
       const sec = el("section", "day-block");
-      sec.appendChild(el("h3", null, esc(fullDayName(day))));
-      const body = el("div", "db-body");
       const items = classes.filter(c => c.day === day);
+      const h = el("h3", null,
+        '<span><span class="caret">▾</span>' + esc(fullDayName(day)) + '</span>' +
+        '<span class="count">' + items.length + '</span>');
+      h.addEventListener("click", () => {
+        const collapsed = sec.classList.toggle("collapsed");
+        h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+      });
+      sec.appendChild(h);
+      const body = el("div", "db-body");
       if (!items.length) body.appendChild(el("div", "empty", "—"));
       else items.forEach(c => body.appendChild(dayCard(c)));
       sec.appendChild(body);
+      if (COLLAPSE_DEFAULT) {
+        sec.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       stack.appendChild(sec);
     });
     root.appendChild(stack);
@@ -2787,6 +2819,10 @@
       const rows = el("div", "rows");
       items.forEach(c => rows.appendChild(rowFn(c, k)));
       g.appendChild(rows);
+      if (COLLAPSE_DEFAULT) {
+        g.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       wrap.appendChild(g);
     });
     root.appendChild(wrap);
@@ -2853,6 +2889,10 @@
         rows.appendChild(locationRow(c));
       });
       g.appendChild(rows);
+      if (COLLAPSE_DEFAULT) {
+        g.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       wrap.appendChild(g);
     });
     root.appendChild(wrap);
@@ -2903,6 +2943,17 @@
       const any = !filtering || g.querySelector(".row.hl-match");
       g.classList.toggle("hl-hidden", filtering && !any);
     });
+    // On mobile every section starts collapsed; while a spotlight is active,
+    // open the ones that contain a match (and re-collapse everything when the
+    // filter clears) so results aren't hidden inside a closed section.
+    if (COLLAPSE_DEFAULT) {
+      document.querySelectorAll(".group, .day-block").forEach(g => {
+        const collapse = !filtering || !g.querySelector(".row.hl-match, .card.hl-match");
+        g.classList.toggle("collapsed", collapse);
+        const caret = g.querySelector(".caret");
+        if (caret) caret.textContent = collapse ? "▸" : "▾";
+      });
+    }
   }
 
   // Time-of-day chips
@@ -2948,6 +2999,7 @@
   window.addEventListener("afterprint", exitPrint);
 
   // ---- Init ----
+  if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
   buildLegend();
   buildDay();
   buildClass();

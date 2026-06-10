@@ -196,6 +196,30 @@ def normalize_studio(raw: str) -> str:
     return STUDIO_FIX.get(t.upper(), t)
 
 
+# Instructor-name consolidation: collapse typos, spacing, and bare first names
+# onto a single canonical spelling per person. Keyed by the upper-cased name
+# token (after splitting co-taught cells on "/"). Reviewed name-by-name with the
+# club's input; only confirmed same-person merges live here. Names not listed
+# (e.g. Steve, Sue, Susan, Cate, Kate, Catherine, Emily) are intentionally kept
+# distinct.
+INSTRUCTOR_FIX = {
+    "RUEBEN": "Reuben",          # typo for Reuben
+    "EMILYANN": "Emily Ann",     # spacing variant
+    "EMILY ANN": "Emily Ann",
+    "KIM P": "Kim P.",           # missing period
+    "KIM": "Kim P.",             # bare Kim is Kim P.
+    "STEVE V": "Steve V.",       # missing period (still distinct from bare Steve)
+    "ASHLEY": "Ashley K.",       # bare Ashley is Ashley K.
+    "BEN": "Ben G.",             # bare Ben is Ben G.
+    "JENNIFER": "Jennifer R.",   # bare Jennifer is Jennifer R.
+}
+
+
+def normalize_instructor(name: str) -> str:
+    t = tidy(name)
+    return INSTRUCTOR_FIX.get(t.upper(), t)
+
+
 # Explicit class mapping: normalized-upper raw name -> (family, familyLabel, displayName)
 # (the trailing reservation '*' is stripped before lookup).
 _M = {
@@ -279,10 +303,12 @@ def normalize(rows: list[list[str]]) -> list[dict]:
         day, day_full, day_idx = parse_day(day_raw)
         minutes, time_label = parse_time(time_raw)
         family, family_label, display_name, reservation = map_class(class_raw)
-        instr = tidy(instr_raw)
-        # Split co-taught entries ("Brooke R./Kate", "Kim P/Shannon") for the
-        # instructor view; keep the full string for display.
-        instructors = [p.strip() for p in re.split(r"\s*/\s*", instr) if p.strip()] or [instr]
+        # Split co-taught entries ("Brooke R./Kate", "Kim P/Shannon"), consolidate
+        # each name to its canonical spelling, then rebuild a consistent display
+        # string ("A / B") from the normalized parts.
+        parts = [p.strip() for p in re.split(r"\s*/\s*", tidy(instr_raw)) if p.strip()]
+        instructors = [normalize_instructor(p) for p in parts] or [tidy(instr_raw)]
+        instr = " / ".join(instructors)
         out.append(
             {
                 "day": day,
@@ -509,7 +535,15 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   /* ---- By Day: stacked sections (mobile) ---- */
   .day-stack { display: none; }
   .day-block { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
-  .day-block > h3 { margin: 0; padding: 10px 12px; font-size: 1rem; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+  .day-block > h3 {
+    margin: 0; padding: 11px 14px; font-size: 1rem; cursor: pointer;
+    background: var(--panel-2); border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .day-block > h3 .caret { color: var(--muted); font-size: .75rem; margin-right: 6px; }
+  .day-block > h3 .count { color: var(--muted); font-size: .8rem; font-weight: 400; }
+  .day-block.collapsed > h3 { border-bottom: none; }
+  .day-block.collapsed .db-body { display: none; }
   .db-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
   .db-body .empty { color: var(--muted); font-size: .85rem; text-align: center; padding: 12px; }
 
@@ -600,11 +634,21 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   @media (max-width: 760px) {
     .timegrid-wrap { display: none; }
     .day-stack { display: block; }
-    .legend { width: 100%; margin: 4px 0 0; order: 5; }
-    h1 { font-size: 1.25rem; }
+    /* Trim the sticky header so it doesn't eat half the screen. */
+    .legend { display: none; }                 /* boundary text is redundant with the chips */
+    .head-row .sub { display: none; }
+    h1 { font-size: 1.2rem; }
     .groups { grid-template-columns: 1fr; }
-    header.site { padding: 14px 14px 0; }
+    header.site { padding: 12px 14px 0; }
     main { padding: 0 14px; }
+    .tabs { margin-top: 10px; }
+    .toolbar { padding: 10px 0; gap: 8px 10px; }
+    /* Compact, collapsed-by-default color key (opened via JS only on desktop). */
+    .colorkey { margin-bottom: 8px; }
+    .colorkey > summary { padding: 9px 0; font-size: .88rem; }
+    .colorkey > summary .hint { display: none; }
+    .key-items { max-height: 30vh; gap: 5px; }
+    .key-item { padding: 3px 9px 3px 7px; font-size: .76rem; }
   }
 
   /* ---- Print (landscape, fits the page at any orientation) ---- */
@@ -729,6 +773,9 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   "use strict";
   const DATA = JSON.parse(document.getElementById("schedule-data").textContent);
   const classes = DATA.classes;
+  // On narrow screens, sections start collapsed so the page is a tidy list of
+  // headers you can drill into, and the color key starts closed to save space.
+  const COLLAPSE_DEFAULT = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
   // Global lane priority: busiest activities first, so each class keeps the same
   // relative lane position in every time slot it appears in (consistent rows).
   const famRank = {};
@@ -841,12 +888,23 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const stack = el("div", "day-stack");
     DAY_ORDER.forEach(day => {
       const sec = el("section", "day-block");
-      sec.appendChild(el("h3", null, esc(fullDayName(day))));
-      const body = el("div", "db-body");
       const items = classes.filter(c => c.day === day);
+      const h = el("h3", null,
+        '<span><span class="caret">▾</span>' + esc(fullDayName(day)) + '</span>' +
+        '<span class="count">' + items.length + '</span>');
+      h.addEventListener("click", () => {
+        const collapsed = sec.classList.toggle("collapsed");
+        h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+      });
+      sec.appendChild(h);
+      const body = el("div", "db-body");
       if (!items.length) body.appendChild(el("div", "empty", "—"));
       else items.forEach(c => body.appendChild(dayCard(c)));
       sec.appendChild(body);
+      if (COLLAPSE_DEFAULT) {
+        sec.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       stack.appendChild(sec);
     });
     root.appendChild(stack);
@@ -940,6 +998,10 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       const rows = el("div", "rows");
       items.forEach(c => rows.appendChild(rowFn(c, k)));
       g.appendChild(rows);
+      if (COLLAPSE_DEFAULT) {
+        g.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       wrap.appendChild(g);
     });
     root.appendChild(wrap);
@@ -1006,6 +1068,10 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
         rows.appendChild(locationRow(c));
       });
       g.appendChild(rows);
+      if (COLLAPSE_DEFAULT) {
+        g.classList.add("collapsed");
+        h.querySelector(".caret").textContent = "▸";
+      }
       wrap.appendChild(g);
     });
     root.appendChild(wrap);
@@ -1056,6 +1122,17 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       const any = !filtering || g.querySelector(".row.hl-match");
       g.classList.toggle("hl-hidden", filtering && !any);
     });
+    // On mobile every section starts collapsed; while a spotlight is active,
+    // open the ones that contain a match (and re-collapse everything when the
+    // filter clears) so results aren't hidden inside a closed section.
+    if (COLLAPSE_DEFAULT) {
+      document.querySelectorAll(".group, .day-block").forEach(g => {
+        const collapse = !filtering || !g.querySelector(".row.hl-match, .card.hl-match");
+        g.classList.toggle("collapsed", collapse);
+        const caret = g.querySelector(".caret");
+        if (caret) caret.textContent = collapse ? "▸" : "▾";
+      });
+    }
   }
 
   // Time-of-day chips
@@ -1101,6 +1178,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   window.addEventListener("afterprint", exitPrint);
 
   // ---- Init ----
+  if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
   buildLegend();
   buildDay();
   buildClass();
