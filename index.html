@@ -45,7 +45,7 @@
   h1 { font-size: 1.5rem; margin: 0; letter-spacing: .2px; }
   .head-row .sub { color: var(--muted); font-size: .9rem; }
   .print-btn {
-    margin-left: auto; align-self: center;
+    align-self: center;
     display: inline-flex; align-items: center; gap: 7px;
     border: 1px solid var(--line); background: var(--panel); color: var(--text);
     padding: 7px 14px; border-radius: 10px; font-size: .85rem; cursor: pointer;
@@ -54,7 +54,12 @@
   .print-btn:hover { background: var(--panel-2); border-color: var(--accent); }
   .print-btn svg { width: 16px; height: 16px; display: block; }
 
-  .tabs { display: flex; gap: 6px; max-width: 1200px; margin: 14px auto 0; flex-wrap: wrap; }
+  /* Tabs on the left, the Highlight chips pushed to the right, on one row. */
+  .tabbar {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 10px 18px; flex-wrap: wrap; max-width: 1200px; margin: 14px auto 0;
+  }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .tab {
     appearance: none; border: 1px solid var(--line); background: var(--panel);
     color: var(--text); padding: 9px 16px; border-radius: 10px 10px 0 0;
@@ -63,11 +68,9 @@
   .tab:hover { background: var(--panel-2); }
   .tab.active { background: var(--accent); border-color: var(--accent); font-weight: 600; }
 
-  .toolbar {
-    max-width: 1200px; margin: 0 auto; padding: 12px 0 16px;
-    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-  }
-  .tod-group { display: flex; gap: 6px; align-items: center; }
+  /* Lifts the chips off the header's bottom edge so they don't sit on the border
+     while the folder-style tabs stay flush to it. */
+  .tod-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
   .tod-label { color: var(--muted); font-size: .82rem; margin-right: 2px; }
   .chip {
     appearance: none; border: 1px solid var(--line); background: var(--panel);
@@ -79,16 +82,21 @@
   .chip[data-tod="morning"].active { background: var(--morning); color: #2a2200; border-color: var(--morning); }
   .chip[data-tod="midday"].active  { background: var(--midday);  color: #08240f; border-color: var(--midday); }
   .chip[data-tod="evening"].active { background: var(--evening); color: #2a0830; border-color: var(--evening); }
-  .legend { color: var(--muted); font-size: .78rem; margin-left: auto; }
-  .legend b { color: var(--text); font-weight: 600; }
   .resv-note {
+    margin-left: auto; align-self: center;
     display: inline-flex; align-items: center; gap: 6px; font-size: .82rem;
     color: var(--text); background: var(--panel); border: 1px solid var(--accent);
     border-radius: 999px; padding: 4px 12px;
   }
   .resv-note b { color: var(--accent-2); font-size: 1rem; line-height: 1; }
 
-  main { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  /* Desktop: two columns — a sticky color rail beside the schedule content. */
+  .layout {
+    max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    display: flex; align-items: flex-start; gap: 18px;
+  }
+  main { flex: 1 1 auto; min-width: 0; }
+  .colorrail { flex: 0 0 208px; position: sticky; top: calc(var(--header-h, 150px) + 12px); }
   .view { display: none; }
   .view.active { display: block; }
 
@@ -187,30 +195,32 @@
 
   /* ---- Color key (activity-type legend) ---- */
   .colorkey {
-    max-width: 1200px; margin: 0 auto 12px; padding: 0 14px;
+    padding: 0 12px;
     background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
   }
   .colorkey > summary {
-    list-style: none; cursor: pointer; padding: 11px 0; font-weight: 600; font-size: .92rem;
+    list-style: none; cursor: pointer; padding: 11px 2px; font-weight: 600; font-size: .9rem;
     display: flex; align-items: center; gap: 8px;
   }
   .colorkey > summary::-webkit-details-marker { display: none; }
   .colorkey > summary::before { content: "▾"; color: var(--muted); font-size: .8rem; }
   .colorkey:not([open]) > summary::before { content: "▸"; }
-  .colorkey > summary .hint { color: var(--muted); font-weight: 400; font-size: .8rem; }
+  .colorkey > summary .hint { color: var(--muted); font-weight: 400; font-size: .75rem; }
+  /* Rail: a vertical, scannable list of color rows that scrolls within itself. */
   .key-items {
-    display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 0 12px;
-    max-height: 32vh; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 3px; padding: 2px 0 12px;
+    max-height: calc(100vh - var(--header-h, 150px) - 90px); overflow-y: auto;
   }
   .key-item {
-    display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
-    border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
-    border-radius: 999px; padding: 4px 11px 4px 8px; font-size: .8rem; transition: border-color .15s;
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    border: 1px solid transparent; background: var(--panel-2); color: var(--text);
+    border-radius: 8px; padding: 5px 9px; font-size: .8rem; transition: border-color .15s, background .15s;
   }
   .key-item:hover { border-color: var(--muted); }
   .key-item.active { border-color: var(--text); box-shadow: 0 0 0 1px var(--text) inset; }
   .key-item .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; }
-  .key-item .kcount { color: var(--muted); font-size: .72rem; }
+  .key-item .klabel { flex: 1 1 auto; min-width: 0; }
+  .key-item .kcount { color: var(--muted); font-size: .72rem; flex: none; }
 
   footer.site {
     max-width: 1200px; margin: 30px auto 0; padding: 18px 20px;
@@ -223,20 +233,24 @@
     .timegrid-wrap { display: none; }
     .day-stack { display: block; }
     /* Trim the sticky header so it doesn't eat half the screen. */
-    .legend { display: none; }                 /* boundary text is redundant with the chips */
     .head-row .sub { display: none; }
+    /* Keep the header minimal; the footer still explains the * badge. */
+    .resv-note { display: none; }
+    .print-btn { margin-left: auto; }
     h1 { font-size: 1.2rem; }
     .groups { grid-template-columns: 1fr; }
     header.site { padding: 12px 14px 0; }
-    main { padding: 0 14px; }
-    .tabs { margin-top: 10px; }
-    .toolbar { padding: 10px 0; gap: 8px 10px; }
+    /* Group tabs left and let the Highlight chips wrap below them (not spread). */
+    .tabbar { margin-top: 10px; justify-content: flex-start; align-items: center; gap: 8px 10px; }
+    .tod-group { margin-bottom: 6px; }
+    /* Single column: the color rail collapses back to a full-width block on top. */
+    .layout { display: block; padding: 0 14px; }
+    .colorrail { position: static; }
     /* Compact, collapsed-by-default color key (opened via JS only on desktop). */
-    .colorkey { margin-bottom: 8px; }
-    .colorkey > summary { padding: 9px 0; font-size: .88rem; }
+    .colorkey { margin-bottom: 12px; }
+    .colorkey > summary { padding: 9px 2px; font-size: .88rem; }
     .colorkey > summary .hint { display: none; }
-    .key-items { max-height: 30vh; gap: 5px; }
-    .key-item { padding: 3px 9px 3px 7px; font-size: .76rem; }
+    .key-items { max-height: 34vh; }
   }
 
   /* ---- Print (landscape, fits the page at any orientation) ---- */
@@ -253,12 +267,15 @@
     main { max-width: none; padding: 0; }
     a { color: #000; text-decoration: none; }
 
+    /* Collapse the two-column layout back to a single flow for paper. */
+    .layout { display: block !important; max-width: none; padding: 0; }
+    .colorrail { position: static !important; flex: none !important; width: auto !important; }
     /* Print a compact color key so the colors stay meaningful on paper. */
     .colorkey { display: block !important; max-width: none; margin: 0 0 6px; padding: 0; border: none; }
     .colorkey > summary { padding: 1px 0; font-size: 10px; font-weight: 700; list-style: none; pointer-events: none; }
     .colorkey > summary::before, .colorkey > summary .hint { display: none; }
     .colorkey > summary::after { content: ":"; }
-    .key-items { display: flex !important; max-height: none !important; overflow: visible !important; padding: 0; gap: 2px 9px; }
+    .key-items { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; max-height: none !important; overflow: visible !important; padding: 0; gap: 2px 9px; }
     .key-item { border: none !important; background: none !important; box-shadow: none !important; padding: 0; font-size: 9px; }
     .key-item .swatch { width: 9px; height: 9px; }
     .key-item .kcount { display: none; }
@@ -303,6 +320,7 @@
   <div class="head-row">
     <h1>FAC Group Exercise Schedule</h1>
     <span class="sub">Fayetteville Athletic Club · weekly classes</span>
+    <span class="resv-note"><b>*</b> Reservation required</span>
     <button class="print-btn" id="printBtn" title="Print the current view">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="6 9 6 2 18 2 18 9"></polyline>
@@ -312,13 +330,13 @@
       <span>Print</span>
     </button>
   </div>
-  <nav class="tabs" id="tabs">
-    <button class="tab active" data-view="day">By Day</button>
-    <button class="tab" data-view="class">By Class</button>
-    <button class="tab" data-view="instructor">By Instructor</button>
-    <button class="tab" data-view="location">By Location</button>
-  </nav>
-  <div class="toolbar">
+  <div class="tabbar">
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-view="day">By Day</button>
+      <button class="tab" data-view="class">By Class</button>
+      <button class="tab" data-view="instructor">By Instructor</button>
+      <button class="tab" data-view="location">By Location</button>
+    </nav>
     <div class="tod-group">
       <span class="tod-label">Highlight:</span>
       <button class="chip active" data-tod="all">All</button>
@@ -326,23 +344,23 @@
       <button class="chip" data-tod="midday">Midday</button>
       <button class="chip" data-tod="evening">Evening</button>
     </div>
-    <span class="resv-note"><b>*</b> Reservation required</span>
-    <span class="legend">
-      <b>Morning</b> before 11:00 AM · <b>Midday</b> 11:00 AM–4:00 PM · <b>Evening</b> 4:00 PM+
-    </span>
   </div>
-  <details class="colorkey" id="colorkey" open>
-    <summary>Class colors <span class="hint">— click a type to spotlight it everywhere</span></summary>
-    <div class="key-items" id="keyItems"></div>
-  </details>
 </header>
 
-<main>
-  <section id="view-day" class="view active"></section>
-  <section id="view-class" class="view"></section>
-  <section id="view-instructor" class="view"></section>
-  <section id="view-location" class="view"></section>
-</main>
+<div class="layout">
+  <aside class="colorrail">
+    <details class="colorkey" id="colorkey" open>
+      <summary>Class colors <span class="hint">— click to spotlight</span></summary>
+      <div class="key-items" id="keyItems"></div>
+    </details>
+  </aside>
+  <main>
+    <section id="view-day" class="view active"></section>
+    <section id="view-class" class="view"></section>
+    <section id="view-instructor" class="view"></section>
+    <section id="view-location" class="view"></section>
+  </main>
+</div>
 
 <footer class="site">
   <div>Last updated: <b>June 9, 2026 at 6:08 PM</b></div>
@@ -2974,7 +2992,8 @@
       item.dataset.family = f.family;
       item.innerHTML =
         '<span class="swatch" style="background:' + esc(f.color) + '"></span>' +
-        esc(f.label) + ' <span class="kcount">' + f.count + '</span>';
+        '<span class="klabel">' + esc(f.label) + '</span>' +
+        '<span class="kcount">' + f.count + '</span>';
       item.addEventListener("click", () => {
         const wasActive = curFam === f.family;
         document.querySelectorAll(".key-item").forEach(k => k.classList.remove("active"));
@@ -2998,9 +3017,18 @@
   window.addEventListener("beforeprint", enterPrint);
   window.addEventListener("afterprint", exitPrint);
 
+  // Keep the color rail's sticky offset (and its scroll height) in sync with the
+  // real sticky-header height, which changes with viewport width / wrapping.
+  function syncHeaderHeight() {
+    const h = document.querySelector("header.site");
+    if (h) document.documentElement.style.setProperty("--header-h", h.offsetHeight + "px");
+  }
+
   // ---- Init ----
   if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
   buildLegend();
+  syncHeaderHeight();
+  window.addEventListener("resize", syncHeaderHeight);
   buildDay();
   buildClass();
   buildInstructor();
