@@ -1,0 +1,97 @@
+{
+  "updated": "2026-06-18T08:24:55",
+  "source": "https://www.lesmills.com/us/workouts/all",
+  "note": "Les Mills program descriptions for the FAC schedule tooltips. PUBLISHED FIELD is `summary` (our own words, written by the coding agent) — that is the ONLY text rendered on the site. `source_text` holds the verbatim copy fetched from lesmills.com for REFERENCE ONLY and is never embedded into index.html/data.json. fetch_descriptions.py refreshes `source_text` and flags when it changes so the summary can be rewritten; it never overwrites `summary`. All tooltips credit and link back to Les Mills.",
+  "programs": {
+    "BODYPUMP": {
+      "name": "LES MILLS BODYPUMP",
+      "summary": "Les Mills' original barbell class: light-to-moderate weights and high repetitions work every major muscle group to build lean strength, tone up and burn calories — all set to motivating music.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/bodypump",
+      "source_text": "BODYPUMP is the original barbell workout for strength and toning. Build lean muscle, burn calories, and get stronger with this proven group fitness class.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "BODYATTACK": {
+      "name": "LES MILLS BODYATTACK",
+      "summary": "A high-energy cardio class built on athletic, explosive movement. Sports-style drills mixed with strength moves build all-round fitness, endurance and stamina.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/bodyattack",
+      "source_text": "BODYATTACK is a high-energy cardio workout combining athletic training with explosive moves. Build fitness, endurance & stamina. Find a class or try online.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "GRIT": {
+      "name": "LES MILLS GRIT",
+      "summary": "A 30-minute high-intensity interval workout that pushes you hard. Offered in Strength, Cardio and Athletic styles, it builds lean muscle, speed and stamina in a focused, coach-led session.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-grit",
+      "source_text": "30-minute high-intensity interval training that pushes you to the edge. GRIT Strength, Cardio & Athletic workouts build lean muscle, speed & stamina.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "CORE": {
+      "name": "LES MILLS CORE",
+      "summary": "A short (30–45 minute) class that strengthens the muscles around your core — abs, glutes and back. Science-backed exercises build the stability and control that carry over to sport and everyday movement, and help guard against injury. (Formerly CXWORX.)",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-core",
+      "source_text": "Build core strength with LES MILLS CORE. Science-backed 30/45-min workout targeting abs, glutes & back. Improve stability, speed & injury prevention.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "SHAPES": {
+      "name": "LES MILLS SHAPES",
+      "summary": "A low-impact, high-output full-body class that blends sculpt training, Pilates and power yoga. It builds strength and shape without lifting heavy weights, in 30- or 45-minute formats.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-shapes",
+      "source_text": "Low-impact, high-output full-body workout combining sculpt training, Pilates, and power yoga. Build strength without lifting. 30/45 min classes.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "STRENGTH_DEVELOPMENT": {
+      "name": "LES MILLS STRENGTH DEVELOPMENT",
+      "summary": "A science-backed, progressive resistance-training program done in a group setting. Steadily increasing the load over time builds real muscle and strength.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/strength-development",
+      "source_text": "Les Mills STRENGTH DEVELOPMENT: Build muscle and increase strength with science-backed progressive resistance training in a group setting.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "TONE": {
+      "name": "LES MILLS TONE",
+      "summary": "An all-round, full-body class mixing cardio, strength and core work. It's built to boost athleticism and movement control while helping you get fit and toned — a great everyday option.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
+      "source_text": "LES MILLS TONE combines cardio, strength and core in one full-body workout. Boost athleticism, get fit and toned, and improve movement control.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "CEREMONY": {
+      "name": "LES MILLS CEREMONY",
+      "summary": "A 45-minute full-body functional circuit that moves through stations — battle ropes, ski ergs, air bikes and more — combining strength, cardio and core training.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-ceremony",
+      "source_text": "45-minute full-body functional circuit with strength, cardio & core training. Battle ropes, ski ergs, air bikes & more. Find a class near you.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "RPM": {
+      "name": "LES MILLS RPM",
+      "summary": "Les Mills' original indoor cycling class. Ride to the beat through science-backed intervals — low-impact but high-energy — setting your own intensity on the bike.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/rpm",
+      "source_text": "RPM is the original indoor cycling workout. Ride to the rhythm with science-backed cardio training. Low-impact, high-energy. Find a class or try on LES MILLS+.",
+      "source_text_fetched": "2026-06-18"
+    },
+    "SPRINT": {
+      "name": "LES MILLS SPRINT",
+      "summary": "A 30-minute high-intensity interval ride that delivers big results in little time. Science-backed bursts of hard effort and recovery push your limits on the bike.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-18",
+      "url": "https://www.lesmills.com/us/workouts/sprint",
+      "source_text": "30-minute HIIT cycling workout that maximizes results in minimal time. Science-backed intervals push your limits. Find classes or try on LES MILLS+.",
+      "source_text_fetched": "2026-06-18"
+    }
+  }
+}

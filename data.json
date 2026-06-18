@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-15T13:08:53",
-  "updatedHuman": "June 15, 2026 at 1:08 PM",
+  "updated": "2026-06-18T13:27:42",
+  "updatedHuman": "June 18, 2026 at 1:27 PM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -49,49 +49,57 @@
       "family": "BODYATTACK",
       "label": "Les Mills BODYATTACK",
       "color": "#d946ef",
-      "count": 2
+      "count": 2,
+      "descKey": "BODYATTACK"
     },
     {
       "family": "BODYPUMP",
       "label": "Les Mills BODYPUMP",
       "color": "#ef4444",
-      "count": 16
+      "count": 16,
+      "descKey": "BODYPUMP"
     },
     {
       "family": "CEREMONY",
       "label": "Les Mills Ceremony",
       "color": "#f59e0b",
-      "count": 12
+      "count": 12,
+      "descKey": "CEREMONY"
     },
     {
       "family": "CORE",
       "label": "Les Mills CORE",
       "color": "#ec4899",
-      "count": 2
+      "count": 2,
+      "descKey": "CORE"
     },
     {
       "family": "GRIT",
       "label": "Les Mills GRIT",
       "color": "#6366f1",
-      "count": 3
+      "count": 3,
+      "descKey": "GRIT"
     },
     {
       "family": "SHAPES",
       "label": "Les Mills SHAPES",
       "color": "#10b981",
-      "count": 5
+      "count": 5,
+      "descKey": "SHAPES"
     },
     {
       "family": "STRENGTH_DEV",
       "label": "Les Mills Strength Development",
       "color": "#f43f5e",
-      "count": 2
+      "count": 2,
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "family": "TONE",
       "label": "Les Mills TONE",
       "color": "#34d399",
-      "count": 1
+      "count": 1,
+      "descKey": "TONE"
     },
     {
       "family": "PILATES",
@@ -136,7 +144,8 @@
         "Corinne"
       ],
       "studio": "Small",
-      "color": "#d946ef"
+      "color": "#d946ef",
+      "descKey": "BODYATTACK"
     },
     {
       "day": "MON",
@@ -155,7 +164,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -193,7 +203,8 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "MON",
@@ -212,7 +223,8 @@
         "Tamara"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -288,7 +300,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "MON",
@@ -364,7 +377,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -421,7 +435,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -459,7 +474,8 @@
         "Mason"
       ],
       "studio": "Large",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "MON",
@@ -497,7 +513,8 @@
         "Ashley F."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "MON",
@@ -573,7 +590,8 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -611,7 +629,8 @@
         "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -630,7 +649,8 @@
         "Caroline"
       ],
       "studio": "Court",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "TUE",
@@ -687,7 +707,8 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "TUE",
@@ -706,7 +727,8 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "TUE",
@@ -744,7 +766,8 @@
         "Susan"
       ],
       "studio": "Large",
-      "color": "#f43f5e"
+      "color": "#f43f5e",
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "day": "TUE",
@@ -801,7 +824,8 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "TUE",
@@ -839,7 +863,8 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -858,7 +883,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ec4899"
+      "color": "#ec4899",
+      "descKey": "CORE"
     },
     {
       "day": "TUE",
@@ -877,7 +903,8 @@
         "Susan"
       ],
       "studio": "Large",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -896,7 +923,8 @@
         "Virtual"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "TUE",
@@ -934,7 +962,8 @@
         "Mason"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "TUE",
@@ -991,7 +1020,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1029,7 +1059,8 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "WED",
@@ -1048,7 +1079,8 @@
         "Corinne"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1124,7 +1156,8 @@
         "Emily"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "WED",
@@ -1143,7 +1176,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#34d399"
+      "color": "#34d399",
+      "descKey": "TONE"
     },
     {
       "day": "WED",
@@ -1181,7 +1215,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1238,7 +1273,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1276,7 +1312,8 @@
         "Shannon"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1409,7 +1446,8 @@
         "Susan"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -1428,7 +1466,8 @@
         "Caroline"
       ],
       "studio": "Small",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "THU",
@@ -1466,7 +1505,8 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "THU",
@@ -1504,7 +1544,8 @@
         "Susan"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "THU",
@@ -1542,7 +1583,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#f43f5e"
+      "color": "#f43f5e",
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "day": "THU",
@@ -1599,7 +1641,8 @@
         "Ashley F."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "THU",
@@ -1637,7 +1680,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -1656,7 +1700,8 @@
         "Shannon"
       ],
       "studio": "Large",
-      "color": "#ec4899"
+      "color": "#ec4899",
+      "descKey": "CORE"
     },
     {
       "day": "THU",
@@ -1675,7 +1720,8 @@
         "Caroline"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -1694,7 +1740,8 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "THU",
@@ -1713,7 +1760,8 @@
         "Sharon"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "THU",
@@ -1770,7 +1818,8 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -1808,7 +1857,8 @@
         "Caroline"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -1865,7 +1915,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "FRI",
@@ -1904,7 +1955,8 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "FRI",
@@ -1942,7 +1994,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -1980,7 +2033,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "SAT",
@@ -1999,7 +2053,8 @@
         "Tiffany"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "SAT",
@@ -2037,7 +2092,8 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "SAT",
@@ -2075,7 +2131,8 @@
         "Brooke R."
       ],
       "studio": "Large",
-      "color": "#d946ef"
+      "color": "#d946ef",
+      "descKey": "BODYATTACK"
     },
     {
       "day": "SAT",
@@ -2152,7 +2209,8 @@
         "Shannon"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "SUN",
@@ -2228,7 +2286,61 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     }
-  ]
+  ],
+  "descriptions": {
+    "BODYATTACK": {
+      "name": "LES MILLS BODYATTACK",
+      "text": "A high-energy cardio class built on athletic, explosive movement. Sports-style drills mixed with strength moves build all-round fitness, endurance and stamina.",
+      "url": "https://www.lesmills.com/us/workouts/bodyattack"
+    },
+    "BODYPUMP": {
+      "name": "LES MILLS BODYPUMP",
+      "text": "Les Mills' original barbell class: light-to-moderate weights and high repetitions work every major muscle group to build lean strength, tone up and burn calories — all set to motivating music.",
+      "url": "https://www.lesmills.com/us/workouts/bodypump"
+    },
+    "SHAPES": {
+      "name": "LES MILLS SHAPES",
+      "text": "A low-impact, high-output full-body class that blends sculpt training, Pilates and power yoga. It builds strength and shape without lifting heavy weights, in 30- or 45-minute formats.",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-shapes"
+    },
+    "CEREMONY": {
+      "name": "LES MILLS CEREMONY",
+      "text": "A 45-minute full-body functional circuit that moves through stations — battle ropes, ski ergs, air bikes and more — combining strength, cardio and core training.",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-ceremony"
+    },
+    "GRIT": {
+      "name": "LES MILLS GRIT",
+      "text": "A 30-minute high-intensity interval workout that pushes you hard. Offered in Strength, Cardio and Athletic styles, it builds lean muscle, speed and stamina in a focused, coach-led session.",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-grit"
+    },
+    "SPRINT": {
+      "name": "LES MILLS SPRINT",
+      "text": "A 30-minute high-intensity interval ride that delivers big results in little time. Science-backed bursts of hard effort and recovery push your limits on the bike.",
+      "url": "https://www.lesmills.com/us/workouts/sprint"
+    },
+    "RPM": {
+      "name": "LES MILLS RPM",
+      "text": "Les Mills' original indoor cycling class. Ride to the beat through science-backed intervals — low-impact but high-energy — setting your own intensity on the bike.",
+      "url": "https://www.lesmills.com/us/workouts/rpm"
+    },
+    "STRENGTH_DEVELOPMENT": {
+      "name": "LES MILLS STRENGTH DEVELOPMENT",
+      "text": "A science-backed, progressive resistance-training program done in a group setting. Steadily increasing the load over time builds real muscle and strength.",
+      "url": "https://www.lesmills.com/us/workouts/strength-development"
+    },
+    "CORE": {
+      "name": "LES MILLS CORE",
+      "text": "A short (30–45 minute) class that strengthens the muscles around your core — abs, glutes and back. Science-backed exercises build the stability and control that carry over to sport and everyday movement, and help guard against injury. (Formerly CXWORX.)",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-core"
+    },
+    "TONE": {
+      "name": "LES MILLS TONE",
+      "text": "An all-round, full-body class mixing cardio, strength and core work. It's built to boost athleticism and movement control while helping you get fit and toned — a great everyday option.",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
+    }
+  },
+  "descSource": "https://www.lesmills.com/us/workouts/all"
 }

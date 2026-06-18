@@ -26,6 +26,7 @@ HERE = Path(__file__).resolve().parent
 RAW_FALLBACK = HERE / "fayac_raw.html"
 DATA_JSON = HERE / "data.json"
 INDEX_HTML = HERE / "index.html"
+DESCRIPTIONS_JSON = HERE / "descriptions.json"
 TABLE_ID = "tablepress-3"
 
 USER_AGENT = (
@@ -280,6 +281,36 @@ _M = {
 }
 
 
+# Map our family/displayName -> Les Mills program key (matching the keys used in
+# descriptions.json). Pure-Les-Mills families map straight through; the mixed
+# CYCLING family is resolved per-class (RPM / SPRINT are Les Mills; Precision
+# Cycling is not). Keep these keys in sync with fetch_descriptions.PROGRAMS.
+_FAMILY_PROGRAM = {
+    "BODYPUMP": "BODYPUMP",
+    "BODYATTACK": "BODYATTACK",
+    "GRIT": "GRIT",
+    "CORE": "CORE",
+    "SHAPES": "SHAPES",
+    "STRENGTH_DEV": "STRENGTH_DEVELOPMENT",
+    "TONE": "TONE",
+    "CEREMONY": "CEREMONY",
+}
+
+
+def program_for(c: dict):
+    """Return the Les Mills program key for a class, or None if it isn't one."""
+    fam = c["family"]
+    if fam in _FAMILY_PROGRAM:
+        return _FAMILY_PROGRAM[fam]
+    if fam == "CYCLING":
+        disp = c["displayName"].upper()
+        if "RPM" in disp:
+            return "RPM"
+        if "SPRINT" in disp:
+            return "SPRINT"
+    return None
+
+
 def map_class(raw: str):
     """Return (family, familyLabel, displayName, reservationRequired)."""
     cleaned = tidy(raw)
@@ -366,6 +397,61 @@ def assign_family_colors(classes: list[dict]) -> list[dict]:
 
 
 # --------------------------------------------------------------------------- #
+# 3c. Les Mills descriptions (class tooltips)
+# --------------------------------------------------------------------------- #
+def load_descriptions() -> dict:
+    """Load committed Les Mills descriptions (optional — feature degrades off)."""
+    if not DESCRIPTIONS_JSON.exists():
+        return {}
+    try:
+        return json.loads(DESCRIPTIONS_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:  # noqa: BLE001
+        print(f"WARN: could not read {DESCRIPTIONS_JSON.name}: {exc}")
+        return {}
+
+
+def attach_descriptions(classes: list[dict], families: list[dict], descs: dict) -> dict:
+    """Tag classes/families with a `descKey` and return the descriptions used.
+
+    A class gets `descKey` when it maps to a Les Mills program we have copy for.
+    A family gets `descKey` only when *every* class in it maps to that one same
+    program (so a legend swatch can speak for the whole type); mixed families
+    like Cycling are left to per-class tooltips.
+
+    Only our own `summary` is published — the verbatim `source_text` fetched from
+    Les Mills is reference-only and is never embedded into the site. Programs
+    without a summary yet (e.g. a brand-new one) are skipped until one is written.
+    """
+    programs = (descs or {}).get("programs", {})
+
+    def published(rec: dict):
+        summary = (rec.get("summary") or "").strip()
+        if not summary:
+            return None
+        return {"name": rec.get("name", ""), "text": summary, "url": rec.get("url", "")}
+
+    used: dict[str, dict] = {}
+    for c in classes:
+        key = program_for(c)
+        if key and key in programs:
+            pub = published(programs[key])
+            if pub:
+                c["descKey"] = key
+                used[key] = pub
+    by_family: dict[str, set] = {}
+    for c in classes:
+        by_family.setdefault(c["family"], set()).add(program_for(c))
+    for f in families:
+        keys = by_family.get(f["family"], set())
+        present = {k for k in keys if k}
+        if len(present) == 1 and None not in keys:
+            (only,) = tuple(present)
+            if only in used:
+                f["descKey"] = only
+    return used
+
+
+# --------------------------------------------------------------------------- #
 # 4. Emit
 # --------------------------------------------------------------------------- #
 def render_index(payload: dict, updated_human: str) -> str:
@@ -383,6 +469,8 @@ def main() -> None:
         sys.exit(1)
     classes = normalize(rows)
     families = assign_family_colors(classes)
+    descs = load_descriptions()
+    used_descs = attach_descriptions(classes, families, descs)
 
     now = datetime.now()
     payload = {
@@ -391,6 +479,8 @@ def main() -> None:
         "source": SOURCE_URL,
         "families": families,
         "classes": classes,
+        "descriptions": used_descs,
+        "descSource": (descs or {}).get("source", "https://www.lesmills.com/us/workouts/all"),
     }
 
     DATA_JSON.write_text(
@@ -404,6 +494,7 @@ def main() -> None:
     instrs = sorted({c["instructor"] for c in classes})
     print(f"Parsed {len(classes)} classes.")
     print(f"  {len(fams)} class families, {len(instrs)} instructors.")
+    print(f"  {len(used_descs)} Les Mills descriptions attached.")
     print(f"  Wrote {DATA_JSON.name} and {INDEX_HTML.name}.")
     print(f"  Last updated: {payload['updatedHuman']}")
 
@@ -635,6 +726,39 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .key-item .klabel { flex: 1 1 auto; min-width: 0; }
   .key-item .kcount { color: var(--muted); font-size: .72rem; flex: none; }
 
+  /* ---- Class info button + description popover ---- */
+  .info {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: 15px; height: 15px; margin-left: 5px; padding: 0; vertical-align: middle;
+    font: italic 700 .62rem/1 Georgia, "Times New Roman", serif;
+    color: var(--muted); background: transparent;
+    border: 1px solid var(--muted); border-radius: 50%; cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  .info:hover, .info:focus-visible { color: var(--text); border-color: var(--text); outline: none; }
+  .desc-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 60; }
+  .desc-pop {
+    position: fixed; z-index: 61; max-width: 320px; width: max-content;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 13px 16px 11px; color: var(--text);
+  }
+  .desc-pop .desc-close {
+    position: absolute; top: 5px; right: 8px; border: none; background: none;
+    color: var(--muted); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 2px 4px;
+  }
+  .desc-pop .desc-close:hover { color: var(--text); }
+  .desc-pop .desc-name { font-weight: 700; font-size: .95rem; padding-right: 18px; margin-bottom: 6px; }
+  .desc-pop .desc-name a { color: var(--accent-2); text-decoration: none; }
+  .desc-pop .desc-name a:hover { text-decoration: underline; }
+  .desc-pop .desc-text { font-size: .85rem; line-height: 1.45; }
+  .desc-pop .desc-credit { margin-top: 10px; font-size: .72rem; color: var(--muted); }
+  .desc-pop .desc-credit a { color: var(--muted); }
+  .desc-pop.desc-sheet {
+    left: 12px; right: 12px; bottom: 12px; top: auto; width: auto; max-width: none;
+    border-radius: 14px; padding: 18px 18px 16px;
+  }
+  .desc-pop.desc-sheet .desc-text { font-size: .92rem; }
+
   footer.site {
     max-width: 1200px; margin: 30px auto 0; padding: 18px 20px;
     border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem;
@@ -645,6 +769,9 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   @media (max-width: 760px) {
     .timegrid-wrap { display: none; }
     .day-stack { display: block; }
+    /* The compact mobile color strip has no room for info buttons — the day
+       cards carry the tooltips there instead. */
+    .key-item .info { display: none; }
     /* Trim the sticky header so it doesn't eat half the screen. */
     .head-row .sub { display: none; }
     /* Keep the header minimal; the footer still explains the * badge. */
@@ -823,6 +950,16 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   function badge(c) {
     return c.reservationRequired ? ' <span class="badge">Reserve *</span>' : "";
   }
+  // Info "ⓘ" affordance for Les Mills classes that have a description.
+  const DESCS = DATA.descriptions || {};
+  function infoFor(key, label) {
+    return key && DESCS[key]
+      ? ' <button type="button" class="info" data-desc="' + esc(key) +
+        '" aria-label="About ' + esc(label || "this class") +
+        '" title="About this class">i</button>'
+      : "";
+  }
+  function infoBtn(c) { return infoFor(c.descKey, c.displayName); }
   // Tag a card/row with its time-of-day + family, and color its left border by type.
   function paint(node, c) {
     node.dataset.tod = c.bucket;
@@ -914,6 +1051,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = sec.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete sec.dataset.userOpen; else sec.dataset.userOpen = "1";
       });
       sec.appendChild(h);
       const body = el("div", "db-body");
@@ -970,7 +1109,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const card = el("div", "card card-compact");
     paint(card, c);
     card.innerHTML =
-      '<div class="cname">' + esc(c.displayName) + badge(c) + '</div>' +
+      '<div class="cname">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
       '<div class="meta">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>';
     return card;
   }
@@ -980,7 +1119,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     paint(card, c);
     card.innerHTML =
       '<div class="time">' + esc(c.time) + '</div>' +
-      '<div class="cname">' + esc(c.displayName) + badge(c) + '</div>' +
+      '<div class="cname">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
       '<div class="meta">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>';
     return card;
   }
@@ -1012,6 +1151,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = g.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete g.dataset.userOpen; else g.dataset.userOpen = "1";
       });
       g.appendChild(h);
       const rows = el("div", "rows");
@@ -1032,7 +1173,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     row.innerHTML =
       '<div class="rday">' + esc(DAY_FULL[c.day] || c.day) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>' +
       '</div>';
     return row;
@@ -1046,7 +1187,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     row.innerHTML =
       '<div class="rday">' + esc(DAY_FULL[c.day] || c.day) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.studio) + withNote + '</div>' +
       '</div>';
     return row;
@@ -1075,6 +1216,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = g.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete g.dataset.userOpen; else g.dataset.userOpen = "1";
       });
       g.appendChild(h);
       const rows = el("div", "rows");
@@ -1101,7 +1244,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     row.innerHTML =
       '<div class="rday">' + esc(c.time) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.instructor) + '</div>' +
       '</div>';
     return row;
@@ -1143,10 +1286,14 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     });
     // On mobile every section starts collapsed; while a spotlight is active,
     // open the ones that contain a match (and re-collapse everything when the
-    // filter clears) so results aren't hidden inside a closed section.
+    // filter clears) so results aren't hidden inside a closed section. A section
+    // the user opened by hand stays open regardless, so toggling a spotlight
+    // doesn't reset their place on the page.
     if (COLLAPSE_DEFAULT) {
       document.querySelectorAll(".group, .day-block").forEach(g => {
-        const collapse = !filtering || !g.querySelector(".row.hl-match, .card.hl-match");
+        const userOpen = g.dataset.userOpen === "1";
+        const collapse = !userOpen &&
+          (!filtering || !g.querySelector(".row.hl-match, .card.hl-match"));
         g.classList.toggle("collapsed", collapse);
         const caret = g.querySelector(".caret");
         if (caret) caret.textContent = collapse ? "▸" : "▾";
@@ -1173,6 +1320,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       item.innerHTML =
         '<span class="swatch" style="background:' + esc(f.color) + '"></span>' +
         '<span class="klabel">' + esc(f.label) + '</span>' +
+        infoFor(f.descKey, f.label) +
         '<span class="kcount">' + f.count + '</span>';
       item.addEventListener("click", () => {
         const wasActive = curFam === f.family;
@@ -1203,6 +1351,65 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const h = document.querySelector("header.site");
     if (h) document.documentElement.style.setProperty("--header-h", h.offsetHeight + "px");
   }
+
+  // ---- Class description popover (Les Mills) ----
+  // A small tap/click popover: anchored next to the info button on wide screens,
+  // a bottom sheet (with backdrop) on narrow ones.
+  let descPop = null, descBack = null;
+  function closeDesc() {
+    if (descPop) { descPop.remove(); descPop = null; }
+    if (descBack) { descBack.remove(); descBack = null; }
+  }
+  function positionDesc(pop, anchor) {
+    const r = anchor.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight, M = 8;
+    let left = Math.max(M, Math.min(r.left, window.innerWidth - pw - M));
+    let top = r.bottom + 6;
+    if (top + ph > window.innerHeight - M) top = Math.max(M, r.top - ph - 6);
+    pop.style.left = left + "px";
+    pop.style.top = top + "px";
+  }
+  function openDesc(key, anchor) {
+    const d = DESCS[key];
+    if (!d) return;
+    closeDesc();
+    const name = d.url
+      ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.name) + '</a>'
+      : esc(d.name);
+    const creditHref = d.url || DATA.descSource || "https://www.lesmills.com/";
+    const pop = el("div", "desc-pop");
+    pop.innerHTML =
+      '<button type="button" class="desc-close" aria-label="Close">&times;</button>' +
+      '<div class="desc-name">' + name + '</div>' +
+      '<div class="desc-text">' + esc(d.text) + '</div>' +
+      '<div class="desc-credit">Source: <a href="' + esc(creditHref) +
+        '" target="_blank" rel="noopener">Les Mills</a></div>';
+    const sheet = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
+    if (sheet) {
+      descBack = el("div", "desc-backdrop");
+      document.body.appendChild(descBack);
+      pop.classList.add("desc-sheet");
+    }
+    document.body.appendChild(pop);
+    descPop = pop;
+    if (!sheet) positionDesc(pop, anchor);
+    pop.querySelector(".desc-close").addEventListener("click", closeDesc);
+  }
+  // Open from the info button. Capture phase + stopPropagation so the card's or
+  // legend swatch's own click handlers (collapse / spotlight) don't also fire.
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".info");
+    if (!b) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openDesc(b.dataset.desc, b);
+  }, true);
+  // Dismiss on outside click / Escape / resize.
+  document.addEventListener("click", e => {
+    if (descPop && !descPop.contains(e.target) && !e.target.closest(".info")) closeDesc();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeDesc(); });
+  window.addEventListener("resize", closeDesc);
 
   // ---- Init ----
   if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
