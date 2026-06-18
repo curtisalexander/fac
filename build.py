@@ -416,14 +416,28 @@ def attach_descriptions(classes: list[dict], families: list[dict], descs: dict) 
     A class gets `descKey` when it maps to a Les Mills program we have copy for.
     A family gets `descKey` only when *every* class in it maps to that one same
     program (so a legend swatch can speak for the whole type); mixed families
-    like Cycling are left to per-class tooltips."""
+    like Cycling are left to per-class tooltips.
+
+    Only our own `summary` is published — the verbatim `source_text` fetched from
+    Les Mills is reference-only and is never embedded into the site. Programs
+    without a summary yet (e.g. a brand-new one) are skipped until one is written.
+    """
     programs = (descs or {}).get("programs", {})
+
+    def published(rec: dict):
+        summary = (rec.get("summary") or "").strip()
+        if not summary:
+            return None
+        return {"name": rec.get("name", ""), "text": summary, "url": rec.get("url", "")}
+
     used: dict[str, dict] = {}
     for c in classes:
         key = program_for(c)
         if key and key in programs:
-            c["descKey"] = key
-            used[key] = programs[key]
+            pub = published(programs[key])
+            if pub:
+                c["descKey"] = key
+                used[key] = pub
     by_family: dict[str, set] = {}
     for c in classes:
         by_family.setdefault(c["family"], set()).add(program_for(c))
@@ -432,7 +446,7 @@ def attach_descriptions(classes: list[dict], families: list[dict], descs: dict) 
         present = {k for k in keys if k}
         if len(present) == 1 and None not in keys:
             (only,) = tuple(present)
-            if only in programs:
+            if only in used:
                 f["descKey"] = only
     return used
 

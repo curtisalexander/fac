@@ -4,12 +4,20 @@ Fetch Les Mills class descriptions for the FAC schedule tooltips.
 
 Pulls program descriptions from the official Les Mills "all workouts" listing
 (https://www.lesmills.com/us/workouts/all) and each program's own page, matches
-them to the Les Mills programs that appear on the FAC schedule, and writes
+them to the Les Mills programs that appear on the FAC schedule, and updates
 `descriptions.json`. Run it periodically to pick up new programs or copy that
 has changed since last time.
 
+IMPORTANT — what this does and does NOT touch:
+  * It writes the fetched VERBATIM Les Mills copy into each program's
+    `source_text` field. That text is REFERENCE ONLY: build.py never publishes
+    it, so it does not appear on the site.
+  * It NEVER overwrites `summary` — the published, our-own-words description.
+    When the verbatim `source_text` changes (or a brand-new program appears),
+    it is reported so a fresh `summary` can be hand/agent-written from it.
+
 Usage:
-    python3 fetch_descriptions.py            # fetch + update descriptions.json
+    python3 fetch_descriptions.py            # fetch + update source_text in descriptions.json
     python3 fetch_descriptions.py --check     # report changes, exit 1 if any, no write
     python3 fetch_descriptions.py --dry-run   # same as --check but always exit 0
 
@@ -19,9 +27,8 @@ Notes:
     PROGRAMS registry below maps each Les Mills program (keyed the same way as
     build.py's `program_for`) to the names/aliases used on lesmills.com.
   * If a program can't be fetched (network down, page moved, parser missed it),
-    its existing description is kept rather than blanked — the site never loses
-    a description because of a flaky fetch. Such misses are reported so you can
-    fix the matching or the parser.
+    its existing record is kept untouched — nothing is blanked by a flaky fetch.
+    Such misses are reported so you can fix the matching or the parser.
 """
 
 import argparse
@@ -245,47 +252,62 @@ def main() -> None:
     except Exception as exc:  # noqa: BLE001
         print(f"WARN: could not fetch listing ({exc}); using known program URLs.")
 
-    # 2. Each program page.
+    # 2. Each program page. We refresh `source_text` (verbatim, reference-only)
+    #    and preserve everything else — crucially the published `summary`.
     today = date.today().isoformat()
     new_programs: dict[str, dict] = {}
     misses: list[str] = []
+    # Track which programs' verbatim copy is new or changed (→ re-summarize).
+    src_added, src_changed = [], []
     for key, meta in PROGRAMS.items():
         url = resolve_url(key, links)
-        text = ""
+        # Start from the existing record so summary/origin/etc. are preserved.
+        rec = dict(old_programs.get(key, {}))
+        rec.setdefault("name", meta["name"])
+        rec.setdefault("summary", "")
+        rec.setdefault("summary_origin", "")
+        rec.setdefault("summary_updated", None)
+        rec["url"] = url
+        rec.setdefault("source_text", "")
+        rec.setdefault("source_text_fetched", None)
+
+        fetched_text = ""
         try:
-            text = extract_description(fetch(url))
+            fetched_text = extract_description(fetch(url))
         except Exception as exc:  # noqa: BLE001
             print(f"  {key}: fetch failed ({exc})")
-        if text:
-            new_programs[key] = {
-                "name": meta["name"],
-                "text": text,
-                "url": url,
-                "fetched": today,
-                "origin": "lesmills",
-            }
-            print(f"  {key}: fetched {len(text)} chars from {url}")
-        else:
-            # Keep whatever we had so the site doesn't lose this description.
-            kept = old_programs.get(key)
-            if kept:
-                new_programs[key] = kept
-                misses.append(f"{key} (kept existing {kept.get('origin', '?')})")
-            else:
-                misses.append(f"{key} (no text, no fallback)")
 
-    # 3. Diff report.
-    added, changed, removed = [], [], []
-    for key, rec in new_programs.items():
-        old = old_programs.get(key)
-        if not old:
-            added.append(key)
-        elif old.get("text", "") != rec.get("text", ""):
-            changed.append(key)
-    for key in old_programs:
-        if key not in new_programs:
-            removed.append(key)
-    # Programs on the listing we don't yet map (possible new classes to add).
+        if fetched_text:
+            old_src = old_programs.get(key, {}).get("source_text", "")
+            if not old_src:
+                src_added.append(key)
+            elif old_src != fetched_text:
+                src_changed.append(key)
+            rec["source_text"] = fetched_text
+            rec["source_text_fetched"] = today
+            print(f"  {key}: fetched {len(fetched_text)} chars from {url}")
+        else:
+            # Keep the existing record untouched (no blanking on a flaky fetch).
+            if old_programs.get(key, {}).get("source_text"):
+                misses.append(f"{key} (kept existing source_text)")
+            else:
+                misses.append(f"{key} (no source_text yet)")
+        new_programs[key] = rec
+
+    # Programs with verbatim copy but no published summary yet → need one written.
+    needs_summary = [
+        k for k, r in new_programs.items()
+        if r.get("source_text") and not (r.get("summary") or "").strip()
+    ]
+    # Programs whose verbatim copy changed after the summary was last written
+    # (heuristic: source newer than summary) → summary may be stale.
+    stale = [
+        k for k in src_changed
+        if (new_programs[k].get("summary") or "").strip()
+    ]
+    removed = [k for k in old_programs if k not in new_programs]
+
+    # Les Mills links on the listing we don't yet map (possible new classes).
     mapped_aliases = {norm(a) for m in PROGRAMS.values() for a in m["aliases"]}
     unmapped = sorted(
         t for t in links
@@ -293,42 +315,40 @@ def main() -> None:
     )
 
     print("\n=== Description refresh report ===")
-    print(f"  added:     {', '.join(added)     or '—'}")
-    print(f"  changed:   {', '.join(changed)   or '—'}")
-    print(f"  removed:   {', '.join(removed)   or '—'}")
-    print(f"  misses:    {', '.join(misses)    or '—'}")
+    print(f"  source copy new:      {', '.join(src_added)   or '—'}")
+    print(f"  source copy changed:  {', '.join(src_changed) or '—'}")
+    print(f"  needs a summary:      {', '.join(needs_summary) or '—'}")
+    print(f"  summary may be stale: {', '.join(stale)       or '—'}")
+    print(f"  removed:              {', '.join(removed)     or '—'}")
+    print(f"  fetch misses:         {', '.join(misses)      or '—'}")
     if unmapped:
-        print("  unmapped Les Mills links on the site (consider adding):")
+        print("  unmapped Les Mills links on the site (consider adding to PROGRAMS):")
         for t in unmapped:
             print(f"    - {t} -> {links[t]}")
+    if needs_summary or stale:
+        print("\n  → Ask the coding agent to (re)write `summary` for the above from"
+              " `source_text`, then run `python3 build.py`.")
 
-    has_changes = bool(added or changed or removed)
+    has_changes = bool(src_added or src_changed or removed)
 
     if args.check or args.dry_run:
-        if has_changes:
-            print("\nChanges detected." if not args.dry_run else "\n(dry run) Changes detected.")
-        else:
-            print("\nNo changes.")
+        prefix = "(dry run) " if args.dry_run else ""
+        print(f"\n{prefix}{'Source-copy changes detected.' if has_changes else 'No changes.'}")
         sys.exit(1 if (args.check and has_changes) else 0)
 
-    # 4. Write.
+    # 3. Write (source_text + bookkeeping only; summaries are left as-is).
     payload = {
         "updated": datetime.now().isoformat(timespec="seconds"),
         "source": LISTING_URL,
-        "note": existing.get(
-            "note",
-            "Les Mills program descriptions shown as tooltips on the FAC schedule. "
-            "Refreshed by fetch_descriptions.py. All descriptions credit and link "
-            "back to Les Mills.",
-        ),
+        "note": existing.get("note", ""),
         "programs": new_programs,
     }
     DESCRIPTIONS_JSON.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(f"\nWrote {DESCRIPTIONS_JSON.name} ({len(new_programs)} programs).")
-    if has_changes:
-        print("Remember to run `python3 build.py` to rebuild the site.")
+    if needs_summary or stale:
+        print("Some summaries need (re)writing before the site reflects the latest copy.")
 
 
 if __name__ == "__main__":

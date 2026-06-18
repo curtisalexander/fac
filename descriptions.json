@@ -1,77 +1,97 @@
 {
   "updated": "2026-06-18T00:00:00",
   "source": "https://www.lesmills.com/us/workouts/all",
-  "note": "Les Mills program descriptions shown as tooltips on the FAC schedule. Refreshed by fetch_descriptions.py. 'origin: seed' entries are concise summaries written for this site (not copied marketing copy); the fetcher replaces them with live text where it can. All descriptions credit and link back to Les Mills.",
+  "note": "Les Mills program descriptions for the FAC schedule tooltips. PUBLISHED FIELD is `summary` (our own words, written by the coding agent) — that is the ONLY text rendered on the site. `source_text` holds the verbatim copy fetched from lesmills.com for REFERENCE ONLY and is never embedded into index.html/data.json. fetch_descriptions.py refreshes `source_text` and flags when it changes so the summary can be rewritten; it never overwrites `summary`. All tooltips credit and link back to Les Mills.",
   "programs": {
     "BODYPUMP": {
       "name": "LES MILLS BODYPUMP",
-      "text": "The original barbell workout for anyone wanting to get lean, toned and fit. Using light to moderate weights with lots of repetition, BODYPUMP works every major muscle group to build strength and burn calories, set to motivating music.",
+      "summary": "The original barbell workout for anyone wanting to get lean, toned and fit. Using light to moderate weights with lots of repetition, BODYPUMP works every major muscle group to build strength and burn calories, set to motivating music.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/bodypump/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "BODYATTACK": {
       "name": "LES MILLS BODYATTACK",
-      "text": "A high-energy interval workout that combines athletic aerobic movements like running, lunging and jumping with strength exercises such as push-ups and squats. It builds cardio fitness, agility and coordination while toning the whole body.",
+      "summary": "A high-energy interval workout that combines athletic aerobic movements like running, lunging and jumping with strength exercises such as push-ups and squats. It builds cardio fitness, agility and coordination while toning the whole body.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/bodyattack/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "GRIT": {
       "name": "LES MILLS GRIT",
-      "text": "A high-intensity interval training (HIIT) workout, around 30 minutes, designed to improve cardio fitness, build lean muscle and burn calories fast. It blends bodyweight, plyometric, athletic and strength training in a coach-led, team-based format.",
+      "summary": "A high-intensity interval training (HIIT) workout, around 30 minutes, designed to improve cardio fitness, build lean muscle and burn calories fast. It blends bodyweight, plyometric, athletic and strength training in a coach-led, team-based format.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-grit/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "CORE": {
       "name": "LES MILLS CORE",
-      "text": "A 30-minute workout that builds strength, stability and endurance in the muscles that support your core — abs, lower back, glutes and hips. Using resistance tubes, weight plates and bodyweight exercises, it improves how you move in daily life and sport. (Formerly CXWORX.)",
+      "summary": "A 30-minute workout that builds strength, stability and endurance in the muscles that support your core — abs, lower back, glutes and hips. Using resistance tubes, weight plates and bodyweight exercises, it improves how you move in daily life and sport. (Formerly CXWORX.)",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/core/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "SHAPES": {
       "name": "LES MILLS SHAPES",
-      "text": "A cardio-dance workout that blends the strength and grace of ballet, pilates and yoga with the energy of dance. It sculpts and tones the body, builds core strength and improves posture, set to a soundtrack that builds to an energetic finish.",
+      "summary": "A cardio-dance workout that blends the strength and grace of ballet, pilates and yoga with the energy of dance. It sculpts and tones the body, builds core strength and improves posture, set to a soundtrack that builds to an energetic finish.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-shapes/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "STRENGTH_DEVELOPMENT": {
       "name": "LES MILLS STRENGTH DEVELOPMENT",
-      "text": "A progressive, periodized strength program built around compound barbell and dumbbell lifts. Across a training block it focuses on building real, measurable strength using proven principles of progressive overload.",
+      "summary": "A progressive, periodized strength program built around compound barbell and dumbbell lifts. Across a training block it focuses on building real, measurable strength using proven principles of progressive overload.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-strength-development/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "TONE": {
       "name": "LES MILLS TONE",
-      "text": "A mix of strength, cardio and core training for a balanced, full-body workout. Using bodyweight exercises, resistance and light weights, it's an ideal all-round option for anyone wanting variety in their training.",
+      "summary": "A mix of strength, cardio and core training for a balanced, full-body workout. Using bodyweight exercises, resistance and light weights, it's an ideal all-round option for anyone wanting variety in their training.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/tone/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "CEREMONY": {
       "name": "LES MILLS CEREMONY",
-      "text": "A functional strength and conditioning workout built for real-world fitness and events like HYROX. It combines functional strength, conditioning and athletic movement in a coach-led format that trains the movement patterns of everyday life.",
+      "summary": "A functional strength and conditioning workout built for real-world fitness and events like HYROX. It combines functional strength, conditioning and athletic movement in a coach-led format that trains the movement patterns of everyday life.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/ceremony/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "RPM": {
       "name": "LES MILLS RPM",
-      "text": "An indoor cycling workout ridden to the rhythm of powerful music. You control your own intensity by adjusting the bike's resistance, riding through hills, flats, mountain peaks and sprints to burn calories and build cardio fitness.",
+      "summary": "An indoor cycling workout ridden to the rhythm of powerful music. You control your own intensity by adjusting the bike's resistance, riding through hills, flats, mountain peaks and sprints to burn calories and build cardio fitness.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/rpm/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     },
     "SPRINT": {
       "name": "LES MILLS SPRINT",
-      "text": "A short, high-intensity interval workout on an indoor bike. In about 30 minutes you push your physical and mental limits with bursts of intense effort and recovery, burning calories during and well after the class.",
+      "summary": "A short, high-intensity interval workout on an indoor bike. In about 30 minutes you push your physical and mental limits with bursts of intense effort and recovery, burning calories during and well after the class.",
+      "summary_origin": "seed",
+      "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-sprint/",
-      "fetched": "2026-06-18",
-      "origin": "seed"
+      "source_text": "",
+      "source_text_fetched": null
     }
   }
 }

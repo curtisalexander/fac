@@ -55,23 +55,35 @@ description of the program, with a link and credit back to Les Mills.
 
 ## Class descriptions
 
-- **`descriptions.json`** — Les Mills program descriptions, keyed by program. Embedded
-  into `index.html` at build time and surfaced as the **ⓘ** tooltips.
-- **`fetch_descriptions.py`** — refreshes `descriptions.json` from the official
-  Les Mills site (<https://www.lesmills.com/us/workouts/all> + each program page),
-  matching programs to the ones on the FAC schedule.
+Each Les Mills program in **`descriptions.json`** has two distinct fields:
+
+- **`summary`** — *our own words*, written for this site. This is the **only** text
+  rendered in the tooltips. `build.py` embeds just `summary` (as `text`) + the name
+  and link into the page.
+- **`source_text`** — the **verbatim** copy fetched from lesmills.com, kept for
+  **reference only**. It is *never* embedded into `index.html`/`data.json`, so the
+  site doesn't republish Les Mills' marketing copy.
+
+This keeps the workflow clean: fetch their copy to know what each class *is*, then
+write an original summary from it.
+
+- **`fetch_descriptions.py`** — refreshes `source_text` from the official Les Mills
+  site (<https://www.lesmills.com/us/workouts/all> + each program page), matching
+  programs to the ones on the FAC schedule. It **never** touches `summary`.
 
 ```bash
-python3 fetch_descriptions.py            # fetch + update descriptions.json
+python3 fetch_descriptions.py            # refresh source_text in descriptions.json
 python3 fetch_descriptions.py --check     # report changes, exit 1 if any (for CI)
 python3 fetch_descriptions.py --dry-run   # report changes, never write/fail
 ```
 
-It reports new programs, changed copy, and any Les Mills classes on the site we
-don't yet map. If a fetch fails it keeps the existing text rather than blanking it,
-so the site never loses a description. After refreshing, run `python3 build.py` to
-rebuild the page. Entries marked `"origin": "seed"` are concise summaries written for
-this site; the fetcher replaces them with live text where it can.
+It reports new source copy, **changed** source copy, programs that **need a summary**,
+summaries that **may be stale** (source changed after the summary was last written),
+and any Les Mills classes on the site we don't yet map. If a fetch fails it leaves the
+existing record untouched. When it flags new/changed copy, (re)write the affected
+`summary` fields from `source_text`, bump `summary_updated`, then run `python3 build.py`
+to rebuild the page. Entries marked `"summary_origin": "seed"` are placeholder
+summaries written before any live fetch.
 
 ## Refreshing the schedule
 
