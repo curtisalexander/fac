@@ -24,18 +24,23 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Refresh Les Mills descriptions
+        # Best-effort: if lesmills.com is unreachable, existing descriptions are
+        # kept and the build still runs.
+        run: python3 fetch_descriptions.py || true
+
       - name: Scrape and rebuild site
         run: python3 build.py
 
-      - name: Commit changes if the schedule changed
+      - name: Commit changes if anything changed
         run: |
-          if [ -n "$(git status --porcelain index.html data.json fayac_raw.html)" ]; then
+          if [ -n "$(git status --porcelain index.html data.json fayac_raw.html descriptions.json)" ]; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add index.html data.json fayac_raw.html
-            git commit -m "chore: refresh FAC schedule"
+            git add index.html data.json fayac_raw.html descriptions.json
+            git commit -m "chore: refresh FAC schedule + class descriptions"
             git push
-            echo "Schedule updated and pushed."
+            echo "Updated and pushed."
           else
-            echo "No schedule changes."
+            echo "No changes."
           fi

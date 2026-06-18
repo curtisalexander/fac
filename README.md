@@ -49,6 +49,30 @@ the color key (e.g. morning + BODYPUMP).
 
 Classes marked with a **Reserve \*** badge require a reservation.
 
+Les Mills classes (BODYPUMP, BODYATTACK, GRIT, CORE, SHAPES, Strength Development,
+TONE, Ceremony, RPM, SPRINT) show a small **ⓘ** button — click/tap it for a short
+description of the program, with a link and credit back to Les Mills.
+
+## Class descriptions
+
+- **`descriptions.json`** — Les Mills program descriptions, keyed by program. Embedded
+  into `index.html` at build time and surfaced as the **ⓘ** tooltips.
+- **`fetch_descriptions.py`** — refreshes `descriptions.json` from the official
+  Les Mills site (<https://www.lesmills.com/us/workouts/all> + each program page),
+  matching programs to the ones on the FAC schedule.
+
+```bash
+python3 fetch_descriptions.py            # fetch + update descriptions.json
+python3 fetch_descriptions.py --check     # report changes, exit 1 if any (for CI)
+python3 fetch_descriptions.py --dry-run   # report changes, never write/fail
+```
+
+It reports new programs, changed copy, and any Les Mills classes on the site we
+don't yet map. If a fetch fails it keeps the existing text rather than blanking it,
+so the site never loses a description. After refreshing, run `python3 build.py` to
+rebuild the page. Entries marked `"origin": "seed"` are concise summaries written for
+this site; the fetcher replaces them with live text where it can.
+
 ## Refreshing the schedule
 
 ### Manually

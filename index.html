@@ -222,6 +222,39 @@
   .key-item .klabel { flex: 1 1 auto; min-width: 0; }
   .key-item .kcount { color: var(--muted); font-size: .72rem; flex: none; }
 
+  /* ---- Class info button + description popover ---- */
+  .info {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: 15px; height: 15px; margin-left: 5px; padding: 0; vertical-align: middle;
+    font: italic 700 .62rem/1 Georgia, "Times New Roman", serif;
+    color: var(--muted); background: transparent;
+    border: 1px solid var(--muted); border-radius: 50%; cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  .info:hover, .info:focus-visible { color: var(--text); border-color: var(--text); outline: none; }
+  .desc-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 60; }
+  .desc-pop {
+    position: fixed; z-index: 61; max-width: 320px; width: max-content;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 13px 16px 11px; color: var(--text);
+  }
+  .desc-pop .desc-close {
+    position: absolute; top: 5px; right: 8px; border: none; background: none;
+    color: var(--muted); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 2px 4px;
+  }
+  .desc-pop .desc-close:hover { color: var(--text); }
+  .desc-pop .desc-name { font-weight: 700; font-size: .95rem; padding-right: 18px; margin-bottom: 6px; }
+  .desc-pop .desc-name a { color: var(--accent-2); text-decoration: none; }
+  .desc-pop .desc-name a:hover { text-decoration: underline; }
+  .desc-pop .desc-text { font-size: .85rem; line-height: 1.45; }
+  .desc-pop .desc-credit { margin-top: 10px; font-size: .72rem; color: var(--muted); }
+  .desc-pop .desc-credit a { color: var(--muted); }
+  .desc-pop.desc-sheet {
+    left: 12px; right: 12px; bottom: 12px; top: auto; width: auto; max-width: none;
+    border-radius: 14px; padding: 18px 18px 16px;
+  }
+  .desc-pop.desc-sheet .desc-text { font-size: .92rem; }
+
   footer.site {
     max-width: 1200px; margin: 30px auto 0; padding: 18px 20px;
     border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem;
@@ -232,6 +265,9 @@
   @media (max-width: 760px) {
     .timegrid-wrap { display: none; }
     .day-stack { display: block; }
+    /* The compact mobile color strip has no room for info buttons — the day
+       cards carry the tooltips there instead. */
+    .key-item .info { display: none; }
     /* Trim the sticky header so it doesn't eat half the screen. */
     .head-row .sub { display: none; }
     /* Keep the header minimal; the footer still explains the * badge. */
@@ -363,7 +399,7 @@
 </div>
 
 <footer class="site">
-  <div>Last updated: <b>June 15, 2026 at 1:08 PM</b></div>
+  <div>Last updated: <b>June 18, 2026 at 1:03 PM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -373,8 +409,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-15T13:08:53",
-  "updatedHuman": "June 15, 2026 at 1:08 PM",
+  "updated": "2026-06-18T13:03:42",
+  "updatedHuman": "June 18, 2026 at 1:03 PM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -423,49 +459,57 @@
       "family": "BODYATTACK",
       "label": "Les Mills BODYATTACK",
       "color": "#d946ef",
-      "count": 2
+      "count": 2,
+      "descKey": "BODYATTACK"
     },
     {
       "family": "BODYPUMP",
       "label": "Les Mills BODYPUMP",
       "color": "#ef4444",
-      "count": 16
+      "count": 16,
+      "descKey": "BODYPUMP"
     },
     {
       "family": "CEREMONY",
       "label": "Les Mills Ceremony",
       "color": "#f59e0b",
-      "count": 12
+      "count": 12,
+      "descKey": "CEREMONY"
     },
     {
       "family": "CORE",
       "label": "Les Mills CORE",
       "color": "#ec4899",
-      "count": 2
+      "count": 2,
+      "descKey": "CORE"
     },
     {
       "family": "GRIT",
       "label": "Les Mills GRIT",
       "color": "#6366f1",
-      "count": 3
+      "count": 3,
+      "descKey": "GRIT"
     },
     {
       "family": "SHAPES",
       "label": "Les Mills SHAPES",
       "color": "#10b981",
-      "count": 5
+      "count": 5,
+      "descKey": "SHAPES"
     },
     {
       "family": "STRENGTH_DEV",
       "label": "Les Mills Strength Development",
       "color": "#f43f5e",
-      "count": 2
+      "count": 2,
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "family": "TONE",
       "label": "Les Mills TONE",
       "color": "#34d399",
-      "count": 1
+      "count": 1,
+      "descKey": "TONE"
     },
     {
       "family": "PILATES",
@@ -510,7 +554,8 @@
         "Corinne"
       ],
       "studio": "Small",
-      "color": "#d946ef"
+      "color": "#d946ef",
+      "descKey": "BODYATTACK"
     },
     {
       "day": "MON",
@@ -529,7 +574,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -567,7 +613,8 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "MON",
@@ -586,7 +633,8 @@
         "Tamara"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -662,7 +710,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "MON",
@@ -738,7 +787,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -795,7 +845,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "MON",
@@ -833,7 +884,8 @@
         "Mason"
       ],
       "studio": "Large",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "MON",
@@ -871,7 +923,8 @@
         "Ashley F."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "MON",
@@ -947,7 +1000,8 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -985,7 +1039,8 @@
         "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -1004,7 +1059,8 @@
         "Caroline"
       ],
       "studio": "Court",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "TUE",
@@ -1061,7 +1117,8 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "TUE",
@@ -1080,7 +1137,8 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "TUE",
@@ -1118,7 +1176,8 @@
         "Susan"
       ],
       "studio": "Large",
-      "color": "#f43f5e"
+      "color": "#f43f5e",
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "day": "TUE",
@@ -1175,7 +1234,8 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "TUE",
@@ -1213,7 +1273,8 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -1232,7 +1293,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ec4899"
+      "color": "#ec4899",
+      "descKey": "CORE"
     },
     {
       "day": "TUE",
@@ -1251,7 +1313,8 @@
         "Susan"
       ],
       "studio": "Large",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -1270,7 +1333,8 @@
         "Virtual"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "TUE",
@@ -1308,7 +1372,8 @@
         "Mason"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "TUE",
@@ -1365,7 +1430,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1403,7 +1469,8 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "WED",
@@ -1422,7 +1489,8 @@
         "Corinne"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1498,7 +1566,8 @@
         "Emily"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "WED",
@@ -1517,7 +1586,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#34d399"
+      "color": "#34d399",
+      "descKey": "TONE"
     },
     {
       "day": "WED",
@@ -1555,7 +1625,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1612,7 +1683,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1650,7 +1722,8 @@
         "Shannon"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "WED",
@@ -1783,7 +1856,8 @@
         "Susan"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -1802,7 +1876,8 @@
         "Caroline"
       ],
       "studio": "Small",
-      "color": "#6366f1"
+      "color": "#6366f1",
+      "descKey": "GRIT"
     },
     {
       "day": "THU",
@@ -1840,7 +1915,8 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "THU",
@@ -1878,7 +1954,8 @@
         "Susan"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "THU",
@@ -1916,7 +1993,8 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#f43f5e"
+      "color": "#f43f5e",
+      "descKey": "STRENGTH_DEVELOPMENT"
     },
     {
       "day": "THU",
@@ -1973,7 +2051,8 @@
         "Ashley F."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "SPRINT"
     },
     {
       "day": "THU",
@@ -2011,7 +2090,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -2030,7 +2110,8 @@
         "Shannon"
       ],
       "studio": "Large",
-      "color": "#ec4899"
+      "color": "#ec4899",
+      "descKey": "CORE"
     },
     {
       "day": "THU",
@@ -2049,7 +2130,8 @@
         "Caroline"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "THU",
@@ -2068,7 +2150,8 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "THU",
@@ -2087,7 +2170,8 @@
         "Sharon"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "THU",
@@ -2144,7 +2228,8 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -2182,7 +2267,8 @@
         "Caroline"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -2239,7 +2325,8 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "FRI",
@@ -2278,7 +2365,8 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981"
+      "color": "#10b981",
+      "descKey": "SHAPES"
     },
     {
       "day": "FRI",
@@ -2316,7 +2404,8 @@
         "Steve"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "FRI",
@@ -2354,7 +2443,8 @@
         "Rick"
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     },
     {
       "day": "SAT",
@@ -2373,7 +2463,8 @@
         "Tiffany"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "SAT",
@@ -2411,7 +2502,8 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "SAT",
@@ -2449,7 +2541,8 @@
         "Brooke R."
       ],
       "studio": "Large",
-      "color": "#d946ef"
+      "color": "#d946ef",
+      "descKey": "BODYATTACK"
     },
     {
       "day": "SAT",
@@ -2526,7 +2619,8 @@
         "Shannon"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "descKey": "CEREMONY"
     },
     {
       "day": "SUN",
@@ -2602,9 +2696,83 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "descKey": "BODYPUMP"
     }
-  ]
+  ],
+  "descriptions": {
+    "BODYATTACK": {
+      "name": "LES MILLS BODYATTACK",
+      "text": "A high-energy interval workout that combines athletic aerobic movements like running, lunging and jumping with strength exercises such as push-ups and squats. It builds cardio fitness, agility and coordination while toning the whole body.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/bodyattack/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "BODYPUMP": {
+      "name": "LES MILLS BODYPUMP",
+      "text": "The original barbell workout for anyone wanting to get lean, toned and fit. Using light to moderate weights with lots of repetition, BODYPUMP works every major muscle group to build strength and burn calories, set to motivating music.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/bodypump/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "SHAPES": {
+      "name": "LES MILLS SHAPES",
+      "text": "A cardio-dance workout that blends the strength and grace of ballet, pilates and yoga with the energy of dance. It sculpts and tones the body, builds core strength and improves posture, set to a soundtrack that builds to an energetic finish.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-shapes/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "CEREMONY": {
+      "name": "LES MILLS CEREMONY",
+      "text": "A functional strength and conditioning workout built for real-world fitness and events like HYROX. It combines functional strength, conditioning and athletic movement in a coach-led format that trains the movement patterns of everyday life.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/ceremony/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "GRIT": {
+      "name": "LES MILLS GRIT",
+      "text": "A high-intensity interval training (HIIT) workout, around 30 minutes, designed to improve cardio fitness, build lean muscle and burn calories fast. It blends bodyweight, plyometric, athletic and strength training in a coach-led, team-based format.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-grit/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "SPRINT": {
+      "name": "LES MILLS SPRINT",
+      "text": "A short, high-intensity interval workout on an indoor bike. In about 30 minutes you push your physical and mental limits with bursts of intense effort and recovery, burning calories during and well after the class.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-sprint/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "RPM": {
+      "name": "LES MILLS RPM",
+      "text": "An indoor cycling workout ridden to the rhythm of powerful music. You control your own intensity by adjusting the bike's resistance, riding through hills, flats, mountain peaks and sprints to burn calories and build cardio fitness.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/rpm/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "STRENGTH_DEVELOPMENT": {
+      "name": "LES MILLS STRENGTH DEVELOPMENT",
+      "text": "A progressive, periodized strength program built around compound barbell and dumbbell lifts. Across a training block it focuses on building real, measurable strength using proven principles of progressive overload.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/les-mills-strength-development/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "CORE": {
+      "name": "LES MILLS CORE",
+      "text": "A 30-minute workout that builds strength, stability and endurance in the muscles that support your core — abs, lower back, glutes and hips. Using resistance tubes, weight plates and bodyweight exercises, it improves how you move in daily life and sport. (Formerly CXWORX.)",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/core/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    },
+    "TONE": {
+      "name": "LES MILLS TONE",
+      "text": "A mix of strength, cardio and core training for a balanced, full-body workout. Using bodyweight exercises, resistance and light weights, it's an ideal all-round option for anyone wanting variety in their training.",
+      "url": "https://www.lesmills.com/us/workouts/group-fitness/tone/",
+      "fetched": "2026-06-18",
+      "origin": "seed"
+    }
+  },
+  "descSource": "https://www.lesmills.com/us/workouts/all"
 }
 </script>
 <script>
@@ -2643,6 +2811,16 @@
   function badge(c) {
     return c.reservationRequired ? ' <span class="badge">Reserve *</span>' : "";
   }
+  // Info "ⓘ" affordance for Les Mills classes that have a description.
+  const DESCS = DATA.descriptions || {};
+  function infoFor(key, label) {
+    return key && DESCS[key]
+      ? ' <button type="button" class="info" data-desc="' + esc(key) +
+        '" aria-label="About ' + esc(label || "this class") +
+        '" title="About this class">i</button>'
+      : "";
+  }
+  function infoBtn(c) { return infoFor(c.descKey, c.displayName); }
   // Tag a card/row with its time-of-day + family, and color its left border by type.
   function paint(node, c) {
     node.dataset.tod = c.bucket;
@@ -2792,7 +2970,7 @@
     const card = el("div", "card card-compact");
     paint(card, c);
     card.innerHTML =
-      '<div class="cname">' + esc(c.displayName) + badge(c) + '</div>' +
+      '<div class="cname">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
       '<div class="meta">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>';
     return card;
   }
@@ -2802,7 +2980,7 @@
     paint(card, c);
     card.innerHTML =
       '<div class="time">' + esc(c.time) + '</div>' +
-      '<div class="cname">' + esc(c.displayName) + badge(c) + '</div>' +
+      '<div class="cname">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
       '<div class="meta">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>';
     return card;
   }
@@ -2856,7 +3034,7 @@
     row.innerHTML =
       '<div class="rday">' + esc(DAY_FULL[c.day] || c.day) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.instructor) + ' · ' + esc(c.studio) + '</div>' +
       '</div>';
     return row;
@@ -2870,7 +3048,7 @@
     row.innerHTML =
       '<div class="rday">' + esc(DAY_FULL[c.day] || c.day) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.time) + ' — ' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.studio) + withNote + '</div>' +
       '</div>';
     return row;
@@ -2927,7 +3105,7 @@
     row.innerHTML =
       '<div class="rday">' + esc(c.time) + '</div>' +
       '<div class="rmain">' +
-        '<div class="rtime">' + esc(c.displayName) + badge(c) + '</div>' +
+        '<div class="rtime">' + esc(c.displayName) + badge(c) + infoBtn(c) + '</div>' +
         '<div class="rsub">' + esc(c.instructor) + '</div>' +
       '</div>';
     return row;
@@ -3003,6 +3181,7 @@
       item.innerHTML =
         '<span class="swatch" style="background:' + esc(f.color) + '"></span>' +
         '<span class="klabel">' + esc(f.label) + '</span>' +
+        infoFor(f.descKey, f.label) +
         '<span class="kcount">' + f.count + '</span>';
       item.addEventListener("click", () => {
         const wasActive = curFam === f.family;
@@ -3033,6 +3212,65 @@
     const h = document.querySelector("header.site");
     if (h) document.documentElement.style.setProperty("--header-h", h.offsetHeight + "px");
   }
+
+  // ---- Class description popover (Les Mills) ----
+  // A small tap/click popover: anchored next to the info button on wide screens,
+  // a bottom sheet (with backdrop) on narrow ones.
+  let descPop = null, descBack = null;
+  function closeDesc() {
+    if (descPop) { descPop.remove(); descPop = null; }
+    if (descBack) { descBack.remove(); descBack = null; }
+  }
+  function positionDesc(pop, anchor) {
+    const r = anchor.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight, M = 8;
+    let left = Math.max(M, Math.min(r.left, window.innerWidth - pw - M));
+    let top = r.bottom + 6;
+    if (top + ph > window.innerHeight - M) top = Math.max(M, r.top - ph - 6);
+    pop.style.left = left + "px";
+    pop.style.top = top + "px";
+  }
+  function openDesc(key, anchor) {
+    const d = DESCS[key];
+    if (!d) return;
+    closeDesc();
+    const name = d.url
+      ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.name) + '</a>'
+      : esc(d.name);
+    const creditHref = d.url || DATA.descSource || "https://www.lesmills.com/";
+    const pop = el("div", "desc-pop");
+    pop.innerHTML =
+      '<button type="button" class="desc-close" aria-label="Close">&times;</button>' +
+      '<div class="desc-name">' + name + '</div>' +
+      '<div class="desc-text">' + esc(d.text) + '</div>' +
+      '<div class="desc-credit">Source: <a href="' + esc(creditHref) +
+        '" target="_blank" rel="noopener">Les Mills</a></div>';
+    const sheet = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
+    if (sheet) {
+      descBack = el("div", "desc-backdrop");
+      document.body.appendChild(descBack);
+      pop.classList.add("desc-sheet");
+    }
+    document.body.appendChild(pop);
+    descPop = pop;
+    if (!sheet) positionDesc(pop, anchor);
+    pop.querySelector(".desc-close").addEventListener("click", closeDesc);
+  }
+  // Open from the info button. Capture phase + stopPropagation so the card's or
+  // legend swatch's own click handlers (collapse / spotlight) don't also fire.
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".info");
+    if (!b) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openDesc(b.dataset.desc, b);
+  }, true);
+  // Dismiss on outside click / Escape / resize.
+  document.addEventListener("click", e => {
+    if (descPop && !descPop.contains(e.target) && !e.target.closest(".info")) closeDesc();
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeDesc(); });
+  window.addEventListener("resize", closeDesc);
 
   // ---- Init ----
   if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
