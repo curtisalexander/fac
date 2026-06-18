@@ -914,6 +914,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = sec.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete sec.dataset.userOpen; else sec.dataset.userOpen = "1";
       });
       sec.appendChild(h);
       const body = el("div", "db-body");
@@ -1012,6 +1014,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = g.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete g.dataset.userOpen; else g.dataset.userOpen = "1";
       });
       g.appendChild(h);
       const rows = el("div", "rows");
@@ -1075,6 +1079,8 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       h.addEventListener("click", () => {
         const collapsed = g.classList.toggle("collapsed");
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
+        // Remember a manual open so an active spotlight won't re-collapse it.
+        if (collapsed) delete g.dataset.userOpen; else g.dataset.userOpen = "1";
       });
       g.appendChild(h);
       const rows = el("div", "rows");
@@ -1143,10 +1149,14 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     });
     // On mobile every section starts collapsed; while a spotlight is active,
     // open the ones that contain a match (and re-collapse everything when the
-    // filter clears) so results aren't hidden inside a closed section.
+    // filter clears) so results aren't hidden inside a closed section. A section
+    // the user opened by hand stays open regardless, so toggling a spotlight
+    // doesn't reset their place on the page.
     if (COLLAPSE_DEFAULT) {
       document.querySelectorAll(".group, .day-block").forEach(g => {
-        const collapse = !filtering || !g.querySelector(".row.hl-match, .card.hl-match");
+        const userOpen = g.dataset.userOpen === "1";
+        const collapse = !userOpen &&
+          (!filtering || !g.querySelector(".row.hl-match, .card.hl-match"));
         g.classList.toggle("collapsed", collapse);
         const caret = g.querySelector(".caret");
         if (caret) caret.textContent = collapse ? "▸" : "▾";
