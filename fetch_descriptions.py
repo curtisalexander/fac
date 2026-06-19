@@ -351,7 +351,10 @@ def main() -> None:
               " `source_text`, then run `python3 build.py`.")
 
     # Surface description "drift" to CI: anything that means the published copy
-    # may no longer reflect Les Mills, or that a page could not be parsed.
+    # may no longer reflect Les Mills, or that a page could not be parsed. These
+    # are all actionable and self-clearing once addressed. `unmapped` is omitted
+    # on purpose — those are programs FAC doesn't offer, a persistent condition
+    # that would re-alert every run; it stays in the report above for reference.
     hard_miss = [m for m in misses if "no source_text yet" in m]
     drift_reasons = []
     if needs_summary:
@@ -360,8 +363,6 @@ def main() -> None:
         drift_reasons.append("summary may be stale: " + ", ".join(stale))
     if removed:
         drift_reasons.append("removed: " + ", ".join(removed))
-    if unmapped:
-        drift_reasons.append(f"{len(unmapped)} unmapped Les Mills link(s)")
     if hard_miss:
         drift_reasons.append("could not fetch (no copy yet): " + ", ".join(hard_miss))
     if drift_reasons:
