@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T13:56:23",
+  "updated": "2026-06-19T14:28:08",
   "source": "https://www.lesmills.com/us/workouts/all",
   "note": "Les Mills program descriptions for the FAC schedule tooltips. PUBLISHED FIELD is `summary` (our own words, written by the coding agent) — that is the ONLY text rendered on the site. `source_text` holds the verbatim copy fetched from lesmills.com for REFERENCE ONLY and is never embedded into index.html/data.json. fetch_descriptions.py refreshes `source_text` and flags when it changes so the summary can be rewritten; it never overwrites `summary`. All tooltips credit and link back to Les Mills.",
   "programs": {
