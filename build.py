@@ -751,7 +751,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .day-chip {
     position: fixed; z-index: 30; left: 50%; bottom: 16px; transform: translateX(-50%);
     display: none; pointer-events: none;
-    background: rgba(31,44,60,.95); color: var(--text);
+    background: rgba(31,44,60,.85); color: var(--text);
     border: 1px solid var(--accent); border-radius: 999px;
     padding: 6px 14px; font-size: .85rem; font-weight: 600;
     box-shadow: var(--shadow); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
@@ -1559,7 +1559,14 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
       const r = b.getBoundingClientRect();
       if (r.top < 0 && r.bottom > probe) cur = b;   // header off-top, still in view
     });
-    if (cur) {
+    // If any day's header is currently on-screen (e.g. the next day surfaces as
+    // you scroll down), there's a real anchor — drop the reminder pill at once.
+    let headerVisible = false;
+    document.querySelectorAll(".day-block").forEach(b => {
+      const t = b.getBoundingClientRect().top;
+      if (t >= 0 && t < window.innerHeight) headerVisible = true;
+    });
+    if (cur && !headerVisible) {
       dayChip.textContent = DAY_NAME[cur.dataset.day] || cur.dataset.day || "";
       dayChip.classList.add("show");
     } else {
