@@ -265,13 +265,56 @@ def load_existing() -> dict:
     return {}
 
 
+def reconcile(keys: list[str]) -> None:
+    """Mark summaries as current: set each program's `summary_source` to its
+    stored `source_text` and bump `summary_updated`. Run this right AFTER you
+    (re)write a `summary`, so the level-triggered stale check clears. Offline —
+    reads/writes descriptions.json only, no fetching."""
+    data = load_existing()
+    programs = data.get("programs", {})
+    if not programs:
+        print(f"No programs in {DESCRIPTIONS_JSON.name}; nothing to reconcile.")
+        return
+    targets = keys or list(programs)
+    today = date.today().isoformat()
+    done, skipped = [], []
+    for k in targets:
+        r = programs.get(k)
+        if r is None:
+            print(f"  {k}: not found"); skipped.append(k); continue
+        if not (r.get("summary") or "").strip():
+            print(f"  {k}: no summary to reconcile"); skipped.append(k); continue
+        if (r.get("summary_source") or "") == (r.get("source_text") or ""):
+            skipped.append(f"{k} (already current)"); continue
+        r["summary_source"] = r.get("source_text") or ""
+        r["summary_updated"] = today
+        if not (r.get("summary_origin") or "").strip():
+            r["summary_origin"] = "agent"
+        done.append(k)
+    DESCRIPTIONS_JSON.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Reconciled summary_source for: {', '.join(done) or '—'}")
+    if skipped:
+        print(f"Skipped: {', '.join(skipped)}")
+    print("Now run `python3 build.py` to rebuild the site.")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Refresh Les Mills descriptions.")
     ap.add_argument("--check", action="store_true",
                     help="report changes and exit 1 if any; do not write")
     ap.add_argument("--dry-run", action="store_true",
                     help="report changes but never write or fail")
+    ap.add_argument("--reconcile", nargs="*", metavar="KEY",
+                    help="set summary_source = source_text (and bump summary_updated) "
+                         "for the given programs (or all if none given), then exit. "
+                         "Run after rewriting a summary so the stale flag clears. "
+                         "No network.")
     args = ap.parse_args()
+
+    if args.reconcile is not None:
+        reconcile([k.upper() for k in args.reconcile])
+        return
 
     existing = load_existing()
     old_programs = existing.get("programs", {})
@@ -375,8 +418,10 @@ def main() -> None:
         for t in unmapped:
             print(f"    - {t} -> {links[t]}")
     if needs_summary or stale:
-        print("\n  → Ask the coding agent to (re)write `summary` for the above from"
-              " `source_text`, then run `python3 build.py`.")
+        affected = " ".join(sorted(set(needs_summary) | set(stale)))
+        print("\n  → (Re)write `summary` for the above from `source_text`, then run:")
+        print(f"        python3 fetch_descriptions.py --reconcile {affected}")
+        print("        python3 build.py")
 
     # Surface description "drift" to CI: anything that means the published copy
     # may no longer reflect Les Mills, or that a page could not be parsed. These
