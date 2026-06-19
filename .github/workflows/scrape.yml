@@ -2,6 +2,16 @@ name: Refresh FAC schedule
 
 # Re-scrape the FAC group-exercise schedule and commit any changes so the
 # published GitHub Pages site stays current.
+#
+# Design — "safe fallback AND notify" without a separate restore job:
+#   * build.py validates the parse and writes index.html/data.json ONLY when it
+#     looks healthy. If the scrape is broken (page moved, columns shifted, etc.)
+#     it exits non-zero BEFORE writing, so the commit step is skipped and the
+#     last good build stays published. The fallback is therefore automatic — no
+#     "restore previous content" job is needed.
+#   * Conditions worth a human's eyes (build failure, live-fetch fallback to the
+#     committed snapshot, or Les Mills description drift) are surfaced by the
+#     separate `notify` job, which opens/updates a GitHub issue.
 
 on:
   schedule:
@@ -15,6 +25,10 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    outputs:
+      fallback: ${{ steps.build.outputs.fallback }}
+      drift: ${{ steps.desc.outputs.drift }}
+      drift_summary: ${{ steps.desc.outputs.drift_summary }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,11 +39,17 @@ jobs:
           python-version: "3.x"
 
       - name: Refresh Les Mills descriptions
-        # Best-effort: if lesmills.com is unreachable, existing descriptions are
-        # kept and the build still runs.
-        run: python3 fetch_descriptions.py || true
+        # Best-effort: never aborts the build. Reports description drift via its
+        # `drift` / `drift_summary` step outputs for the notify job.
+        id: desc
+        continue-on-error: true
+        run: python3 fetch_descriptions.py
 
       - name: Scrape and rebuild site
+        # Fails (non-zero) if the page can't be parsed or fails sanity checks,
+        # leaving the published files untouched. Sets `fallback=true` when it
+        # had to build from the committed snapshot instead of the live page.
+        id: build
         run: python3 build.py
 
       - name: Commit changes if anything changed
@@ -43,4 +63,67 @@ jobs:
             echo "Updated and pushed."
           else
             echo "No changes."
+          fi
+
+  notify:
+    needs: refresh
+    # Run whenever the refresh failed, fell back to the stale snapshot, or
+    # detected Les Mills description drift.
+    if: >-
+      always() && (
+        needs.refresh.result == 'failure' ||
+        needs.refresh.outputs.fallback == 'true' ||
+        needs.refresh.outputs.drift == 'true'
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Open or update a tracking issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RESULT: ${{ needs.refresh.result }}
+          FALLBACK: ${{ needs.refresh.outputs.fallback }}
+          DRIFT: ${{ needs.refresh.outputs.drift }}
+          DRIFT_SUMMARY: ${{ needs.refresh.outputs.drift_summary }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+
+          {
+            echo "The scheduled FAC schedule refresh needs attention."
+            echo
+            echo "- Refresh job result: **${RESULT}**"
+            if [ "${RESULT}" = "failure" ]; then
+              echo "- The scrape failed or a sanity check tripped. The published site was left unchanged (safe fallback) — see the run logs for the specific reason."
+            fi
+            if [ "${FALLBACK}" = "true" ]; then
+              echo "- The live FAC fetch failed and the committed snapshot was used. The source URL may be down or have moved; published data may be stale."
+            fi
+            if [ "${DRIFT}" = "true" ]; then
+              echo "- Les Mills description drift detected: ${DRIFT_SUMMARY}"
+            fi
+            echo
+            echo "Run logs: ${RUN_URL}"
+            echo
+            echo "_This issue is reused for subsequent runs; new occurrences are added as comments._"
+          } > body.md
+
+          # Ensure the label exists (idempotent).
+          gh label create automation-failure \
+            --color B60205 \
+            --description "Automated FAC refresh needs attention" 2>/dev/null || true
+
+          TITLE="Schedule refresh needs attention"
+          NUM="$(gh issue list --repo "$REPO" --label automation-failure --state open \
+                   --json number --jq '.[0].number // empty')"
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --repo "$REPO" --body-file body.md
+            echo "Commented on existing issue #$NUM."
+          else
+            gh issue create --repo "$REPO" --title "$TITLE" \
+              --label automation-failure --body-file body.md
+            echo "Opened a new tracking issue."
           fi

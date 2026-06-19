@@ -33,12 +33,33 @@ Notes:
 
 import argparse
 import json
+import os
 import re
 import sys
 import urllib.request
 from datetime import date, datetime
 from html.parser import HTMLParser
 from pathlib import Path
+
+
+def gh_set_output(key: str, value: str) -> None:
+    """Expose a value to later GitHub Actions steps via $GITHUB_OUTPUT."""
+    path = os.environ.get("GITHUB_OUTPUT")
+    if not path:
+        return
+    try:
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(f"{key}={value}\n")
+    except OSError:
+        pass
+
+
+def gh_annotate(level: str, msg: str) -> None:
+    """Emit a GitHub Actions annotation (warning/error), or plain text locally."""
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::{level}::{msg}")
+    else:
+        print(f"[{level.upper()}] {msg}")
 
 HERE = Path(__file__).resolve().parent
 DESCRIPTIONS_JSON = HERE / "descriptions.json"
@@ -328,6 +349,26 @@ def main() -> None:
     if needs_summary or stale:
         print("\n  → Ask the coding agent to (re)write `summary` for the above from"
               " `source_text`, then run `python3 build.py`.")
+
+    # Surface description "drift" to CI: anything that means the published copy
+    # may no longer reflect Les Mills, or that a page could not be parsed.
+    hard_miss = [m for m in misses if "no source_text yet" in m]
+    drift_reasons = []
+    if needs_summary:
+        drift_reasons.append("needs a summary: " + ", ".join(needs_summary))
+    if stale:
+        drift_reasons.append("summary may be stale: " + ", ".join(stale))
+    if removed:
+        drift_reasons.append("removed: " + ", ".join(removed))
+    if unmapped:
+        drift_reasons.append(f"{len(unmapped)} unmapped Les Mills link(s)")
+    if hard_miss:
+        drift_reasons.append("could not fetch (no copy yet): " + ", ".join(hard_miss))
+    if drift_reasons:
+        gh_set_output("drift", "true")
+        gh_set_output("drift_summary", " | ".join(drift_reasons))
+        for r in drift_reasons:
+            gh_annotate("warning", f"Les Mills descriptions: {r}")
 
     has_changes = bool(src_added or src_changed or removed)
 
