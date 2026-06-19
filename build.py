@@ -14,6 +14,7 @@ Stdlib only — no `pip install` required.
 
 import html
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -36,10 +37,38 @@ USER_AGENT = (
 
 
 # --------------------------------------------------------------------------- #
+# 0. CI signaling helpers (no-ops when run locally)
+# --------------------------------------------------------------------------- #
+def gh_set_output(key: str, value: str) -> None:
+    """Expose a value to later GitHub Actions steps via $GITHUB_OUTPUT."""
+    path = os.environ.get("GITHUB_OUTPUT")
+    if not path:
+        return
+    try:
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(f"{key}={value}\n")
+    except OSError:
+        pass
+
+
+def gh_annotate(level: str, msg: str) -> None:
+    """Emit a GitHub Actions annotation (warning/error), or plain text locally."""
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::{level}::{msg}")
+    else:
+        print(f"[{level.upper()}] {msg}")
+
+
+# --------------------------------------------------------------------------- #
 # 1. Fetch
 # --------------------------------------------------------------------------- #
-def fetch_html() -> str:
-    """Fetch the live page; fall back to the local raw HTML snapshot offline."""
+def fetch_html() -> tuple[str, bool]:
+    """Fetch the live page; fall back to the local raw HTML snapshot offline.
+
+    Returns (html, used_live). `used_live` is False when the live fetch failed
+    and the committed snapshot was used instead — a notify-worthy condition that
+    must NOT silently pass as a healthy refresh.
+    """
     try:
         req = urllib.request.Request(SOURCE_URL, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -50,11 +79,11 @@ def fetch_html() -> str:
             RAW_FALLBACK.write_text(data, encoding="utf-8")
         except OSError:
             pass
-        return data
+        return data, True
     except Exception as exc:  # noqa: BLE001 — any network error → fall back
         if RAW_FALLBACK.exists():
             print(f"Live fetch failed ({exc}); using local {RAW_FALLBACK.name}")
-            return RAW_FALLBACK.read_text(encoding="utf-8")
+            return RAW_FALLBACK.read_text(encoding="utf-8"), False
         print(f"ERROR: live fetch failed ({exc}) and no local fallback exists.")
         sys.exit(1)
 
@@ -461,13 +490,69 @@ def render_index(payload: dict, updated_human: str) -> str:
     )
 
 
+# --------------------------------------------------------------------------- #
+# 4b. Sanity validation — fail loudly instead of publishing corrupt data.
+# --------------------------------------------------------------------------- #
+# Baselines (the live page currently yields ~111 classes across all 7 days);
+# these floors are deliberately well below normal so only a genuinely broken
+# parse trips them.
+MIN_CLASSES = 40
+MIN_DAYS = 5
+MIN_TIME_FRACTION = 0.85
+MIN_NAME_FRACTION = 0.95
+
+
+def validate(classes: list[dict]) -> list[str]:
+    """Structural checks that catch a changed/garbled source page (renamed table,
+    shifted columns, partial parse). Returns a list of human-readable problems;
+    empty means the parse looks healthy."""
+    problems: list[str] = []
+    n = len(classes)
+    if n < MIN_CLASSES:
+        problems.append(f"only {n} classes parsed (expected >= {MIN_CLASSES})")
+    days = {c["day"] for c in classes}
+    if len(days) < MIN_DAYS:
+        problems.append(f"only {len(days)} distinct days {sorted(days)} "
+                        f"(expected >= {MIN_DAYS})")
+    if n:
+        timed = sum(1 for c in classes if c.get("timeMin") != 9999)
+        if timed / n < MIN_TIME_FRACTION:
+            problems.append(f"only {timed}/{n} classes have a parseable time "
+                            f"(< {int(MIN_TIME_FRACTION * 100)}%) — TIME column may have moved")
+        named = sum(1 for c in classes if (c.get("displayName") or "").strip())
+        if named / n < MIN_NAME_FRACTION:
+            problems.append(f"only {named}/{n} classes have a name "
+                            f"(< {int(MIN_NAME_FRACTION * 100)}%) — CLASS column may have moved")
+    return problems
+
+
 def main() -> None:
-    page = fetch_html()
+    page, used_live = fetch_html()
+    if not used_live:
+        gh_set_output("fallback", "true")
+        gh_annotate("warning",
+                    "FAC live fetch failed; built from the committed snapshot. The "
+                    "source URL may be down or moved — published data may be stale.")
+
     rows = parse_rows(page)
     if not rows:
-        print(f"ERROR: no rows found in table #{TABLE_ID}.")
+        gh_annotate("error",
+                    f"No rows found in table #{TABLE_ID} — the FAC page structure "
+                    "likely changed. Published site left unchanged.")
         sys.exit(1)
     classes = normalize(rows)
+
+    # Validate BEFORE writing anything: if the parse looks broken we exit without
+    # touching index.html/data.json, so the last good build stays published.
+    problems = validate(classes)
+    if problems:
+        for p in problems:
+            gh_annotate("error", f"Schedule sanity check failed: {p}")
+        gh_annotate("error",
+                    "Refusing to overwrite the published site with suspect data; "
+                    "the FAC page format may have changed.")
+        sys.exit(1)
+
     families = assign_family_colors(classes)
     descs = load_descriptions()
     used_descs = attach_descriptions(classes, families, descs)
@@ -606,7 +691,10 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- By Day: aligned time grid (desktop) ---- */
   .timegrid-wrap {
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    /* overflow:visible (not auto) keeps the viewport — not this box — as the
+       vertical scroll container, so the day-name <thead> can stick to the top
+       of the page while scrolling. */
+    overflow: visible;
     border: 1px solid var(--line); border-radius: var(--radius);
   }
   .timegrid {
@@ -615,8 +703,19 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   }
   .timegrid th, .timegrid td { border: 1px solid var(--line); vertical-align: top; }
   .tg-corner, .tg-dayhead { background: var(--panel-2); }
-  .tg-corner { width: 72px; position: sticky; left: 0; z-index: 3; }
-  .tg-dayhead { text-align: center; font-weight: 600; font-size: .85rem; padding: 9px 4px; }
+  /* Day-name header: frozen below the site header while scrolling, and
+     clickable to spotlight that whole column. */
+  .tg-dayhead {
+    position: sticky; top: var(--header-h, 150px); z-index: 4;
+    box-shadow: inset 0 -1px 0 var(--line);
+    text-align: center; font-weight: 600; font-size: .85rem; padding: 9px 4px;
+    cursor: pointer; user-select: none; transition: background .15s, color .15s;
+  }
+  .tg-dayhead:hover { background: var(--line); }
+  .tg-dayhead.active { background: var(--accent); color: #fff; }
+  .tg-corner {
+    width: 72px; position: sticky; left: 0; top: var(--header-h, 150px); z-index: 5;
+  }
   .tg-time {
     width: 72px; position: sticky; left: 0; z-index: 1; background: var(--panel-2);
     font-weight: 700; font-size: .76rem; color: var(--accent-2);
@@ -646,6 +745,19 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   .day-block.collapsed .db-body { display: none; }
   .db-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
   .db-body .empty { color: var(--muted); font-size: .85rem; text-align: center; padding: 12px; }
+  /* Mobile only: a small floating pill naming the expanded day you're scrolling
+     through, shown once its header has scrolled off the top. A subtle reminder
+     that doesn't anchor a full header. */
+  .day-chip {
+    position: fixed; z-index: 30; left: 50%; bottom: 16px; transform: translateX(-50%);
+    display: none; pointer-events: none;
+    background: rgba(31,44,60,.95); color: var(--text);
+    border: 1px solid var(--accent); border-radius: 999px;
+    padding: 6px 14px; font-size: .85rem; font-weight: 600;
+    box-shadow: var(--shadow); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .day-chip.show { display: block; }
+  @media (min-width: 761px) { .day-chip { display: none !important; } }
 
   /* ---- Cards ---- */
   .card {
@@ -964,6 +1076,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   function paint(node, c) {
     node.dataset.tod = c.bucket;
     node.dataset.family = c.family;
+    node.dataset.day = c.day;
     node.style.borderLeftColor = c.color;
     return node;
   }
@@ -1023,7 +1136,11 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const thead = el("thead");
     const hr = el("tr");
     hr.appendChild(el("th", "tg-corner", "&nbsp;"));
-    DAY_ORDER.forEach(day => hr.appendChild(el("th", "tg-dayhead", esc(fullDayName(day)))));
+    DAY_ORDER.forEach(day => {
+      const th = el("th", "tg-dayhead", esc(fullDayName(day)));
+      th.dataset.day = day;
+      hr.appendChild(th);
+    });
     thead.appendChild(hr);
     table.appendChild(thead);
     slotList.forEach(s => table.appendChild(slotTbody(s.min, s.si)));
@@ -1044,6 +1161,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const stack = el("div", "day-stack");
     DAY_ORDER.forEach(day => {
       const sec = el("section", "day-block");
+      sec.dataset.day = day;
       const items = classes.filter(c => c.day === day);
       const h = el("h3", null,
         '<span><span class="caret">▾</span>' + esc(fullDayName(day)) + '</span>' +
@@ -1053,6 +1171,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
         // Remember a manual open so an active spotlight won't re-collapse it.
         if (collapsed) delete sec.dataset.userOpen; else sec.dataset.userOpen = "1";
+        queueDayChip();
       });
       sec.appendChild(h);
       const body = el("div", "db-body");
@@ -1268,17 +1387,21 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   });
 
   // ---- Highlight (time-of-day filter + color-key family spotlight) ----
-  let curTod = "all", curFam = null;
+  let curTod = "all", curFam = null, curDay = null;
 
   function applyHighlight() {
-    const filtering = (curTod && curTod !== "all") || !!curFam;
+    const filtering = (curTod && curTod !== "all") || !!curFam || !!curDay;
     document.body.classList.toggle("hl-filtering", filtering);
     document.querySelectorAll(".card, .row").forEach(node => {
       const match =
         (curTod === "all" || node.dataset.tod === curTod) &&
-        (!curFam || node.dataset.family === curFam);
+        (!curFam || node.dataset.family === curFam) &&
+        (!curDay || node.dataset.day === curDay);
       node.classList.toggle("hl-match", filtering && match);
     });
+    // Keep clicked day-name headers visibly active (re-applied after print rebuilds).
+    document.querySelectorAll(".tg-dayhead").forEach(h =>
+      h.classList.toggle("active", !!curDay && h.dataset.day === curDay));
     // Hide groups with no matching session so grouped views stay tidy.
     document.querySelectorAll(".group").forEach(g => {
       const any = !filtering || g.querySelector(".row.hl-match");
@@ -1308,6 +1431,14 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
     btn.classList.add("active");
     curTod = btn.dataset.tod;
+    applyHighlight();
+  });
+
+  // Day-name headers (By Day grid) — click to spotlight that whole column.
+  document.getElementById("view-day").addEventListener("click", e => {
+    const th = e.target.closest(".tg-dayhead");
+    if (!th) return;
+    curDay = curDay === th.dataset.day ? null : th.dataset.day;
     applyHighlight();
   });
 
@@ -1411,6 +1542,38 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeDesc(); });
   window.addEventListener("resize", closeDesc);
 
+  // ---- Mobile: floating "current day" reminder ----
+  // While scrolling an expanded day in the By Day stack (mobile only), show a
+  // small pill naming that day once its header has scrolled off the top — so it
+  // stays clear which day you're viewing without anchoring a full header.
+  const dayChip = el("div", "day-chip");
+  document.body.appendChild(dayChip);
+  let chipQueued = false;
+  function updateDayChip() {
+    chipQueued = false;
+    const mobile = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
+    if (!mobile) { dayChip.classList.remove("show"); return; }
+    const probe = window.innerHeight * 0.3;
+    let cur = null;
+    document.querySelectorAll(".day-block:not(.collapsed)").forEach(b => {
+      const r = b.getBoundingClientRect();
+      if (r.top < 0 && r.bottom > probe) cur = b;   // header off-top, still in view
+    });
+    if (cur) {
+      dayChip.textContent = DAY_NAME[cur.dataset.day] || cur.dataset.day || "";
+      dayChip.classList.add("show");
+    } else {
+      dayChip.classList.remove("show");
+    }
+  }
+  function queueDayChip() {
+    if (chipQueued) return;
+    chipQueued = true;
+    requestAnimationFrame(updateDayChip);
+  }
+  window.addEventListener("scroll", queueDayChip, { passive: true });
+  window.addEventListener("resize", queueDayChip);
+
   // ---- Init ----
   if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
   buildLegend();
@@ -1420,6 +1583,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
   buildClass();
   buildInstructor();
   buildLocation();
+  queueDayChip();
 })();
 </script>
 </body>

@@ -102,7 +102,10 @@
 
   /* ---- By Day: aligned time grid (desktop) ---- */
   .timegrid-wrap {
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    /* overflow:visible (not auto) keeps the viewport — not this box — as the
+       vertical scroll container, so the day-name <thead> can stick to the top
+       of the page while scrolling. */
+    overflow: visible;
     border: 1px solid var(--line); border-radius: var(--radius);
   }
   .timegrid {
@@ -111,8 +114,19 @@
   }
   .timegrid th, .timegrid td { border: 1px solid var(--line); vertical-align: top; }
   .tg-corner, .tg-dayhead { background: var(--panel-2); }
-  .tg-corner { width: 72px; position: sticky; left: 0; z-index: 3; }
-  .tg-dayhead { text-align: center; font-weight: 600; font-size: .85rem; padding: 9px 4px; }
+  /* Day-name header: frozen below the site header while scrolling, and
+     clickable to spotlight that whole column. */
+  .tg-dayhead {
+    position: sticky; top: var(--header-h, 150px); z-index: 4;
+    box-shadow: inset 0 -1px 0 var(--line);
+    text-align: center; font-weight: 600; font-size: .85rem; padding: 9px 4px;
+    cursor: pointer; user-select: none; transition: background .15s, color .15s;
+  }
+  .tg-dayhead:hover { background: var(--line); }
+  .tg-dayhead.active { background: var(--accent); color: #fff; }
+  .tg-corner {
+    width: 72px; position: sticky; left: 0; top: var(--header-h, 150px); z-index: 5;
+  }
   .tg-time {
     width: 72px; position: sticky; left: 0; z-index: 1; background: var(--panel-2);
     font-weight: 700; font-size: .76rem; color: var(--accent-2);
@@ -142,6 +156,19 @@
   .day-block.collapsed .db-body { display: none; }
   .db-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
   .db-body .empty { color: var(--muted); font-size: .85rem; text-align: center; padding: 12px; }
+  /* Mobile only: a small floating pill naming the expanded day you're scrolling
+     through, shown once its header has scrolled off the top. A subtle reminder
+     that doesn't anchor a full header. */
+  .day-chip {
+    position: fixed; z-index: 30; left: 50%; bottom: 16px; transform: translateX(-50%);
+    display: none; pointer-events: none;
+    background: rgba(31,44,60,.95); color: var(--text);
+    border: 1px solid var(--accent); border-radius: 999px;
+    padding: 6px 14px; font-size: .85rem; font-weight: 600;
+    box-shadow: var(--shadow); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .day-chip.show { display: block; }
+  @media (min-width: 761px) { .day-chip { display: none !important; } }
 
   /* ---- Cards ---- */
   .card {
@@ -399,7 +426,7 @@
 </div>
 
 <footer class="site">
-  <div>Last updated: <b>June 18, 2026 at 1:27 PM</b></div>
+  <div>Last updated: <b>June 19, 2026 at 8:41 AM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -409,8 +436,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-18T13:27:42",
-  "updatedHuman": "June 18, 2026 at 1:27 PM",
+  "updated": "2026-06-19T08:41:05",
+  "updatedHuman": "June 19, 2026 at 8:41 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -2805,6 +2832,7 @@
   function paint(node, c) {
     node.dataset.tod = c.bucket;
     node.dataset.family = c.family;
+    node.dataset.day = c.day;
     node.style.borderLeftColor = c.color;
     return node;
   }
@@ -2864,7 +2892,11 @@
     const thead = el("thead");
     const hr = el("tr");
     hr.appendChild(el("th", "tg-corner", "&nbsp;"));
-    DAY_ORDER.forEach(day => hr.appendChild(el("th", "tg-dayhead", esc(fullDayName(day)))));
+    DAY_ORDER.forEach(day => {
+      const th = el("th", "tg-dayhead", esc(fullDayName(day)));
+      th.dataset.day = day;
+      hr.appendChild(th);
+    });
     thead.appendChild(hr);
     table.appendChild(thead);
     slotList.forEach(s => table.appendChild(slotTbody(s.min, s.si)));
@@ -2885,6 +2917,7 @@
     const stack = el("div", "day-stack");
     DAY_ORDER.forEach(day => {
       const sec = el("section", "day-block");
+      sec.dataset.day = day;
       const items = classes.filter(c => c.day === day);
       const h = el("h3", null,
         '<span><span class="caret">▾</span>' + esc(fullDayName(day)) + '</span>' +
@@ -2894,6 +2927,7 @@
         h.querySelector(".caret").textContent = collapsed ? "▸" : "▾";
         // Remember a manual open so an active spotlight won't re-collapse it.
         if (collapsed) delete sec.dataset.userOpen; else sec.dataset.userOpen = "1";
+        queueDayChip();
       });
       sec.appendChild(h);
       const body = el("div", "db-body");
@@ -3109,17 +3143,21 @@
   });
 
   // ---- Highlight (time-of-day filter + color-key family spotlight) ----
-  let curTod = "all", curFam = null;
+  let curTod = "all", curFam = null, curDay = null;
 
   function applyHighlight() {
-    const filtering = (curTod && curTod !== "all") || !!curFam;
+    const filtering = (curTod && curTod !== "all") || !!curFam || !!curDay;
     document.body.classList.toggle("hl-filtering", filtering);
     document.querySelectorAll(".card, .row").forEach(node => {
       const match =
         (curTod === "all" || node.dataset.tod === curTod) &&
-        (!curFam || node.dataset.family === curFam);
+        (!curFam || node.dataset.family === curFam) &&
+        (!curDay || node.dataset.day === curDay);
       node.classList.toggle("hl-match", filtering && match);
     });
+    // Keep clicked day-name headers visibly active (re-applied after print rebuilds).
+    document.querySelectorAll(".tg-dayhead").forEach(h =>
+      h.classList.toggle("active", !!curDay && h.dataset.day === curDay));
     // Hide groups with no matching session so grouped views stay tidy.
     document.querySelectorAll(".group").forEach(g => {
       const any = !filtering || g.querySelector(".row.hl-match");
@@ -3149,6 +3187,14 @@
     document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
     btn.classList.add("active");
     curTod = btn.dataset.tod;
+    applyHighlight();
+  });
+
+  // Day-name headers (By Day grid) — click to spotlight that whole column.
+  document.getElementById("view-day").addEventListener("click", e => {
+    const th = e.target.closest(".tg-dayhead");
+    if (!th) return;
+    curDay = curDay === th.dataset.day ? null : th.dataset.day;
     applyHighlight();
   });
 
@@ -3252,6 +3298,38 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeDesc(); });
   window.addEventListener("resize", closeDesc);
 
+  // ---- Mobile: floating "current day" reminder ----
+  // While scrolling an expanded day in the By Day stack (mobile only), show a
+  // small pill naming that day once its header has scrolled off the top — so it
+  // stays clear which day you're viewing without anchoring a full header.
+  const dayChip = el("div", "day-chip");
+  document.body.appendChild(dayChip);
+  let chipQueued = false;
+  function updateDayChip() {
+    chipQueued = false;
+    const mobile = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
+    if (!mobile) { dayChip.classList.remove("show"); return; }
+    const probe = window.innerHeight * 0.3;
+    let cur = null;
+    document.querySelectorAll(".day-block:not(.collapsed)").forEach(b => {
+      const r = b.getBoundingClientRect();
+      if (r.top < 0 && r.bottom > probe) cur = b;   // header off-top, still in view
+    });
+    if (cur) {
+      dayChip.textContent = DAY_NAME[cur.dataset.day] || cur.dataset.day || "";
+      dayChip.classList.add("show");
+    } else {
+      dayChip.classList.remove("show");
+    }
+  }
+  function queueDayChip() {
+    if (chipQueued) return;
+    chipQueued = true;
+    requestAnimationFrame(updateDayChip);
+  }
+  window.addEventListener("scroll", queueDayChip, { passive: true });
+  window.addEventListener("resize", queueDayChip);
+
   // ---- Init ----
   if (COLLAPSE_DEFAULT) document.getElementById("colorkey").removeAttribute("open");
   buildLegend();
@@ -3261,6 +3339,7 @@
   buildClass();
   buildInstructor();
   buildLocation();
+  queueDayChip();
 })();
 </script>
 </body>
