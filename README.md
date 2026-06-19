@@ -63,6 +63,9 @@ Each Les Mills program in **`descriptions.json`** has two distinct fields:
 - **`source_text`** — the **verbatim** copy fetched from lesmills.com, kept for
   **reference only**. It is *never* embedded into `index.html`/`data.json`, so the
   site doesn't republish Les Mills' marketing copy.
+- **`summary_source`** — the `source_text` the current `summary` was last
+  reconciled against. A summary is flagged **stale** whenever `source_text`
+  differs from it, and stays flagged every run until reconciled (see below).
 
 This keeps the workflow clean: fetch their copy to know what each class *is*, then
 write an original summary from it.
@@ -78,12 +81,22 @@ python3 fetch_descriptions.py --dry-run   # report changes, never write/fail
 ```
 
 It reports new source copy, **changed** source copy, programs that **need a summary**,
-summaries that **may be stale** (source changed after the summary was last written),
+summaries that **may be stale** (`source_text` no longer matches `summary_source`),
 and any Les Mills classes on the site we don't yet map. If a fetch fails it leaves the
-existing record untouched. When it flags new/changed copy, (re)write the affected
-`summary` fields from `source_text`, bump `summary_updated`, then run `python3 build.py`
-to rebuild the page. Entries marked `"summary_origin": "seed"` are placeholder
+existing record untouched. Entries marked `"summary_origin": "seed"` are placeholder
 summaries written before any live fetch.
+
+When it flags a summary, (re)write the affected `summary` text, then **reconcile**
+so the stale flag clears — don't hand-edit `summary_source`/`summary_updated`:
+
+```bash
+python3 fetch_descriptions.py --reconcile CEREMONY   # or no args = all programs
+python3 build.py
+```
+
+`--reconcile` sets `summary_source = source_text` and bumps `summary_updated` for
+the given programs (skipping any already current). Forgetting it isn't silent: the
+program stays flagged stale and the CI notify job keeps re-opening the issue.
 
 ## Refreshing the schedule
 
