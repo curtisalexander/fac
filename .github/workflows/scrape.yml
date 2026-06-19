@@ -31,10 +31,10 @@ jobs:
       drift_summary: ${{ steps.desc.outputs.drift_summary }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -111,19 +111,27 @@ jobs:
             echo "_This issue is reused for subsequent runs; new occurrences are added as comments._"
           } > body.md
 
-          # Ensure the label exists (idempotent).
-          gh label create automation-failure \
+          TITLE="Schedule refresh needs attention"
+
+          # Ensure the label exists. --repo is required because this job has no
+          # checkout, so gh can't infer the repo from a local remote.
+          gh label create automation-failure --repo "$REPO" \
             --color B60205 \
             --description "Automated FAC refresh needs attention" 2>/dev/null || true
 
-          TITLE="Schedule refresh needs attention"
-          NUM="$(gh issue list --repo "$REPO" --label automation-failure --state open \
-                   --json number --jq '.[0].number // empty')"
+          # Look up an existing open issue by title (works even if the label is
+          # somehow absent, so a label hiccup never blocks notification).
+          NUM="$(gh issue list --repo "$REPO" --state open --search "$TITLE in:title" \
+                   --json number --jq '.[0].number // empty' 2>/dev/null || true)"
+
           if [ -n "$NUM" ]; then
             gh issue comment "$NUM" --repo "$REPO" --body-file body.md
             echo "Commented on existing issue #$NUM."
           else
-            gh issue create --repo "$REPO" --title "$TITLE" \
-              --label automation-failure --body-file body.md
+            # Prefer a labeled issue; fall back to no label if labeling fails.
+            if ! gh issue create --repo "$REPO" --title "$TITLE" \
+                   --label automation-failure --body-file body.md; then
+              gh issue create --repo "$REPO" --title "$TITLE" --body-file body.md
+            fi
             echo "Opened a new tracking issue."
           fi
