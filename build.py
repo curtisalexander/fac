@@ -1554,17 +1554,22 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const mobile = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
     if (!mobile) { dayChip.classList.remove("show"); return; }
     const probe = window.innerHeight * 0.3;
+    // Day headers scroll *under* the sticky site header, so a day's header is
+    // really gone (and the pill should appear) the moment its top passes below
+    // the sticky header's bottom edge — not when it reaches the viewport top.
+    const hdr = document.querySelector("header.site");
+    const headerH = hdr ? hdr.offsetHeight : 0;
     let cur = null;
     document.querySelectorAll(".day-block:not(.collapsed)").forEach(b => {
       const r = b.getBoundingClientRect();
-      if (r.top < 0 && r.bottom > probe) cur = b;   // header off-top, still in view
+      if (r.top < headerH && r.bottom > probe) cur = b;   // header tucked under bar, still in view
     });
-    // If any day's header is currently on-screen (e.g. the next day surfaces as
-    // you scroll down), there's a real anchor — drop the reminder pill at once.
+    // If any day's header is still visible below the sticky bar (e.g. the next
+    // day surfaces as you scroll down), there's a real anchor — drop the pill.
     let headerVisible = false;
     document.querySelectorAll(".day-block").forEach(b => {
       const t = b.getBoundingClientRect().top;
-      if (t >= 0 && t < window.innerHeight) headerVisible = true;
+      if (t >= headerH && t < window.innerHeight) headerVisible = true;
     });
     if (cur && !headerVisible) {
       dayChip.textContent = DAY_NAME[cur.dataset.day] || cur.dataset.day || "";
