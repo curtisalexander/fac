@@ -15,6 +15,15 @@ IMPORTANT — what this does and does NOT touch:
   * It NEVER overwrites `summary` — the published, our-own-words description.
     When the verbatim `source_text` changes (or a brand-new program appears),
     it is reported so a fresh `summary` can be hand/agent-written from it.
+  * `summary_source` records the source copy the current `summary` was last
+    reconciled against. A summary is flagged STALE whenever the live
+    `source_text` differs from its `summary_source` — a level-triggered check
+    that persists every run until resolved (it does not self-clear when a
+    changed source is committed). WHEN YOU (RE)WRITE A `summary`, also set that
+    program's `summary_source` to the `source_text` you wrote it from, so the
+    stale flag clears. (Set it to the current fetched `source_text` even if you
+    drew the prose from richer on-page copy, so the automated comparison stays
+    stable.)
 
 Usage:
     python3 fetch_descriptions.py            # fetch + update source_text in descriptions.json
@@ -113,9 +122,11 @@ PROGRAMS = {
         "url": "https://www.lesmills.com/us/workouts/group-fitness/tone/",
     },
     "CEREMONY": {
+        # Les Mills folded CEREMONY into the LES MILLS x HYROX partnership; the
+        # old group-fitness/ceremony page 404s. Resolve to the HYROX page first.
         "name": "LES MILLS CEREMONY",
-        "aliases": ["CEREMONY", "LES MILLS CEREMONY"],
-        "url": "https://www.lesmills.com/us/workouts/group-fitness/ceremony/",
+        "aliases": ["CEREMONY HYROX", "LES MILLS CEREMONY", "CEREMONY"],
+        "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox",
     },
     "RPM": {
         "name": "LES MILLS RPM",
@@ -291,6 +302,10 @@ def main() -> None:
         rec["url"] = url
         rec.setdefault("source_text", "")
         rec.setdefault("source_text_fetched", None)
+        # The source copy the current `summary` was last reconciled against.
+        # Drives level-triggered staleness (see below); set when a summary is
+        # (re)written. Empty means "needs backfill / not yet reconciled".
+        rec.setdefault("summary_source", "")
 
         fetched_text = ""
         try:
@@ -315,16 +330,29 @@ def main() -> None:
                 misses.append(f"{key} (no source_text yet)")
         new_programs[key] = rec
 
+    # One-time migration / new-program init: when a summary exists but has no
+    # recorded basis, adopt the current source copy as that basis (assumes the
+    # existing summary already matches the current source). Mismatches that
+    # appear AFTER this is set are what `stale` reports.
+    for r in new_programs.values():
+        if (r.get("summary") or "").strip() and not (r.get("summary_source") or "").strip():
+            r["summary_source"] = r.get("source_text") or ""
+
     # Programs with verbatim copy but no published summary yet → need one written.
     needs_summary = [
         k for k, r in new_programs.items()
         if r.get("source_text") and not (r.get("summary") or "").strip()
     ]
-    # Programs whose verbatim copy changed after the summary was last written
-    # (heuristic: source newer than summary) → summary may be stale.
+    # Level-triggered staleness: a published summary is stale whenever the live
+    # source copy differs from the `summary_source` it was reconciled against.
+    # Unlike change-detection, this PERSISTS every run until someone rewrites the
+    # summary and updates `summary_source` — so it can't silently self-clear when
+    # a changed source is committed (the bug that hid the CEREMONY rebrand).
     stale = [
-        k for k in src_changed
-        if (new_programs[k].get("summary") or "").strip()
+        k for k, r in new_programs.items()
+        if (r.get("summary") or "").strip()
+        and (r.get("source_text") or "")
+        and (r.get("source_text") or "") != (r.get("summary_source") or "")
     ]
     removed = [k for k in old_programs if k not in new_programs]
 
