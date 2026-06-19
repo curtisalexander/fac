@@ -1424,6 +1424,27 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     }
   }
 
+  // Desktop By Day grid: jump the page to the first slot of the spotlighted
+  // time-of-day so the section the user picked starts at the top, just below the
+  // frozen site header + day-name row (rather than making them scroll to find it).
+  function scrollDayToTod() {
+    if (curTod === "all") return;
+    const view = document.getElementById("view-day");
+    if (!view.classList.contains("active")) return;
+    const wrap = view.querySelector(".timegrid-wrap");
+    if (!wrap || !wrap.offsetParent) return;   // null offsetParent => mobile/hidden
+    const card = wrap.querySelector('.card[data-tod="' + curTod + '"]');
+    if (!card) return;
+    const slot = card.closest("tbody.slot");
+    if (!slot) return;
+    const thead = wrap.querySelector("thead");
+    const headerH = parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue("--header-h")) || 150;
+    const theadH = thead ? thead.offsetHeight : 0;
+    const y = window.scrollY + slot.getBoundingClientRect().top - headerH - theadH - 8;
+    window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" });
+  }
+
   // Time-of-day chips
   document.querySelector(".tod-group").addEventListener("click", e => {
     const btn = e.target.closest(".chip");
@@ -1432,6 +1453,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     btn.classList.add("active");
     curTod = btn.dataset.tod;
     applyHighlight();
+    scrollDayToTod();
   });
 
   // Day-name headers (By Day grid) — click to spotlight that whole column.

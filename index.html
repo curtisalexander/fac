@@ -426,7 +426,7 @@
 </div>
 
 <footer class="site">
-  <div>Last updated: <b>June 19, 2026 at 9:59 AM</b></div>
+  <div>Last updated: <b>June 19, 2026 at 10:32 AM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -436,8 +436,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-19T09:59:21",
-  "updatedHuman": "June 19, 2026 at 9:59 AM",
+  "updated": "2026-06-19T10:32:32",
+  "updatedHuman": "June 19, 2026 at 10:32 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -3180,6 +3180,27 @@
     }
   }
 
+  // Desktop By Day grid: jump the page to the first slot of the spotlighted
+  // time-of-day so the section the user picked starts at the top, just below the
+  // frozen site header + day-name row (rather than making them scroll to find it).
+  function scrollDayToTod() {
+    if (curTod === "all") return;
+    const view = document.getElementById("view-day");
+    if (!view.classList.contains("active")) return;
+    const wrap = view.querySelector(".timegrid-wrap");
+    if (!wrap || !wrap.offsetParent) return;   // null offsetParent => mobile/hidden
+    const card = wrap.querySelector('.card[data-tod="' + curTod + '"]');
+    if (!card) return;
+    const slot = card.closest("tbody.slot");
+    if (!slot) return;
+    const thead = wrap.querySelector("thead");
+    const headerH = parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue("--header-h")) || 150;
+    const theadH = thead ? thead.offsetHeight : 0;
+    const y = window.scrollY + slot.getBoundingClientRect().top - headerH - theadH - 8;
+    window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" });
+  }
+
   // Time-of-day chips
   document.querySelector(".tod-group").addEventListener("click", e => {
     const btn = e.target.closest(".chip");
@@ -3188,6 +3209,7 @@
     btn.classList.add("active");
     curTod = btn.dataset.tod;
     applyHighlight();
+    scrollDayToTod();
   });
 
   // Day-name headers (By Day grid) — click to spotlight that whole column.
