@@ -29,6 +29,8 @@ jobs:
       fallback: ${{ steps.build.outputs.fallback }}
       drift: ${{ steps.desc.outputs.drift }}
       drift_summary: ${{ steps.desc.outputs.drift_summary }}
+      fac_drift: ${{ steps.desc_fac.outputs.drift }}
+      fac_drift_summary: ${{ steps.desc_fac.outputs.drift_summary }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -45,6 +47,14 @@ jobs:
         continue-on-error: true
         run: python3 fetch_descriptions.py
 
+      - name: Refresh FAC class descriptions
+        # Same contract as the Les Mills fetcher, but sourced from the FAC page:
+        # scrapes class bullets into fac_descriptions.json and reports drift
+        # (a new class needing a summary, or stale bullets) via its step outputs.
+        id: desc_fac
+        continue-on-error: true
+        run: python3 fetch_fac_descriptions.py
+
       - name: Scrape and rebuild site
         # Fails (non-zero) if the page can't be parsed or fails sanity checks,
         # leaving the published files untouched. Sets `fallback=true` when it
@@ -54,10 +64,10 @@ jobs:
 
       - name: Commit changes if anything changed
         run: |
-          if [ -n "$(git status --porcelain index.html data.json fayac_raw.html descriptions.json)" ]; then
+          if [ -n "$(git status --porcelain index.html data.json fayac_raw.html descriptions.json fac_descriptions.json)" ]; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add index.html data.json fayac_raw.html descriptions.json
+            git add index.html data.json fayac_raw.html descriptions.json fac_descriptions.json
             git commit -m "chore: refresh FAC schedule + class descriptions"
             git push
             echo "Updated and pushed."
@@ -73,7 +83,8 @@ jobs:
       always() && (
         needs.refresh.result == 'failure' ||
         needs.refresh.outputs.fallback == 'true' ||
-        needs.refresh.outputs.drift == 'true'
+        needs.refresh.outputs.drift == 'true' ||
+        needs.refresh.outputs.fac_drift == 'true'
       )
     runs-on: ubuntu-latest
     permissions:
@@ -88,6 +99,8 @@ jobs:
           FALLBACK: ${{ needs.refresh.outputs.fallback }}
           DRIFT: ${{ needs.refresh.outputs.drift }}
           DRIFT_SUMMARY: ${{ needs.refresh.outputs.drift_summary }}
+          FAC_DRIFT: ${{ needs.refresh.outputs.fac_drift }}
+          FAC_DRIFT_SUMMARY: ${{ needs.refresh.outputs.fac_drift_summary }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
@@ -104,6 +117,9 @@ jobs:
             fi
             if [ "${DRIFT}" = "true" ]; then
               echo "- Les Mills description drift detected: ${DRIFT_SUMMARY}"
+            fi
+            if [ "${FAC_DRIFT}" = "true" ]; then
+              echo "- FAC class description drift detected: ${FAC_DRIFT_SUMMARY}"
             fi
             echo
             echo "Run logs: ${RUN_URL}"

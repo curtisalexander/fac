@@ -1,0 +1,121 @@
+{
+  "updated": "2026-06-22T09:08:32",
+  "source": "https://www.fayac.com/strength-and-cardio/",
+  "note": "",
+  "classes": {
+    "DANCEFIIT": {
+      "name": "DanceFIIT",
+      "summary": "A high-energy, 50-minute dance-cardio class with strength-training intervals woven in — it lifts the mood while it tones and sculpts, and the high intensity keeps the calorie burn up throughout.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minute",
+        "Dance & Cardio Class",
+        "Strength Training Intervals",
+        "Uplift, Tone & Sculpt",
+        "High Intensity, Burns Calories"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minute",
+        "Dance & Cardio Class",
+        "Strength Training Intervals",
+        "Uplift, Tone & Sculpt",
+        "High Intensity, Burns Calories"
+      ]
+    },
+    "HOT_CARDIO_SCULPT": {
+      "name": "Hot Cardio Sculpt",
+      "summary": "A 50-minute heated yoga class that leans into cardio — a high-intensity flow built for intermediate-to-advanced participants. Bring a yoga mat and towel.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minute Yoga",
+        "Heat Class",
+        "High Intensity",
+        "Greater Focus on Cardio",
+        "Bring Yoga Mat & Towel",
+        "For Intermediate to Advanced Participants"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minute Yoga",
+        "Heat Class",
+        "High Intensity",
+        "Greater Focus on Cardio",
+        "Bring Yoga Mat & Towel",
+        "For Intermediate to Advanced Participants"
+      ]
+    },
+    "FAST_FEED": {
+      "name": "Fast Feed Tennis",
+      "summary": "A fast-paced, heart-racing 50-minute tennis workout in the Tennis Center — fun, social, and welcoming to all tennis levels. Fee-based class.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minute",
+        "Fee Based Class",
+        "Class Held in Tennis Center",
+        "Heart Racing, Fast Paced",
+        "Very Fun & Social",
+        "All Tennis Levels Welcome"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minute",
+        "Fee Based Class",
+        "Class Held in Tennis Center",
+        "Heart Racing, Fast Paced",
+        "Very Fun & Social",
+        "All Tennis Levels Welcome"
+      ]
+    },
+    "BARRE": {
+      "name": "Barre Intensity",
+      "summary": "A 50-minute barre class blending Pilates and dance: controlled movements work muscles to fatigue while keeping the heart rate up, for a full upper- and lower-body workout.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minute",
+        "Combines Pilates & Dance",
+        "Movements to Fatigue Muscles",
+        "Elevates Heart Rate",
+        "Upper & Lower Body Workout"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minute",
+        "Combines Pilates & Dance",
+        "Movements to Fatigue Muscles",
+        "Elevates Heart Rate",
+        "Upper & Lower Body Workout"
+      ]
+    },
+    "FULL_BODY_TONE": {
+      "name": "Full Body Tone",
+      "summary": "A 50-minute early-morning class that combines barre and Pilates with cardio and light strength training — the barre-and-Pilates burn delivers full-body, head-to-toe results.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minute",
+        "Ultimate Early Morning Workout",
+        "Combines Barre & Pilates",
+        "Cardio & Light Strength Training",
+        "Barre & Pilates Burn for Results"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minute",
+        "Ultimate Early Morning Workout",
+        "Combines Barre & Pilates",
+        "Cardio & Light Strength Training",
+        "Barre & Pilates Burn for Results"
+      ]
+    }
+  }
+}
