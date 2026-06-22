@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T09:30:03",
+  "updated": "2026-06-22T09:55:10",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "note": "",
   "classes": {
@@ -119,7 +119,7 @@
     },
     "WAYMO_HYROX": {
       "name": "WAYMO HYROX",
-      "summary": "A 50-minute cross-training class on the WAYMO court, led by a personal trainer. The workout rotates daily and builds strength, speed, and agility — an early-riser \"breakfast club\" way to start the day.",
+      "summary": "A 50-minute cross-training class on the WAYMO court, led by a personal trainer, with daily-rotating workouts that build strength, speed, and agility. The early-morning session has a breakfast club for early risers.",
       "summary_origin": "agent",
       "summary_updated": "2026-06-22",
       "url": "https://www.fayac.com/strength-and-cardio/",
