@@ -1102,7 +1102,6 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     </nav>
     <div class="tod-group">
       <span class="tod-label">Highlight:</span>
-      <button class="chip active" data-tod="all">All</button>
       <button class="chip" data-tod="morning">Morning</button>
       <button class="chip" data-tod="midday">Midday</button>
       <button class="chip" data-tod="evening">Evening</button>
@@ -1575,13 +1574,19 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" });
   }
 
-  // Time-of-day chips
+  // Time-of-day chips — clicking the active chip de-selects it, reverting to
+  // "all" (the behavior the removed "All" button used to provide).
   document.querySelector(".tod-group").addEventListener("click", e => {
     const btn = e.target.closest(".chip");
     if (!btn) return;
+    const wasActive = btn.classList.contains("active");
     document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-    btn.classList.add("active");
-    curTod = btn.dataset.tod;
+    if (wasActive) {
+      curTod = "all";
+    } else {
+      btn.classList.add("active");
+      curTod = btn.dataset.tod;
+    }
     applyHighlight();
     scrollDayToTod();
   });

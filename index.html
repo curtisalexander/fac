@@ -402,7 +402,6 @@
     </nav>
     <div class="tod-group">
       <span class="tod-label">Highlight:</span>
-      <button class="chip active" data-tod="all">All</button>
       <button class="chip" data-tod="morning">Morning</button>
       <button class="chip" data-tod="midday">Midday</button>
       <button class="chip" data-tod="evening">Evening</button>
@@ -426,7 +425,7 @@
 </div>
 
 <footer class="site">
-  <div>Last updated: <b>June 22, 2026 at 9:55 AM</b></div>
+  <div>Last updated: <b>June 22, 2026 at 10:01 AM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -436,8 +435,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-22T09:55:34",
-  "updatedHuman": "June 22, 2026 at 9:55 AM",
+  "updated": "2026-06-22T10:01:52",
+  "updatedHuman": "June 22, 2026 at 10:01 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -3354,13 +3353,19 @@
     window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" });
   }
 
-  // Time-of-day chips
+  // Time-of-day chips — clicking the active chip de-selects it, reverting to
+  // "all" (the behavior the removed "All" button used to provide).
   document.querySelector(".tod-group").addEventListener("click", e => {
     const btn = e.target.closest(".chip");
     if (!btn) return;
+    const wasActive = btn.classList.contains("active");
     document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-    btn.classList.add("active");
-    curTod = btn.dataset.tod;
+    if (wasActive) {
+      curTod = "all";
+    } else {
+      btn.classList.add("active");
+      curTod = btn.dataset.tod;
+    }
     applyHighlight();
     scrollDayToTod();
   });
