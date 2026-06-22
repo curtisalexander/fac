@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime
 from html.parser import HTMLParser
@@ -28,7 +29,15 @@ RAW_FALLBACK = HERE / "fayac_raw.html"
 DATA_JSON = HERE / "data.json"
 INDEX_HTML = HERE / "index.html"
 DESCRIPTIONS_JSON = HERE / "descriptions.json"
+FAC_DESCRIPTIONS_JSON = HERE / "fac_descriptions.json"
 TABLE_ID = "tablepress-3"
+
+# How many times to (re)try the live fetch before falling back to the committed
+# snapshot, and how long to pause between tries. The FAC host occasionally
+# answers a runner with a truncated / bot-challenged page (a ~7 KB body with no
+# schedule table) that LOOKS like a successful 200 — retrying clears it.
+FETCH_ATTEMPTS = 3
+FETCH_RETRY_WAIT = 3  # seconds
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -62,30 +71,56 @@ def gh_annotate(level: str, msg: str) -> None:
 # --------------------------------------------------------------------------- #
 # 1. Fetch
 # --------------------------------------------------------------------------- #
+def _looks_like_schedule_page(page: str) -> bool:
+    """A genuine schedule page must contain the TablePress table. A truncated or
+    bot-challenged 200 response (seen intermittently from the FAC host) does not,
+    so this guards against accepting one as a healthy fetch."""
+    return f'id="{TABLE_ID}"' in page
+
+
 def fetch_html() -> tuple[str, bool]:
     """Fetch the live page; fall back to the local raw HTML snapshot offline.
 
     Returns (html, used_live). `used_live` is False when the live fetch failed
     and the committed snapshot was used instead — a notify-worthy condition that
     must NOT silently pass as a healthy refresh.
+
+    The live fetch is retried a few times. A network error OR a 200 that doesn't
+    contain the schedule table (truncated/blocked response) both count as a failed
+    attempt, so a transient bad response no longer aborts the whole refresh.
     """
-    try:
-        req = urllib.request.Request(SOURCE_URL, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = resp.read().decode("utf-8", "replace")
-        print(f"Fetched live page ({len(data):,} bytes) from {SOURCE_URL}")
-        # Keep a fresh snapshot for offline rebuilds.
+    last_problem = "unknown error"
+    for attempt in range(1, FETCH_ATTEMPTS + 1):
         try:
-            RAW_FALLBACK.write_text(data, encoding="utf-8")
-        except OSError:
-            pass
-        return data, True
-    except Exception as exc:  # noqa: BLE001 — any network error → fall back
-        if RAW_FALLBACK.exists():
-            print(f"Live fetch failed ({exc}); using local {RAW_FALLBACK.name}")
-            return RAW_FALLBACK.read_text(encoding="utf-8"), False
-        print(f"ERROR: live fetch failed ({exc}) and no local fallback exists.")
-        sys.exit(1)
+            req = urllib.request.Request(SOURCE_URL, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = resp.read().decode("utf-8", "replace")
+            if not _looks_like_schedule_page(data):
+                last_problem = (f"200 response missing table #{TABLE_ID} "
+                                f"({len(data):,} bytes) — truncated or blocked")
+                print(f"Attempt {attempt}/{FETCH_ATTEMPTS}: {last_problem}")
+            else:
+                print(f"Fetched live page ({len(data):,} bytes) from {SOURCE_URL}"
+                      + (f" on attempt {attempt}" if attempt > 1 else ""))
+                # Keep a fresh snapshot for offline rebuilds.
+                try:
+                    RAW_FALLBACK.write_text(data, encoding="utf-8")
+                except OSError:
+                    pass
+                return data, True
+        except Exception as exc:  # noqa: BLE001 — any network error → retry/fall back
+            last_problem = str(exc)
+            print(f"Attempt {attempt}/{FETCH_ATTEMPTS} failed ({exc})")
+        if attempt < FETCH_ATTEMPTS:
+            time.sleep(FETCH_RETRY_WAIT)
+
+    if RAW_FALLBACK.exists():
+        print(f"Live fetch failed after {FETCH_ATTEMPTS} attempts "
+              f"({last_problem}); using local {RAW_FALLBACK.name}")
+        return RAW_FALLBACK.read_text(encoding="utf-8"), False
+    print(f"ERROR: live fetch failed after {FETCH_ATTEMPTS} attempts "
+          f"({last_problem}) and no local fallback exists.")
+    sys.exit(1)
 
 
 # --------------------------------------------------------------------------- #
@@ -452,12 +487,20 @@ def attach_descriptions(classes: list[dict], families: list[dict], descs: dict) 
     without a summary yet (e.g. a brand-new one) are skipped until one is written.
     """
     programs = (descs or {}).get("programs", {})
+    desc_source = (descs or {}).get("source", "https://www.lesmills.com/us/workouts/all")
 
     def published(rec: dict):
         summary = (rec.get("summary") or "").strip()
         if not summary:
             return None
-        return {"name": rec.get("name", ""), "text": summary, "url": rec.get("url", "")}
+        url = rec.get("url", "")
+        return {
+            "name": rec.get("name", ""),
+            "text": summary,
+            "url": url,
+            # Who the published copy is credited to + where the popup footer links.
+            "source": {"label": "Les Mills", "url": url or desc_source},
+        }
 
     used: dict[str, dict] = {}
     for c in classes:
@@ -477,6 +520,61 @@ def attach_descriptions(classes: list[dict], families: list[dict], descs: dict) 
             (only,) = tuple(present)
             if only in used:
                 f["descKey"] = only
+    return used
+
+
+def load_fac_descriptions() -> dict:
+    """Load committed FAC class descriptions (optional — feature degrades off)."""
+    if not FAC_DESCRIPTIONS_JSON.exists():
+        return {}
+    try:
+        return json.loads(FAC_DESCRIPTIONS_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:  # noqa: BLE001
+        print(f"WARN: could not read {FAC_DESCRIPTIONS_JSON.name}: {exc}")
+        return {}
+
+
+def attach_fac_descriptions(classes: list[dict], families: list[dict], fac: dict) -> dict:
+    """Attach FAC-sourced descriptions (our summaries of the club's own bullet
+    copy) to non-Les-Mills classes, keyed by `family`. Returns the descriptions
+    used, to be merged alongside the Les Mills ones.
+
+    A class only takes a FAC description when it doesn't already carry a Les Mills
+    one (Les Mills wins for the programs it covers, e.g. SHAPES). Published copy
+    is credited to FAC and the popup footer links back to the Strength & Cardio
+    page. As above, only our own `summary` is published — `source_bullets` are
+    reference-only and never embedded.
+    """
+    fac_classes = (fac or {}).get("classes", {})
+    fac_source = (fac or {}).get("source", SOURCE_URL)
+
+    def published(rec: dict):
+        summary = (rec.get("summary") or "").strip()
+        if not summary:
+            return None
+        url = rec.get("url", "") or fac_source
+        return {
+            "name": rec.get("name", ""),
+            "text": summary,
+            "url": url,
+            "source": {"label": "Fayetteville Athletic Club", "url": url},
+        }
+
+    used: dict[str, dict] = {}
+    for c in classes:
+        if c.get("descKey"):          # a Les Mills description already owns it
+            continue
+        rec = fac_classes.get(c["family"])
+        if rec:
+            pub = published(rec)
+            if pub:
+                c["descKey"] = c["family"]
+                used[c["family"]] = pub
+    # Every FAC description is keyed by family, so a family with copy can always
+    # speak for its legend swatch (no mixed-program ambiguity like Cycling).
+    for f in families:
+        if not f.get("descKey") and f["family"] in used:
+            f["descKey"] = f["family"]
     return used
 
 
@@ -556,6 +654,10 @@ def main() -> None:
     families = assign_family_colors(classes)
     descs = load_descriptions()
     used_descs = attach_descriptions(classes, families, descs)
+    # Layer FAC's own class descriptions on top for the non-Les-Mills classes
+    # (Les Mills already claimed its programs above, so those are skipped).
+    fac_descs = load_fac_descriptions()
+    used_descs.update(attach_fac_descriptions(classes, families, fac_descs))
 
     now = datetime.now()
     payload = {
@@ -579,7 +681,8 @@ def main() -> None:
     instrs = sorted({c["instructor"] for c in classes})
     print(f"Parsed {len(classes)} classes.")
     print(f"  {len(fams)} class families, {len(instrs)} instructors.")
-    print(f"  {len(used_descs)} Les Mills descriptions attached.")
+    print(f"  {len(used_descs)} class descriptions attached "
+          f"(Les Mills + FAC).")
     print(f"  Wrote {DATA_JSON.name} and {INDEX_HTML.name}.")
     print(f"  Last updated: {payload['updatedHuman']}")
 
@@ -1505,7 +1608,7 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     if (h) document.documentElement.style.setProperty("--header-h", h.offsetHeight + "px");
   }
 
-  // ---- Class description popover (Les Mills) ----
+  // ---- Class description popover (Les Mills + FAC) ----
   // A small tap/click popover: anchored next to the info button on wide screens,
   // a bottom sheet (with backdrop) on narrow ones.
   let descPop = null, descBack = null;
@@ -1529,14 +1632,17 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     const name = d.url
       ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.name) + '</a>'
       : esc(d.name);
-    const creditHref = d.url || DATA.descSource || "https://www.lesmills.com/";
+    // Each description carries its own credit (Les Mills or FAC). Fall back to
+    // Les Mills for older data.json that predates the `source` field.
+    const src = d.source ||
+      { label: "Les Mills", url: d.url || DATA.descSource || "https://www.lesmills.com/" };
     const pop = el("div", "desc-pop");
     pop.innerHTML =
       '<button type="button" class="desc-close" aria-label="Close">&times;</button>' +
       '<div class="desc-name">' + name + '</div>' +
       '<div class="desc-text">' + esc(d.text) + '</div>' +
-      '<div class="desc-credit">Source: <a href="' + esc(creditHref) +
-        '" target="_blank" rel="noopener">Les Mills</a></div>';
+      '<div class="desc-credit">Source: <a href="' + esc(src.url) +
+        '" target="_blank" rel="noopener">' + esc(src.label) + '</a></div>';
     const sheet = !!(window.matchMedia && window.matchMedia("(max-width: 760px)").matches);
     if (sheet) {
       descBack = el("div", "desc-backdrop");

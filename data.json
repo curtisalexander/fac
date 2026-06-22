@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-19T10:32:32",
-  "updatedHuman": "June 19, 2026 at 10:32 AM",
+  "updated": "2026-06-22T09:09:53",
+  "updatedHuman": "June 22, 2026 at 9:09 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -13,7 +13,8 @@
       "family": "BARRE",
       "label": "Barre",
       "color": "#0ea5e9",
-      "count": 3
+      "count": 3,
+      "descKey": "BARRE"
     },
     {
       "family": "CYCLING",
@@ -25,25 +26,29 @@
       "family": "DANCEFIIT",
       "label": "DanceFIIT",
       "color": "#14b8a6",
-      "count": 4
+      "count": 4,
+      "descKey": "DANCEFIIT"
     },
     {
       "family": "FAST_FEED",
       "label": "Fast Feed",
       "color": "#22c55e",
-      "count": 11
+      "count": 11,
+      "descKey": "FAST_FEED"
     },
     {
       "family": "FULL_BODY_TONE",
       "label": "Full Body Tone",
       "color": "#fb7185",
-      "count": 1
+      "count": 1,
+      "descKey": "FULL_BODY_TONE"
     },
     {
       "family": "HOT_CARDIO_SCULPT",
       "label": "Hot Cardio Sculpt",
       "color": "#3b82f6",
-      "count": 3
+      "count": 3,
+      "descKey": "HOT_CARDIO_SCULPT"
     },
     {
       "family": "BODYATTACK",
@@ -281,7 +286,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "MON",
@@ -320,7 +326,8 @@
         "Jodelle"
       ],
       "studio": "Large",
-      "color": "#0ea5e9"
+      "color": "#0ea5e9",
+      "descKey": "BARRE"
     },
     {
       "day": "MON",
@@ -339,7 +346,8 @@
         "Brooke R."
       ],
       "studio": "Small",
-      "color": "#3b82f6"
+      "color": "#3b82f6",
+      "descKey": "HOT_CARDIO_SCULPT"
     },
     {
       "day": "MON",
@@ -533,7 +541,8 @@
         "Ashley K."
       ],
       "studio": "Large",
-      "color": "#14b8a6"
+      "color": "#14b8a6",
+      "descKey": "DANCEFIIT"
     },
     {
       "day": "MON",
@@ -552,7 +561,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "TUE",
@@ -688,7 +698,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "TUE",
@@ -747,7 +758,8 @@
         "Bianca"
       ],
       "studio": "Large",
-      "color": "#14b8a6"
+      "color": "#14b8a6",
+      "descKey": "DANCEFIIT"
     },
     {
       "day": "TUE",
@@ -943,7 +955,8 @@
         "Brooke R."
       ],
       "studio": "Small",
-      "color": "#3b82f6"
+      "color": "#3b82f6",
+      "descKey": "HOT_CARDIO_SCULPT"
     },
     {
       "day": "TUE",
@@ -1001,7 +1014,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "WED",
@@ -1137,7 +1151,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "WED",
@@ -1293,7 +1308,8 @@
         "Kate"
       ],
       "studio": "Small",
-      "color": "#3b82f6"
+      "color": "#3b82f6",
+      "descKey": "HOT_CARDIO_SCULPT"
     },
     {
       "day": "WED",
@@ -1351,7 +1367,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "WED",
@@ -1408,7 +1425,8 @@
         "Melissa"
       ],
       "studio": "Large",
-      "color": "#fb7185"
+      "color": "#fb7185",
+      "descKey": "FULL_BODY_TONE"
     },
     {
       "day": "THU",
@@ -1525,7 +1543,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "THU",
@@ -1564,7 +1583,8 @@
         "Anne"
       ],
       "studio": "Large",
-      "color": "#14b8a6"
+      "color": "#14b8a6",
+      "descKey": "DANCEFIIT"
     },
     {
       "day": "THU",
@@ -1780,7 +1800,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "THU",
@@ -1896,7 +1917,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "FRI",
@@ -1936,7 +1958,8 @@
         "Kate"
       ],
       "studio": "Large",
-      "color": "#0ea5e9"
+      "color": "#0ea5e9",
+      "descKey": "BARRE"
     },
     {
       "day": "FRI",
@@ -2073,7 +2096,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "SAT",
@@ -2112,7 +2136,8 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e"
+      "color": "#22c55e",
+      "descKey": "FAST_FEED"
     },
     {
       "day": "SAT",
@@ -2189,7 +2214,8 @@
         "Ashley K."
       ],
       "studio": "Large",
-      "color": "#14b8a6"
+      "color": "#14b8a6",
+      "descKey": "DANCEFIIT"
     },
     {
       "day": "SUN",
@@ -2229,7 +2255,8 @@
         "Jordan"
       ],
       "studio": "Large",
-      "color": "#0ea5e9"
+      "color": "#0ea5e9",
+      "descKey": "BARRE"
     },
     {
       "day": "SUN",
@@ -2294,52 +2321,137 @@
     "BODYATTACK": {
       "name": "LES MILLS BODYATTACK",
       "text": "A high-energy cardio class built on athletic, explosive movement. Sports-style drills mixed with strength moves build all-round fitness, endurance and stamina.",
-      "url": "https://www.lesmills.com/us/workouts/bodyattack"
+      "url": "https://www.lesmills.com/us/workouts/bodyattack",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/bodyattack"
+      }
     },
     "BODYPUMP": {
       "name": "LES MILLS BODYPUMP",
       "text": "Les Mills' original barbell class: light-to-moderate weights and high repetitions work every major muscle group to build lean strength, tone up and burn calories — all set to motivating music.",
-      "url": "https://www.lesmills.com/us/workouts/bodypump"
+      "url": "https://www.lesmills.com/us/workouts/bodypump",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/bodypump"
+      }
     },
     "SHAPES": {
       "name": "LES MILLS SHAPES",
       "text": "A low-impact, high-output full-body class that blends sculpt training, Pilates and power yoga. It builds strength and shape without lifting heavy weights, in 30- or 45-minute formats.",
-      "url": "https://www.lesmills.com/us/workouts/les-mills-shapes"
+      "url": "https://www.lesmills.com/us/workouts/les-mills-shapes",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/les-mills-shapes"
+      }
     },
     "CEREMONY": {
       "name": "LES MILLS CEREMONY",
       "text": "Les Mills' HYROX-partnership class: high-performance strength and cardio training that moves you through eight functional workout stations. The coach-led, music-driven format builds strength, fitness and stamina, with the group's energy carrying you from one station to the next. (FAC runs it as Ceremony — Hyrox and Ceremony — Stations.)",
-      "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox"
+      "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox"
+      }
     },
     "GRIT": {
       "name": "LES MILLS GRIT",
       "text": "A 30-minute high-intensity interval workout that pushes you hard. Offered in Strength, Cardio and Athletic styles, it builds lean muscle, speed and stamina in a focused, coach-led session.",
-      "url": "https://www.lesmills.com/us/workouts/les-mills-grit"
+      "url": "https://www.lesmills.com/us/workouts/les-mills-grit",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/les-mills-grit"
+      }
     },
     "SPRINT": {
       "name": "LES MILLS SPRINT",
       "text": "A 30-minute high-intensity interval ride that delivers big results in little time. Science-backed bursts of hard effort and recovery push your limits on the bike.",
-      "url": "https://www.lesmills.com/us/workouts/sprint"
+      "url": "https://www.lesmills.com/us/workouts/sprint",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/sprint"
+      }
     },
     "RPM": {
       "name": "LES MILLS RPM",
       "text": "Les Mills' original indoor cycling class. Ride to the beat through science-backed intervals — low-impact but high-energy — setting your own intensity on the bike.",
-      "url": "https://www.lesmills.com/us/workouts/rpm"
+      "url": "https://www.lesmills.com/us/workouts/rpm",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/rpm"
+      }
     },
     "STRENGTH_DEVELOPMENT": {
       "name": "LES MILLS STRENGTH DEVELOPMENT",
       "text": "A science-backed, progressive resistance-training program done in a group setting. Steadily increasing the load over time builds real muscle and strength.",
-      "url": "https://www.lesmills.com/us/workouts/strength-development"
+      "url": "https://www.lesmills.com/us/workouts/strength-development",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/strength-development"
+      }
     },
     "CORE": {
       "name": "LES MILLS CORE",
       "text": "A short (30–45 minute) class that strengthens the muscles around your core — abs, glutes and back. Science-backed exercises build the stability and control that carry over to sport and everyday movement, and help guard against injury. (Formerly CXWORX.)",
-      "url": "https://www.lesmills.com/us/workouts/les-mills-core"
+      "url": "https://www.lesmills.com/us/workouts/les-mills-core",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/les-mills-core"
+      }
     },
     "TONE": {
       "name": "LES MILLS TONE",
       "text": "An all-round, full-body class mixing cardio, strength and core work. It's built to boost athleticism and movement control while helping you get fit and toned — a great everyday option.",
-      "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
+      "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
+      }
+    },
+    "FAST_FEED": {
+      "name": "Fast Feed Tennis",
+      "text": "A fast-paced, heart-racing 50-minute tennis workout in the Tennis Center — fun, social, and welcoming to all tennis levels. Fee-based class.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
+    },
+    "BARRE": {
+      "name": "Barre Intensity",
+      "text": "A 50-minute barre class blending Pilates and dance: controlled movements work muscles to fatigue while keeping the heart rate up, for a full upper- and lower-body workout.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
+    },
+    "HOT_CARDIO_SCULPT": {
+      "name": "Hot Cardio Sculpt",
+      "text": "A 50-minute heated yoga class that leans into cardio — a high-intensity flow built for intermediate-to-advanced participants. Bring a yoga mat and towel.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
+    },
+    "DANCEFIIT": {
+      "name": "DanceFIIT",
+      "text": "A high-energy, 50-minute dance-cardio class with strength-training intervals woven in — it lifts the mood while it tones and sculpts, and the high intensity keeps the calorie burn up throughout.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
+    },
+    "FULL_BODY_TONE": {
+      "name": "Full Body Tone",
+      "text": "A 50-minute early-morning class that combines barre and Pilates with cardio and light strength training — the barre-and-Pilates burn delivers full-body, head-to-toe results.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
     }
   },
   "descSource": "https://www.lesmills.com/us/workouts/all"
