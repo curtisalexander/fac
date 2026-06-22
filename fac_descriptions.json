@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T14:21:11",
+  "updated": "2026-06-22T09:30:03",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "note": "",
   "classes": {
@@ -115,6 +115,30 @@
         "Combines Barre & Pilates",
         "Cardio & Light Strength Training",
         "Barre & Pilates Burn for Results"
+      ]
+    },
+    "WAYMO_HYROX": {
+      "name": "WAYMO HYROX",
+      "summary": "A 50-minute cross-training class on the WAYMO court, led by a personal trainer. The workout rotates daily and builds strength, speed, and agility — an early-riser \"breakfast club\" way to start the day.",
+      "summary_origin": "agent",
+      "summary_updated": "2026-06-22",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source_bullets": [
+        "50-Minutes",
+        "Cross Training Class",
+        "Lead By Personal Trainer",
+        "Workouts Rotate Daily",
+        "Strength, Speed & Agility",
+        "Breakfast Club for Early Risers"
+      ],
+      "source_bullets_fetched": "2026-06-22",
+      "summary_source": [
+        "50-Minutes",
+        "Cross Training Class",
+        "Lead By Personal Trainer",
+        "Workouts Rotate Daily",
+        "Strength, Speed & Agility",
+        "Breakfast Club for Early Risers"
       ]
     }
   }

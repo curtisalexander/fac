@@ -83,9 +83,14 @@ USER_AGENT = (
 
 # --------------------------------------------------------------------------- #
 # Class registry: build.py *family* key -> how it shows up on fayac.com.
-# `name` is the display name we publish; `heading` is the exact heading text on
-# the Strength & Cardio page whose following bullet list we scrape. Keys must
-# match build.py's `family` values so build.py can attach by family.
+# `name` is the display name we publish. Each entry anchors its bullet list with
+# exactly one of:
+#   * `heading` — the exact text of the section's <h2>/<h3> heading; OR
+#   * `marker`  — a literal HTML substring identifying a section that uses a
+#     brand logo image instead of a text heading (e.g. WAYMO), since those have
+#     no heading text to match. The bullet <ul> immediately following the anchor
+#     is scraped either way.
+# Keys must match build.py's `family` values so build.py can attach by family.
 # --------------------------------------------------------------------------- #
 CLASSES = {
     "DANCEFIIT":         {"name": "DanceFIIT",         "heading": "DanceFIIT"},
@@ -93,6 +98,9 @@ CLASSES = {
     "FAST_FEED":         {"name": "Fast Feed Tennis",  "heading": "Fast Feed Tennis"},
     "BARRE":             {"name": "Barre Intensity",   "heading": "Barre Intensity"},
     "FULL_BODY_TONE":    {"name": "Full Body Tone",    "heading": "Full Body Tone"},
+    # WAYMO's section heads with the WAYMO court logo (widget class "of-cover
+    # waymo") rather than a text heading, so anchor on that class.
+    "WAYMO_HYROX":       {"name": "WAYMO HYROX",       "marker": "of-cover waymo"},
 }
 
 
@@ -112,25 +120,42 @@ def _clean(fragment: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def extract_bullets(page: str, heading: str) -> list[str]:
-    """Return the bullet list immediately following a class heading on the FAC
-    page. The page is Elementor markup: a heading widget (<h2>/<h3 class=
-    "elementor-heading-title ...">Name</h…>) followed shortly by a text-editor
-    widget holding a <ul><li>…</li></ul>. We locate the heading by its exact
-    text, then take the first <ul> within the next stretch of HTML (bounded so a
-    section with no bullets can't borrow the next section's list)."""
-    hm = re.search(
-        r"<h[1-4][^>]*elementor-heading-title[^>]*>\s*"
-        + re.escape(heading) + r"\s*</h[1-4]>",
-        page, re.IGNORECASE,
-    )
-    if not hm:
+def _anchor_end(page: str, meta: dict) -> int:
+    """Index just past a class section's anchor (its heading or image marker),
+    or -1 if not found. The bullet <ul> is scraped from here forward."""
+    heading = meta.get("heading")
+    if heading:
+        hm = re.search(
+            r"<h[1-4][^>]*elementor-heading-title[^>]*>\s*"
+            + re.escape(heading) + r"\s*</h[1-4]>",
+            page, re.IGNORECASE,
+        )
+        return hm.end() if hm else -1
+    marker = meta.get("marker")
+    if marker:
+        i = page.find(marker)
+        return i + len(marker) if i >= 0 else -1
+    return -1
+
+
+def extract_bullets(page: str, meta: dict) -> list[str]:
+    """Return the bullet list immediately following a class section's anchor on
+    the FAC page. The page is Elementor markup: each class is a heading widget
+    (<h2>/<h3 class="elementor-heading-title …">) — or, for brand-logo sections
+    like WAYMO, an image widget (class "of-cover …") — followed shortly by a
+    text-editor widget holding a <ul><li>…</li></ul>. We locate the anchor, then
+    take the first <ul> before the next section starts (bounded so a section
+    without its own bullets can't borrow the next one's list)."""
+    start = _anchor_end(page, meta)
+    if start < 0:
         return []
-    window = page[hm.end(): hm.end() + 2000]
-    # Don't cross into the next class's heading.
-    nxt = re.search(r"elementor-heading-title", window)
-    if nxt:
-        window = window[: nxt.start()]
+    window = page[start: start + 2500]
+    # Stop at the next section boundary — a text heading or another logo image —
+    # so we never spill into a neighbouring class's bullets.
+    for pat in (r"elementor-heading-title", r"of-cover"):
+        nxt = re.search(pat, window)
+        if nxt:
+            window = window[: nxt.start()]
     um = re.search(r"<ul\b[^>]*>(.*?)</ul>", window, re.IGNORECASE | re.DOTALL)
     if not um:
         return []
@@ -236,7 +261,7 @@ def main() -> None:
         rec.setdefault("source_bullets_fetched", None)
         rec.setdefault("summary_source", [])
 
-        fetched = extract_bullets(page, meta["heading"]) if page else []
+        fetched = extract_bullets(page, meta) if page else []
         if fetched:
             old = old_classes.get(key, {}).get("source_bullets", [])
             if not old:
@@ -245,7 +270,8 @@ def main() -> None:
                 bullets_changed.append(key)
             rec["source_bullets"] = fetched
             rec["source_bullets_fetched"] = today
-            print(f"  {key}: {len(fetched)} bullets from \"{meta['heading']}\"")
+            anchor = meta.get("heading") or meta.get("marker")
+            print(f"  {key}: {len(fetched)} bullets from \"{anchor}\"")
         else:
             # Keep the existing record untouched (no blanking on a flaky fetch).
             if old_classes.get(key, {}).get("source_bullets"):

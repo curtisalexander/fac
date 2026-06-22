@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-22T14:21:12",
-  "updatedHuman": "June 22, 2026 at 2:21 PM",
+  "updated": "2026-06-22T09:32:14",
+  "updatedHuman": "June 22, 2026 at 9:32 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -116,7 +116,8 @@
       "family": "WAYMO_HYROX",
       "label": "WAYMO HYROX",
       "color": "#eab308",
-      "count": 12
+      "count": 12,
+      "descKey": "WAYMO_HYROX"
     },
     {
       "family": "YOGA",
@@ -189,7 +190,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "MON",
@@ -405,7 +407,8 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "MON",
@@ -502,7 +505,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "MON",
@@ -817,7 +821,8 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "TUE",
@@ -995,7 +1000,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "TUE",
@@ -1054,7 +1060,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "WED",
@@ -1250,7 +1257,8 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "WED",
@@ -1348,7 +1356,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "WED",
@@ -1642,7 +1651,8 @@
         "Cate"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "THU",
@@ -1859,7 +1869,8 @@
         "Spencer"
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "FRI",
@@ -2037,7 +2048,8 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "SAT",
@@ -2176,7 +2188,8 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308"
+      "color": "#eab308",
+      "descKey": "WAYMO_HYROX"
     },
     {
       "day": "SAT",
@@ -2406,6 +2419,15 @@
       "source": {
         "label": "Les Mills",
         "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
+      }
+    },
+    "WAYMO_HYROX": {
+      "name": "WAYMO HYROX",
+      "text": "A 50-minute cross-training class on the WAYMO court, led by a personal trainer. The workout rotates daily and builds strength, speed, and agility — an early-riser \"breakfast club\" way to start the day.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
       }
     },
     "FAST_FEED": {
