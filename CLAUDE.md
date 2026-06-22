@@ -47,8 +47,10 @@ and **you (the agent) write the published `summary` from those bullets**. The
 tooltip footer credits "Fayetteville Athletic Club" and links back to that page.
 
 Records are keyed by **build.py `family`** (e.g. `BARRE`, `DANCEFIIT`), and the
-`CLASSES` registry in `fetch_fac_descriptions.py` maps each family to its FAC
-heading. A class only gets the FAC tooltip if Les Mills doesn't already cover it
+`CLASSES` registry in `fetch_fac_descriptions.py` anchors each family's bullet
+list by either a text `heading` or, for sections that head with a brand logo
+image instead of a heading (e.g. WAYMO → `marker: "of-cover waymo"`), an HTML
+`marker`. A class only gets the FAC tooltip if Les Mills doesn't already cover it
 (Les Mills wins for e.g. `SHAPES`). The stale check compares `source_bullets`
 against `summary_source` (a list), level-triggered just like Les Mills.
 
@@ -59,8 +61,8 @@ python3 fetch_fac_descriptions.py --reconcile DANCEFIIT BARRE   # or no args = a
 python3 build.py
 ```
 
-To add a class, add a `family -> heading` entry to `CLASSES`, re-run the fetcher,
-write a summary, reconcile, rebuild.
+To add a class, add a `family -> {heading|marker}` entry to `CLASSES`, re-run the
+fetcher, write a summary, reconcile, rebuild.
 
 ## CI
 
