@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T14:28:08",
+  "updated": "2026-06-22T13:02:25",
   "source": "https://www.lesmills.com/us/workouts/all",
   "note": "Les Mills program descriptions for the FAC schedule tooltips. PUBLISHED FIELD is `summary` (our own words, written by the coding agent) — that is the ONLY text rendered on the site. `source_text` holds the verbatim copy fetched from lesmills.com for REFERENCE ONLY and is never embedded into index.html/data.json. fetch_descriptions.py refreshes `source_text` and flags when it changes so the summary can be rewritten; it never overwrites `summary`. All tooltips credit and link back to Les Mills.",
   "programs": {
@@ -10,7 +10,7 @@
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/bodypump",
       "source_text": "BODYPUMP is the original barbell workout for strength and toning. Build lean muscle, burn calories, and get stronger with this proven group fitness class.",
-      "source_text_fetched": "2026-06-19",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "BODYPUMP is the original barbell workout for strength and toning. Build lean muscle, burn calories, and get stronger with this proven group fitness class."
     },
     "BODYATTACK": {
@@ -19,8 +19,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/bodyattack",
-      "source_text": "BODYATTACK is a high-energy cardio workout combining athletic training with explosive moves. Build fitness, endurance & stamina. Find a class or try online.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "BODYATTACK is a high-energy sports-inspired cardio workout. Build stamina and strength with athletic movements. Find a class near you today.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "BODYATTACK is a high-energy cardio workout combining athletic training with explosive moves. Build fitness, endurance & stamina. Find a class or try online."
     },
     "GRIT": {
@@ -29,8 +29,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/les-mills-grit",
-      "source_text": "30-minute high-intensity interval training that pushes you to the edge. GRIT Strength, Cardio & Athletic workouts build lean muscle, speed & stamina.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "Discover LES MILLS GRIT - high-intensity interval training workouts including GRIT Athletic, Cardio, and Strength. Push your limits with 30-minute HIIT classes.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "30-minute high-intensity interval training that pushes you to the edge. GRIT Strength, Cardio & Athletic workouts build lean muscle, speed & stamina."
     },
     "CORE": {
@@ -39,8 +39,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/les-mills-core",
-      "source_text": "Build core strength with LES MILLS CORE. Science-backed 30/45-min workout targeting abs, glutes & back. Improve stability, speed & injury prevention.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "Strengthen and sculpt your core with LES MILLS CORE. A targeted 30-minute workout combining functional exercises to build a stronger, more stable midsection.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "Build core strength with LES MILLS CORE. Science-backed 30/45-min workout targeting abs, glutes & back. Improve stability, speed & injury prevention."
     },
     "SHAPES": {
@@ -50,7 +50,7 @@
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/les-mills-shapes",
       "source_text": "Low-impact, high-output full-body workout combining sculpt training, Pilates, and power yoga. Build strength without lifting. 30/45 min classes.",
-      "source_text_fetched": "2026-06-19",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "Low-impact, high-output full-body workout combining sculpt training, Pilates, and power yoga. Build strength without lifting. 30/45 min classes."
     },
     "STRENGTH_DEVELOPMENT": {
@@ -59,8 +59,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/strength-development",
-      "source_text": "Les Mills STRENGTH DEVELOPMENT: Build muscle and increase strength with science-backed progressive resistance training in a group setting.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "Build strength with Strength Development, a Les Mills group fitness class. Find classes near you or train at home with LES MILLS+.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "Les Mills STRENGTH DEVELOPMENT: Build muscle and increase strength with science-backed progressive resistance training in a group setting."
     },
     "TONE": {
@@ -69,8 +69,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
-      "source_text": "LES MILLS TONE combines cardio, strength and core in one full-body workout. Boost athleticism, get fit and toned, and improve movement control.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "LES MILLS TONE combines strength and cardio for a full-body workout. Build lean muscle, improve fitness, and burn calories with this group fitness class.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "LES MILLS TONE combines cardio, strength and core in one full-body workout. Boost athleticism, get fit and toned, and improve movement control."
     },
     "CEREMONY": {
@@ -79,8 +79,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-19",
       "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox",
-      "source_text": "Discover LES MILLS x HYROX, the official group training partnership delivering science-backed functional workouts, race-ready training, and scalable gym solutions.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "CEREMONY HYROX combines functional strength and endurance training. Prepare for HYROX races with Les Mills expert-designed group fitness classes.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "Discover LES MILLS x HYROX, the official group training partnership delivering science-backed functional workouts, race-ready training, and scalable gym solutions."
     },
     "RPM": {
@@ -89,8 +89,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/rpm",
-      "source_text": "RPM is the original indoor cycling workout. Ride to the rhythm with science-backed cardio training. Low-impact, high-energy. Find a class or try on LES MILLS+.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "RPM is a high-energy indoor cycling workout set to music. Burn calories, build endurance, and improve cardiovascular fitness with Les Mills RPM.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "RPM is the original indoor cycling workout. Ride to the rhythm with science-backed cardio training. Low-impact, high-energy. Find a class or try on LES MILLS+."
     },
     "SPRINT": {
@@ -99,8 +99,8 @@
       "summary_origin": "agent",
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/sprint",
-      "source_text": "30-minute HIIT cycling workout that maximizes results in minimal time. Science-backed intervals push your limits. Find classes or try on LES MILLS+.",
-      "source_text_fetched": "2026-06-19",
+      "source_text": "LES MILLS SPRINT is a 30-minute high-intensity interval training (HIIT) indoor cycling workout. Burn calories fast with science-backed interval training.",
+      "source_text_fetched": "2026-06-22",
       "summary_source": "30-minute HIIT cycling workout that maximizes results in minimal time. Science-backed intervals push your limits. Find classes or try on LES MILLS+."
     }
   }
