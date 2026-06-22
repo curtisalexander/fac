@@ -61,6 +61,19 @@ python3 fetch_fac_descriptions.py --reconcile DANCEFIIT BARRE   # or no args = a
 python3 build.py
 ```
 
+### Watch list (classes FAC hasn't described yet)
+
+Scheduled families with **no** FAC description section yet (Aqua, Pilates, Young
+At Heart, Yoga, Precision Cycling) live in the `WATCH` registry. They are scraped
+every run using the headings FAC would likely use, but stay **silent** until copy
+appears — a still-empty watched family is *not* written to `fac_descriptions.json`,
+is *not* a miss, and triggers *no* CI drift (so registering them never alerts
+perpetually or affects the built page). The moment FAC publishes bullets for one,
+it flows into the normal `needs a summary` path → CI drift → notify, prompting a
+summary. To watch another family, add a `family -> {anchors: [...]}` entry to
+`WATCH`. (Mixed families like Cycling keep per-class tooltips; build.py only lets
+a family label its legend swatch when every class in it shares one FAC key.)
+
 To add a class, add a `family -> {heading|marker}` entry to `CLASSES`, re-run the
 fetcher, write a summary, reconcile, rebuild.
 

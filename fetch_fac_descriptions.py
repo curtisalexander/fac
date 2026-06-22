@@ -35,10 +35,14 @@ Usage:
 Notes:
   * Stdlib only — no `pip install`.
   * CLASSES below maps each build.py *family* key (so build.py can attach a
-    description straight to a family) to the heading text used on the FAC page.
+    description straight to a family) to the heading/marker used on the FAC page.
     Only classes that appear on the schedule belong here; classes on the page
     that FAC doesn't currently schedule (e.g. Cardio Pickleball, Progressive
-    Strength) are intentionally omitted and reported as unmapped.
+    Strength) are intentionally omitted.
+  * WATCH lists scheduled families FAC hasn't described yet. They are scraped but
+    stay silent (no record, no miss, no drift) until bullets appear, at which
+    point they flow into the normal "needs a summary" path. See the README/CLAUDE
+    notes for the rationale.
 """
 
 import argparse
@@ -103,6 +107,30 @@ CLASSES = {
     "WAYMO_HYROX":       {"name": "WAYMO HYROX",       "marker": "of-cover waymo"},
 }
 
+# Watch list: families that appear on the schedule but for which FAC publishes NO
+# description bullets yet (Aqua, Pilates, Young at Heart, Yoga, Precision
+# Cycling). They are scraped every run using the headings FAC would most likely
+# use, but stay SILENT until copy actually appears — registering them must not
+# alert CI perpetually, write any record into fac_descriptions.json, or otherwise
+# touch the built page. The moment bullets show up they flow into the normal
+# "needs a summary" path (drift -> CI notify) so we write one. `anchors` lists
+# the candidate headings to try, in order.
+WATCH = {
+    "AQUA":    {"name": "Aqua Aerobics",
+                "anchors": [{"heading": "Aqua Aerobics"}, {"heading": "Aqua"}]},
+    "PILATES": {"name": "Pilates",
+                "anchors": [{"heading": "Mat Pilates"}, {"heading": "Pilates Plus"},
+                            {"heading": "Pilates"}]},
+    "YAH":     {"name": "Young At Heart",
+                "anchors": [{"heading": "Young At Heart"}, {"heading": "Young at Heart"},
+                            {"heading": "YAH"}]},
+    "YOGA":    {"name": "Yoga",
+                "anchors": [{"heading": "Flow Yoga"}, {"heading": "Hot Flow Yoga"},
+                            {"heading": "Yoga"}]},
+    "CYCLING": {"name": "Precision Cycling",
+                "anchors": [{"heading": "Precision Cycling"}, {"heading": "Precision Cycle"}]},
+}
+
 
 # --------------------------------------------------------------------------- #
 # Fetching + parsing
@@ -138,15 +166,19 @@ def _anchor_end(page: str, meta: dict) -> int:
     return -1
 
 
-def extract_bullets(page: str, meta: dict) -> list[str]:
-    """Return the bullet list immediately following a class section's anchor on
-    the FAC page. The page is Elementor markup: each class is a heading widget
-    (<h2>/<h3 class="elementor-heading-title …">) — or, for brand-logo sections
-    like WAYMO, an image widget (class "of-cover …") — followed shortly by a
-    text-editor widget holding a <ul><li>…</li></ul>. We locate the anchor, then
-    take the first <ul> before the next section starts (bounded so a section
-    without its own bullets can't borrow the next one's list)."""
-    start = _anchor_end(page, meta)
+def _candidate_anchors(meta: dict) -> list[dict]:
+    """Anchors to try for a class, in order. An active class has one (its
+    `heading` or `marker`); a watched class may list several `anchors` candidates
+    (the headings/markers FAC might plausibly use when it publishes the copy)."""
+    if meta.get("anchors"):
+        return meta["anchors"]
+    one = {k: meta[k] for k in ("heading", "marker") if meta.get(k)}
+    return [one] if one else []
+
+
+def _bullets_at(page: str, anchor: dict) -> list[str]:
+    """Bullet list immediately following one anchor, or [] if not found."""
+    start = _anchor_end(page, anchor)
     if start < 0:
         return []
     window = page[start: start + 2500]
@@ -166,6 +198,20 @@ def extract_bullets(page: str, meta: dict) -> list[str]:
         if text:
             bullets.append(text)
     return bullets
+
+
+def extract_bullets(page: str, meta: dict) -> list[str]:
+    """Return the bullet list for a class on the FAC page. The page is Elementor
+    markup: each class is a heading widget (<h2>/<h3 class="elementor-heading-
+    title …">) — or, for brand-logo sections like WAYMO, an image widget (class
+    "of-cover …") — followed shortly by a text-editor widget holding a
+    <ul><li>…</li></ul>. We locate the anchor (trying each candidate for watched
+    classes), then take the first <ul> before the next section starts."""
+    for anchor in _candidate_anchors(meta):
+        bullets = _bullets_at(page, anchor)
+        if bullets:
+            return bullets
+    return []
 
 
 # --------------------------------------------------------------------------- #
@@ -280,6 +326,45 @@ def main() -> None:
                 misses.append(f"{key} (no bullets yet)")
         new_classes[key] = rec
 
+    # Watch list: scrape the not-yet-published families too, but stay silent
+    # until copy appears. A watched family that's still empty is NOT written to
+    # the file and NOT a miss/drift; one that has gained bullets is written and
+    # flows into the normal needs-a-summary path below.
+    pending_published, pending_quiet = [], []
+    for key, meta in WATCH.items():
+        if key in new_classes:
+            continue  # also defined as an active class — already handled above
+        fetched = extract_bullets(page, meta) if page else []
+        if not fetched:
+            # Preserve a record only if a prior run already captured bullets;
+            # otherwise leave it out of the file entirely (no empty placeholder).
+            if old_classes.get(key, {}).get("source_bullets"):
+                rec = dict(old_classes[key])
+                rec["name"] = rec.get("name") or meta["name"]
+                rec["url"] = SOURCE_URL
+                new_classes[key] = rec
+                misses.append(f"{key} (kept existing bullets)")
+            else:
+                pending_quiet.append(key)
+            continue
+        rec = dict(old_classes.get(key, {}))
+        rec.setdefault("name", meta["name"])
+        rec.setdefault("summary", "")
+        rec.setdefault("summary_origin", "")
+        rec.setdefault("summary_updated", None)
+        rec["url"] = SOURCE_URL
+        rec.setdefault("summary_source", [])
+        old = old_classes.get(key, {}).get("source_bullets", [])
+        if not old:
+            bullets_added.append(key)
+        elif old != fetched:
+            bullets_changed.append(key)
+        rec["source_bullets"] = fetched
+        rec["source_bullets_fetched"] = today
+        new_classes[key] = rec
+        pending_published.append(key)
+        print(f"  {key}: FAC now publishes {len(fetched)} bullets — needs a summary")
+
     # One-time migration / new-class init: when a summary exists but has no
     # recorded basis, adopt the current bullets as that basis.
     for r in new_classes.values():
@@ -307,6 +392,8 @@ def main() -> None:
     print(f"  summary may be stale: {', '.join(stale)           or '—'}")
     print(f"  removed:              {', '.join(removed)         or '—'}")
     print(f"  scrape misses:        {', '.join(misses)          or '—'}")
+    # Watched families with no FAC copy yet — informational only, never drift.
+    print(f"  watching (no copy):   {', '.join(pending_quiet)   or '—'}")
     if needs_summary or stale:
         affected = " ".join(sorted(set(needs_summary) | set(stale)))
         print("\n  → (Re)write `summary` for the above from `source_bullets`, then run:")

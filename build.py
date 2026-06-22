@@ -570,11 +570,19 @@ def attach_fac_descriptions(classes: list[dict], families: list[dict], fac: dict
             if pub:
                 c["descKey"] = c["family"]
                 used[c["family"]] = pub
-    # Every FAC description is keyed by family, so a family with copy can always
-    # speak for its legend swatch (no mixed-program ambiguity like Cycling).
+    # A family speaks for its legend swatch only when *every* class in it carries
+    # this one FAC key — so a mixed family (e.g. Cycling: Les Mills RPM/SPRINT
+    # plus FAC Precision Cycling) keeps per-class tooltips and isn't mislabeled.
+    by_family: dict[str, list] = {}
+    for c in classes:
+        by_family.setdefault(c["family"], []).append(c.get("descKey"))
     for f in families:
-        if not f.get("descKey") and f["family"] in used:
-            f["descKey"] = f["family"]
+        fam = f["family"]
+        if f.get("descKey") or fam not in used:
+            continue
+        keys = by_family.get(fam, [])
+        if keys and all(k == fam for k in keys):
+            f["descKey"] = fam
     return used
 
 
