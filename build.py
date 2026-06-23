@@ -1523,10 +1523,18 @@ INDEX_TEMPLATE = r"""<!DOCTYPE html>
     // the user opened by hand stays open regardless, so toggling a spotlight
     // doesn't reset their place on the page.
     if (COLLAPSE_DEFAULT) {
-      document.querySelectorAll(".group, .day-block").forEach(g => {
+      const sections = document.querySelectorAll(".group, .day-block");
+      // If the user has a section manually open in the visible view, keep the
+      // spotlight scoped to their choice: highlight within it but don't auto-open
+      // the other sections (offsetParent is null for sections in hidden views, so
+      // an open day in By Day doesn't suppress auto-open in By Time/By Class).
+      const anyUserOpen = Array.from(sections).some(
+        g => g.dataset.userOpen === "1" && g.offsetParent);
+      sections.forEach(g => {
         const userOpen = g.dataset.userOpen === "1";
         const collapse = !userOpen &&
-          (!filtering || !g.querySelector(".row.hl-match, .card.hl-match"));
+          (anyUserOpen || !filtering ||
+            !g.querySelector(".row.hl-match, .card.hl-match"));
         g.classList.toggle("collapsed", collapse);
         const caret = g.querySelector(".caret");
         if (caret) caret.textContent = collapse ? "▸" : "▾";
