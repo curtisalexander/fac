@@ -425,7 +425,7 @@
 </div>
 
 <footer class="site">
-  <div>Last updated: <b>June 22, 2026 at 10:01 AM</b></div>
+  <div>Last updated: <b>June 23, 2026 at 3:06 AM</b></div>
   <div class="note">
     Source: <a href="https://www.fayac.com/strength-and-cardio/" target="_blank" rel="noopener">Fayetteville Athletic Club</a>
     — schedule data scraped from the official FAC page. Unofficial reformatting for easier browsing.
@@ -435,8 +435,8 @@
 
 <script id="schedule-data" type="application/json">
 {
-  "updated": "2026-06-22T10:01:52",
-  "updatedHuman": "June 22, 2026 at 10:01 AM",
+  "updated": "2026-06-23T03:06:24",
+  "updatedHuman": "June 23, 2026 at 3:06 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -3302,10 +3302,18 @@
     // the user opened by hand stays open regardless, so toggling a spotlight
     // doesn't reset their place on the page.
     if (COLLAPSE_DEFAULT) {
-      document.querySelectorAll(".group, .day-block").forEach(g => {
+      const sections = document.querySelectorAll(".group, .day-block");
+      // If the user has a section manually open in the visible view, keep the
+      // spotlight scoped to their choice: highlight within it but don't auto-open
+      // the other sections (offsetParent is null for sections in hidden views, so
+      // an open day in By Day doesn't suppress auto-open in By Time/By Class).
+      const anyUserOpen = Array.from(sections).some(
+        g => g.dataset.userOpen === "1" && g.offsetParent);
+      sections.forEach(g => {
         const userOpen = g.dataset.userOpen === "1";
         const collapse = !userOpen &&
-          (!filtering || !g.querySelector(".row.hl-match, .card.hl-match"));
+          (anyUserOpen || !filtering ||
+            !g.querySelector(".row.hl-match, .card.hl-match"));
         g.classList.toggle("collapsed", collapse);
         const caret = g.querySelector(".caret");
         if (caret) caret.textContent = collapse ? "▸" : "▾";
