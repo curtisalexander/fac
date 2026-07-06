@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T12:35:16",
+  "updated": "2026-07-06T12:21:28",
   "source": "https://www.lesmills.com/us/workouts/all",
   "note": "Les Mills program descriptions for the FAC schedule tooltips. PUBLISHED FIELD is `summary` (our own words, written by the coding agent) — that is the ONLY text rendered on the site. `source_text` holds the verbatim copy fetched from lesmills.com for REFERENCE ONLY and is never embedded into index.html/data.json. fetch_descriptions.py refreshes `source_text` and flags when it changes so the summary can be rewritten; it never overwrites `summary`. All tooltips credit and link back to Les Mills.",
   "programs": {
@@ -10,7 +10,7 @@
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/bodypump",
       "source_text": "BODYPUMP is the original barbell workout for strength training. Build lean muscle, burn calories, and get fit with this proven group fitness class.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "BODYPUMP is the original barbell workout for strength and toning. Build lean muscle, burn calories, and get stronger with this proven group fitness class."
     },
     "BODYATTACK": {
@@ -20,7 +20,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/bodyattack",
       "source_text": "BODYATTACK is a high-energy sports-inspired cardio workout. Build strength and stamina with athletic movements. Find a class near you today.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "BODYATTACK is a high-energy sports-inspired cardio workout. Build stamina and strength with athletic movements. Find a class near you today."
     },
     "GRIT": {
@@ -30,7 +30,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/les-mills-grit",
       "source_text": "Discover LES MILLS GRIT - high-intensity interval training workouts including GRIT Athletic, Cardio, and Strength. Push your limits with 30-minute HIIT classes.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "Discover LES MILLS GRIT - high-intensity interval training workouts including GRIT Athletic, Cardio, and Strength. Push your limits with 30-minute HIIT classes."
     },
     "CORE": {
@@ -40,7 +40,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/les-mills-core",
       "source_text": "Strengthen and sculpt your core with LES MILLS CORE. A targeted 30-minute workout combining functional exercises to build a stronger, more stable midsection.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "Strengthen and sculpt your core with LES MILLS CORE. A targeted 30-minute workout combining functional exercises to build a stronger, more stable midsection."
     },
     "SHAPES": {
@@ -50,7 +50,7 @@
       "summary_updated": "2026-06-18",
       "url": "https://www.lesmills.com/us/workouts/les-mills-shapes",
       "source_text": "Low-impact, high-output full-body workout combining sculpt training, Pilates, and power yoga. Build strength without lifting. 30/45 min classes.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "Low-impact, high-output full-body workout combining sculpt training, Pilates, and power yoga. Build strength without lifting. 30/45 min classes."
     },
     "STRENGTH_DEVELOPMENT": {
@@ -60,7 +60,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/strength-development",
       "source_text": "Build strength with Strength Development, a Les Mills group fitness class. Find classes near you or train at home with LES MILLS+.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "Build strength with Strength Development, a Les Mills group fitness class. Find classes near you or train at home with LES MILLS+."
     },
     "TONE": {
@@ -70,7 +70,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
       "source_text": "LES MILLS TONE combines strength and cardio for a full-body workout. Build lean muscle, improve fitness, and burn calories with this group fitness class.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "LES MILLS TONE combines strength and cardio for a full-body workout. Build lean muscle, improve fitness, and burn calories with this group fitness class."
     },
     "CEREMONY": {
@@ -80,7 +80,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox",
       "source_text": "CEREMONY HYROX combines functional strength and endurance training. Prepare for HYROX races with Les Mills expert-designed group fitness classes.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "CEREMONY HYROX combines functional strength and endurance training. Prepare for HYROX races with Les Mills expert-designed group fitness classes."
     },
     "RPM": {
@@ -90,7 +90,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/rpm",
       "source_text": "RPM is a high-energy indoor cycling workout set to music. Burn calories, build endurance, and improve cardiovascular fitness with Les Mills RPM.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "RPM is a high-energy indoor cycling workout set to music. Burn calories, build endurance, and improve cardiovascular fitness with Les Mills RPM."
     },
     "SPRINT": {
@@ -100,7 +100,7 @@
       "summary_updated": "2026-06-22",
       "url": "https://www.lesmills.com/us/workouts/sprint",
       "source_text": "LES MILLS SPRINT is a 30-minute high-intensity interval training (HIIT) indoor cycling workout. Burn calories fast with science-backed interval training.",
-      "source_text_fetched": "2026-06-29",
+      "source_text_fetched": "2026-07-06",
       "summary_source": "LES MILLS SPRINT is a 30-minute high-intensity interval training (HIIT) indoor cycling workout. Burn calories fast with science-backed interval training."
     }
   }
