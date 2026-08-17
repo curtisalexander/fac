@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-10T11:54:29",
-  "updatedHuman": "August 10, 2026 at 11:54 AM",
+  "updated": "2026-08-17T11:32:49",
+  "updatedHuman": "August 17, 2026 at 11:32 AM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -12,15 +12,15 @@
     {
       "family": "BARRE",
       "label": "Barre",
-      "color": "#0ea5e9",
-      "count": 3,
+      "color": "#a855f7",
+      "count": 2,
       "descKey": "BARRE"
     },
     {
       "family": "CYCLING",
       "label": "Cycling",
       "color": "#f97316",
-      "count": 13
+      "count": 12
     },
     {
       "family": "DANCEFIIT",
@@ -32,21 +32,21 @@
     {
       "family": "FAST_FEED",
       "label": "Fast Feed",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "count": 11,
       "descKey": "FAST_FEED"
     },
     {
       "family": "FULL_BODY_TONE",
       "label": "Full Body Tone",
-      "color": "#fb7185",
+      "color": "#34d399",
       "count": 1,
       "descKey": "FULL_BODY_TONE"
     },
     {
       "family": "HOT_CARDIO_SCULPT",
       "label": "Hot Cardio Sculpt",
-      "color": "#3b82f6",
+      "color": "#0ea5e9",
       "count": 3,
       "descKey": "HOT_CARDIO_SCULPT"
     },
@@ -81,7 +81,7 @@
     {
       "family": "GRIT",
       "label": "Les Mills GRIT",
-      "color": "#6366f1",
+      "color": "#3b82f6",
       "count": 3,
       "descKey": "GRIT"
     },
@@ -102,33 +102,45 @@
     {
       "family": "TONE",
       "label": "Les Mills TONE",
-      "color": "#34d399",
-      "count": 1,
+      "color": "#fb7185",
+      "count": 2,
       "descKey": "TONE"
+    },
+    {
+      "family": "LM BODY BALANCE",
+      "label": "LM BODY BALANCE",
+      "color": "#facc15",
+      "count": 1
+    },
+    {
+      "family": "LM CEREMONY HYROX",
+      "label": "LM CEREMONY HYROX",
+      "color": "#a3e635",
+      "count": 1
     },
     {
       "family": "PILATES",
       "label": "Pilates",
-      "color": "#8b5cf6",
+      "color": "#6366f1",
       "count": 3
     },
     {
       "family": "WAYMO_HYROX",
       "label": "WAYMO HYROX",
-      "color": "#eab308",
-      "count": 12,
+      "color": "#22c55e",
+      "count": 11,
       "descKey": "WAYMO_HYROX"
     },
     {
       "family": "YOGA",
       "label": "Yoga",
-      "color": "#84cc16",
+      "color": "#eab308",
       "count": 12
     },
     {
       "family": "YAH",
       "label": "Young At Heart",
-      "color": "#a855f7",
+      "color": "#8b5cf6",
       "count": 3
     }
   ],
@@ -185,12 +197,12 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Spencer",
+      "instructor": "Ashley F.",
       "instructors": [
-        "Spencer"
+        "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -288,7 +300,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -318,18 +330,18 @@
       "time": "9:30 AM",
       "timeMin": 570,
       "bucket": "morning",
-      "classRaw": "Barre",
-      "family": "BARRE",
-      "familyLabel": "Barre",
-      "displayName": "Barre",
+      "classRaw": "LM TONE",
+      "family": "TONE",
+      "familyLabel": "Les Mills TONE",
+      "displayName": "Les Mills TONE",
       "reservationRequired": false,
-      "instructor": "Jodelle",
+      "instructor": "Betsy",
       "instructors": [
-        "Jodelle"
+        "Betsy"
       ],
       "studio": "Large",
-      "color": "#0ea5e9",
-      "descKey": "BARRE"
+      "color": "#fb7185",
+      "descKey": "TONE"
     },
     {
       "day": "MON",
@@ -343,12 +355,12 @@
       "familyLabel": "Hot Cardio Sculpt",
       "displayName": "Hot Cardio Sculpt",
       "reservationRequired": false,
-      "instructor": "Brooke R.",
+      "instructor": "Kate",
       "instructors": [
-        "Brooke R."
+        "Kate"
       ],
       "studio": "Small",
-      "color": "#3b82f6",
+      "color": "#0ea5e9",
       "descKey": "HOT_CARDIO_SCULPT"
     },
     {
@@ -368,7 +380,7 @@
         "Reuben"
       ],
       "studio": "Large",
-      "color": "#a855f7"
+      "color": "#8b5cf6"
     },
     {
       "day": "MON",
@@ -407,7 +419,7 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -427,7 +439,7 @@
         "Jamie"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "MON",
@@ -466,7 +478,7 @@
         "Ben P."
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "MON",
@@ -485,7 +497,7 @@
         "Mason"
       ],
       "studio": "Large",
-      "color": "#6366f1",
+      "color": "#3b82f6",
       "descKey": "GRIT"
     },
     {
@@ -500,12 +512,12 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Spencer",
+      "instructor": "Ashley F.",
       "instructors": [
-        "Spencer"
+        "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -515,18 +527,18 @@
       "time": "5:45 PM",
       "timeMin": 1065,
       "bucket": "evening",
-      "classRaw": "LM SPRINT",
+      "classRaw": "LM RPM",
       "family": "CYCLING",
       "familyLabel": "Cycling",
-      "displayName": "Les Mills SPRINT",
+      "displayName": "Les Mills RPM",
       "reservationRequired": false,
-      "instructor": "Ashley F.",
+      "instructor": "Jennifer C.",
       "instructors": [
-        "Ashley F."
+        "Jennifer C."
       ],
       "studio": "Cycle",
       "color": "#f97316",
-      "descKey": "SPRINT"
+      "descKey": "RPM"
     },
     {
       "day": "MON",
@@ -565,7 +577,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -614,17 +626,17 @@
       "time": "5:45 AM",
       "timeMin": 345,
       "bucket": "morning",
-      "classRaw": "Warm Morning Flow",
+      "classRaw": "Hot Power Flow",
       "family": "YOGA",
       "familyLabel": "Yoga",
-      "displayName": "Warm Morning Flow",
+      "displayName": "Hot Power Flow",
       "reservationRequired": false,
-      "instructor": "Lara",
+      "instructor": "Todd",
       "instructors": [
-        "Lara"
+        "Todd"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "TUE",
@@ -663,7 +675,7 @@
         "Caroline"
       ],
       "studio": "Court",
-      "color": "#6366f1",
+      "color": "#3b82f6",
       "descKey": "GRIT"
     },
     {
@@ -683,7 +695,7 @@
         "Liz"
       ],
       "studio": "Large",
-      "color": "#8b5cf6"
+      "color": "#6366f1"
     },
     {
       "day": "TUE",
@@ -702,7 +714,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -777,9 +789,9 @@
       "familyLabel": "Les Mills Strength Development",
       "displayName": "Les Mills Strength Development",
       "reservationRequired": false,
-      "instructor": "Susan",
+      "instructor": "Caroline",
       "instructors": [
-        "Susan"
+        "Caroline"
       ],
       "studio": "Large",
       "color": "#f43f5e",
@@ -802,7 +814,7 @@
         "Nicole"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "TUE",
@@ -821,7 +833,7 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -856,12 +868,12 @@
       "familyLabel": "Pilates",
       "displayName": "Mat Pilates",
       "reservationRequired": false,
-      "instructor": "Anna L.",
+      "instructor": "Bootsie",
       "instructors": [
-        "Anna L."
+        "Bootsie"
       ],
       "studio": "Small",
-      "color": "#8b5cf6"
+      "color": "#6366f1"
     },
     {
       "day": "TUE",
@@ -927,26 +939,6 @@
       "day": "TUE",
       "dayFull": "Tuesday",
       "dayIdx": 1,
-      "time": "5:00 PM",
-      "timeMin": 1020,
-      "bucket": "evening",
-      "classRaw": "LM RPM",
-      "family": "CYCLING",
-      "familyLabel": "Cycling",
-      "displayName": "Les Mills RPM",
-      "reservationRequired": false,
-      "instructor": "Virtual",
-      "instructors": [
-        "Virtual"
-      ],
-      "studio": "Cycle",
-      "color": "#f97316",
-      "descKey": "RPM"
-    },
-    {
-      "day": "TUE",
-      "dayFull": "Tuesday",
-      "dayIdx": 1,
       "time": "5:30 PM",
       "timeMin": 1050,
       "bucket": "evening",
@@ -955,13 +947,32 @@
       "familyLabel": "Hot Cardio Sculpt",
       "displayName": "Hot Cardio Sculpt",
       "reservationRequired": false,
-      "instructor": "Brooke R.",
+      "instructor": "Kate",
       "instructors": [
-        "Brooke R."
+        "Kate"
       ],
       "studio": "Small",
-      "color": "#3b82f6",
+      "color": "#0ea5e9",
       "descKey": "HOT_CARDIO_SCULPT"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM CEREMONY HYROX",
+      "family": "LM CEREMONY HYROX",
+      "familyLabel": "LM CEREMONY HYROX",
+      "displayName": "LM CEREMONY HYROX",
+      "reservationRequired": false,
+      "instructor": "Ashley F.",
+      "instructors": [
+        "Ashley F."
+      ],
+      "studio": "WAYMO",
+      "color": "#a3e635"
     },
     {
       "day": "TUE",
@@ -987,26 +998,6 @@
       "day": "TUE",
       "dayFull": "Tuesday",
       "dayIdx": 1,
-      "time": "5:30 PM",
-      "timeMin": 1050,
-      "bucket": "evening",
-      "classRaw": "WAYMO HYROX",
-      "family": "WAYMO_HYROX",
-      "familyLabel": "WAYMO HYROX",
-      "displayName": "WAYMO HYROX",
-      "reservationRequired": false,
-      "instructor": "Spencer",
-      "instructors": [
-        "Spencer"
-      ],
-      "studio": "WAYMO",
-      "color": "#eab308",
-      "descKey": "WAYMO_HYROX"
-    },
-    {
-      "day": "TUE",
-      "dayFull": "Tuesday",
-      "dayIdx": 1,
       "time": "6:00 PM",
       "timeMin": 1080,
       "bucket": "evening",
@@ -1020,7 +1011,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1055,12 +1046,12 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Spencer",
+      "instructor": "Ashley F.",
       "instructors": [
-        "Spencer"
+        "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -1158,7 +1149,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1173,9 +1164,9 @@
       "familyLabel": "Les Mills Ceremony",
       "displayName": "Les Mills Ceremony — Hyrox",
       "reservationRequired": false,
-      "instructor": "Emily",
+      "instructor": "Susan",
       "instructors": [
-        "Emily"
+        "Susan"
       ],
       "studio": "WAYMO",
       "color": "#f59e0b",
@@ -1198,7 +1189,7 @@
         "Jennifer R."
       ],
       "studio": "Large",
-      "color": "#34d399",
+      "color": "#fb7185",
       "descKey": "TONE"
     },
     {
@@ -1218,7 +1209,7 @@
         "Reuben"
       ],
       "studio": "Large",
-      "color": "#a855f7"
+      "color": "#8b5cf6"
     },
     {
       "day": "WED",
@@ -1257,7 +1248,7 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -1277,7 +1268,7 @@
         "Jennifer K."
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "WED",
@@ -1316,7 +1307,7 @@
         "Kate"
       ],
       "studio": "Small",
-      "color": "#3b82f6",
+      "color": "#0ea5e9",
       "descKey": "HOT_CARDIO_SCULPT"
     },
     {
@@ -1351,12 +1342,12 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Spencer",
+      "instructor": "Cate",
       "instructors": [
-        "Spencer"
+        "Cate"
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -1376,7 +1367,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1396,7 +1387,7 @@
         "Emily Ann"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "THU",
@@ -1429,12 +1420,12 @@
       "familyLabel": "Full Body Tone",
       "displayName": "Full Body Tone",
       "reservationRequired": false,
-      "instructor": "Melissa",
+      "instructor": "Kim P.",
       "instructors": [
-        "Melissa"
+        "Kim P."
       ],
       "studio": "Large",
-      "color": "#fb7185",
+      "color": "#34d399",
       "descKey": "FULL_BODY_TONE"
     },
     {
@@ -1444,17 +1435,17 @@
       "time": "5:45 AM",
       "timeMin": 345,
       "bucket": "morning",
-      "classRaw": "Warm Morning Flow",
+      "classRaw": "Hot Power Flow",
       "family": "YOGA",
       "familyLabel": "Yoga",
-      "displayName": "Warm Morning Flow",
+      "displayName": "Hot Power Flow",
       "reservationRequired": false,
-      "instructor": "Lara",
+      "instructor": "Todd",
       "instructors": [
-        "Lara"
+        "Todd"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "THU",
@@ -1493,7 +1484,7 @@
         "Caroline"
       ],
       "studio": "Small",
-      "color": "#6366f1",
+      "color": "#3b82f6",
       "descKey": "GRIT"
     },
     {
@@ -1513,7 +1504,7 @@
         "Liz"
       ],
       "studio": "Large",
-      "color": "#8b5cf6"
+      "color": "#6366f1"
     },
     {
       "day": "THU",
@@ -1552,7 +1543,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1632,7 +1623,7 @@
         "Catherine"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "THU",
@@ -1651,7 +1642,7 @@
         "Cate"
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -1661,18 +1652,18 @@
       "time": "Noon",
       "timeMin": 720,
       "bucket": "midday",
-      "classRaw": "LM SPRINT",
+      "classRaw": "LM RPM",
       "family": "CYCLING",
       "familyLabel": "Cycling",
-      "displayName": "Les Mills SPRINT",
+      "displayName": "Les Mills RPM",
       "reservationRequired": false,
-      "instructor": "Ashley F.",
+      "instructor": "Jennifer C.",
       "instructors": [
-        "Ashley F."
+        "Jennifer C."
       ],
       "studio": "Cycle",
       "color": "#f97316",
-      "descKey": "SPRINT"
+      "descKey": "RPM"
     },
     {
       "day": "THU",
@@ -1691,7 +1682,7 @@
         "Jennifer K."
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "THU",
@@ -1810,7 +1801,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1830,7 +1821,7 @@
         "Jill"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "FRI",
@@ -1864,12 +1855,12 @@
       "familyLabel": "WAYMO HYROX",
       "displayName": "WAYMO HYROX",
       "reservationRequired": false,
-      "instructor": "Spencer",
+      "instructor": "Ashley F.",
       "instructors": [
-        "Spencer"
+        "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -1928,7 +1919,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -1963,13 +1954,13 @@
       "familyLabel": "Barre",
       "displayName": "Barre Intensity",
       "reservationRequired": false,
-      "instructor": "Brooke R. / Kate",
+      "instructor": "Kate / Ann",
       "instructors": [
-        "Brooke R.",
-        "Kate"
+        "Kate",
+        "Ann"
       ],
       "studio": "Large",
-      "color": "#0ea5e9",
+      "color": "#a855f7",
       "descKey": "BARRE"
     },
     {
@@ -2009,7 +2000,26 @@
         "Reuben"
       ],
       "studio": "Large",
-      "color": "#a855f7"
+      "color": "#8b5cf6"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM BODY BALANCE",
+      "family": "LM BODY BALANCE",
+      "familyLabel": "LM BODY BALANCE",
+      "displayName": "LM BODY BALANCE",
+      "reservationRequired": false,
+      "instructor": "Tasha",
+      "instructors": [
+        "Tasha"
+      ],
+      "studio": "Small",
+      "color": "#facc15"
     },
     {
       "day": "FRI",
@@ -2048,7 +2058,7 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -2108,7 +2118,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -2148,7 +2158,7 @@
         "TBA"
       ],
       "studio": "Tennis",
-      "color": "#22c55e",
+      "color": "#84cc16",
       "descKey": "FAST_FEED"
     },
     {
@@ -2163,9 +2173,9 @@
       "familyLabel": "Les Mills BODYATTACK",
       "displayName": "Les Mills BODYATTACK",
       "reservationRequired": false,
-      "instructor": "Brooke R.",
+      "instructor": "Tasha",
       "instructors": [
-        "Brooke R."
+        "Tasha"
       ],
       "studio": "Large",
       "color": "#d946ef",
@@ -2188,7 +2198,7 @@
         "Ben G."
       ],
       "studio": "WAYMO",
-      "color": "#eab308",
+      "color": "#22c55e",
       "descKey": "WAYMO_HYROX"
     },
     {
@@ -2208,7 +2218,7 @@
         "Emily Ann"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "SAT",
@@ -2268,7 +2278,7 @@
         "Jordan"
       ],
       "studio": "Large",
-      "color": "#0ea5e9",
+      "color": "#a855f7",
       "descKey": "BARRE"
     },
     {
@@ -2278,17 +2288,18 @@
       "time": "1:30 PM",
       "timeMin": 810,
       "bucket": "midday",
-      "classRaw": "Precision Cycle",
+      "classRaw": "LM RPM",
       "family": "CYCLING",
       "familyLabel": "Cycling",
-      "displayName": "Precision Cycling",
+      "displayName": "Les Mills RPM",
       "reservationRequired": false,
-      "instructor": "Tiffany",
+      "instructor": "Jennifer C.",
       "instructors": [
-        "Tiffany"
+        "Jennifer C."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f97316",
+      "descKey": "RPM"
     },
     {
       "day": "SUN",
@@ -2307,7 +2318,7 @@
         "Jill"
       ],
       "studio": "Small",
-      "color": "#84cc16"
+      "color": "#eab308"
     },
     {
       "day": "SUN",
@@ -2367,6 +2378,15 @@
         "url": "https://www.lesmills.com/us/workouts/ceremony-hyrox"
       }
     },
+    "TONE": {
+      "name": "LES MILLS TONE",
+      "text": "An all-round, full-body class mixing cardio, strength and core work. It's built to boost athleticism and movement control while helping you get fit and toned — a great everyday option.",
+      "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
+      }
+    },
     "GRIT": {
       "name": "LES MILLS GRIT",
       "text": "A 30-minute high-intensity interval workout that pushes you hard. Offered in Strength, Cardio and Athletic styles, it builds lean muscle, speed and stamina in a focused, coach-led session.",
@@ -2374,15 +2394,6 @@
       "source": {
         "label": "Les Mills",
         "url": "https://www.lesmills.com/us/workouts/les-mills-grit"
-      }
-    },
-    "SPRINT": {
-      "name": "LES MILLS SPRINT",
-      "text": "A 30-minute high-intensity interval ride that delivers big results in little time. Science-backed bursts of hard effort and recovery push your limits on the bike.",
-      "url": "https://www.lesmills.com/us/workouts/sprint",
-      "source": {
-        "label": "Les Mills",
-        "url": "https://www.lesmills.com/us/workouts/sprint"
       }
     },
     "RPM": {
@@ -2403,6 +2414,15 @@
         "url": "https://www.lesmills.com/us/workouts/strength-development"
       }
     },
+    "SPRINT": {
+      "name": "LES MILLS SPRINT",
+      "text": "A 30-minute high-intensity interval ride that delivers big results in little time. Science-backed bursts of hard effort and recovery push your limits on the bike.",
+      "url": "https://www.lesmills.com/us/workouts/sprint",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/sprint"
+      }
+    },
     "CORE": {
       "name": "LES MILLS CORE",
       "text": "A short (30–45 minute) class that strengthens the muscles around your core — abs, glutes and back. Science-backed exercises build the stability and control that carry over to sport and everyday movement, and help guard against injury. (Formerly CXWORX.)",
@@ -2410,15 +2430,6 @@
       "source": {
         "label": "Les Mills",
         "url": "https://www.lesmills.com/us/workouts/les-mills-core"
-      }
-    },
-    "TONE": {
-      "name": "LES MILLS TONE",
-      "text": "An all-round, full-body class mixing cardio, strength and core work. It's built to boost athleticism and movement control while helping you get fit and toned — a great everyday option.",
-      "url": "https://www.lesmills.com/us/workouts/les-mills-tone",
-      "source": {
-        "label": "Les Mills",
-        "url": "https://www.lesmills.com/us/workouts/les-mills-tone"
       }
     },
     "WAYMO_HYROX": {
@@ -2433,15 +2444,6 @@
     "FAST_FEED": {
       "name": "Fast Feed Tennis",
       "text": "A fast-paced, heart-racing 50-minute tennis workout in the Tennis Center — fun, social, and welcoming to all tennis levels. Fee-based class.",
-      "url": "https://www.fayac.com/strength-and-cardio/",
-      "source": {
-        "label": "Fayetteville Athletic Club",
-        "url": "https://www.fayac.com/strength-and-cardio/"
-      }
-    },
-    "BARRE": {
-      "name": "Barre Intensity",
-      "text": "A 50-minute barre class blending Pilates and dance: controlled movements work muscles to fatigue while keeping the heart rate up, for a full upper- and lower-body workout.",
       "url": "https://www.fayac.com/strength-and-cardio/",
       "source": {
         "label": "Fayetteville Athletic Club",
@@ -2469,6 +2471,15 @@
     "FULL_BODY_TONE": {
       "name": "Full Body Tone",
       "text": "A 50-minute early-morning class that combines barre and Pilates with cardio and light strength training — the barre-and-Pilates burn delivers full-body, head-to-toe results.",
+      "url": "https://www.fayac.com/strength-and-cardio/",
+      "source": {
+        "label": "Fayetteville Athletic Club",
+        "url": "https://www.fayac.com/strength-and-cardio/"
+      }
+    },
+    "BARRE": {
+      "name": "Barre Intensity",
+      "text": "A 50-minute barre class blending Pilates and dance: controlled movements work muscles to fatigue while keeping the heart rate up, for a full upper- and lower-body workout.",
       "url": "https://www.fayac.com/strength-and-cardio/",
       "source": {
         "label": "Fayetteville Athletic Club",
