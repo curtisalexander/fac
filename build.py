@@ -22,6 +22,7 @@ import urllib.request
 from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 SOURCE_URL = "https://www.fayac.com/strength-and-cardio/"
 HERE = Path(__file__).resolve().parent
@@ -31,6 +32,7 @@ INDEX_HTML = HERE / "index.html"
 DESCRIPTIONS_JSON = HERE / "descriptions.json"
 FAC_DESCRIPTIONS_JSON = HERE / "fac_descriptions.json"
 TABLE_ID = "tablepress-3"
+CENTRAL_TIME = ZoneInfo("America/Chicago")
 
 # How many times to (re)try the live fetch before falling back to the committed
 # snapshot, and how long to pause between tries. The FAC host occasionally
@@ -667,10 +669,10 @@ def main() -> None:
     fac_descs = load_fac_descriptions()
     used_descs.update(attach_fac_descriptions(classes, families, fac_descs))
 
-    now = datetime.now()
+    now = datetime.now(CENTRAL_TIME)
     payload = {
         "updated": now.isoformat(timespec="seconds"),
-        "updatedHuman": now.strftime("%B %-d, %Y at %-I:%M %p"),
+        "updatedHuman": now.strftime("%B %-d, %Y at %-I:%M %p Central Time"),
         "source": SOURCE_URL,
         "families": families,
         "classes": classes,
