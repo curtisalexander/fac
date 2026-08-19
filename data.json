@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-17T11:32:49",
-  "updatedHuman": "August 17, 2026 at 11:32 AM",
+  "updated": "2026-08-19T15:26:43",
+  "updatedHuman": "August 19, 2026 at 3:26 PM",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -2344,7 +2344,7 @@
   "descriptions": {
     "BODYATTACK": {
       "name": "LES MILLS BODYATTACK",
-      "text": "A high-energy cardio class built on athletic, explosive movement. Sports-style drills mixed with strength moves build all-round fitness, endurance and stamina.",
+      "text": "A high-energy, sports-inspired cardio class combining athletic movements and dynamic drills to burn calories, build stamina and improve overall fitness.",
       "url": "https://www.lesmills.com/us/workouts/bodyattack",
       "source": {
         "label": "Les Mills",
@@ -2353,7 +2353,7 @@
     },
     "BODYPUMP": {
       "name": "LES MILLS BODYPUMP",
-      "text": "Les Mills' original barbell class: light-to-moderate weights and high repetitions work every major muscle group to build lean strength, tone up and burn calories — all set to motivating music.",
+      "text": "Les Mills' original barbell strength class uses high-repetition movements to work every major muscle group, build lean muscle, burn calories and improve overall fitness — all set to motivating music.",
       "url": "https://www.lesmills.com/us/workouts/bodypump",
       "source": {
         "label": "Les Mills",

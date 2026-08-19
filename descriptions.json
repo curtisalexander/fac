@@ -5,23 +5,23 @@
   "programs": {
     "BODYPUMP": {
       "name": "LES MILLS BODYPUMP",
-      "summary": "Les Mills' original barbell class: light-to-moderate weights and high repetitions work every major muscle group to build lean strength, tone up and burn calories — all set to motivating music.",
+      "summary": "Les Mills' original barbell strength class uses high-repetition movements to work every major muscle group, build lean muscle, burn calories and improve overall fitness — all set to motivating music.",
       "summary_origin": "agent",
-      "summary_updated": "2026-06-18",
+      "summary_updated": "2026-08-19",
       "url": "https://www.lesmills.com/us/workouts/bodypump",
       "source_text": "BODYPUMP is the original barbell workout for strength training. Build lean muscle, burn calories, and get fit with this proven group fitness class.",
       "source_text_fetched": "2026-08-17",
-      "summary_source": "BODYPUMP is the original barbell workout for strength and toning. Build lean muscle, burn calories, and get stronger with this proven group fitness class."
+      "summary_source": "BODYPUMP is the original barbell workout for strength training. Build lean muscle, burn calories, and get fit with this proven group fitness class."
     },
     "BODYATTACK": {
       "name": "LES MILLS BODYATTACK",
-      "summary": "A high-energy cardio class built on athletic, explosive movement. Sports-style drills mixed with strength moves build all-round fitness, endurance and stamina.",
+      "summary": "A high-energy, sports-inspired cardio class combining athletic movements and dynamic drills to burn calories, build stamina and improve overall fitness.",
       "summary_origin": "agent",
-      "summary_updated": "2026-06-22",
+      "summary_updated": "2026-08-19",
       "url": "https://www.lesmills.com/us/workouts/bodyattack",
       "source_text": "BODYATTACK is a high-energy sports-inspired cardio workout. Burn calories, build stamina, and get fit with this dynamic group fitness class.",
       "source_text_fetched": "2026-08-17",
-      "summary_source": "BODYATTACK is a high-energy sports-inspired cardio workout. Build stamina and strength with athletic movements. Find a class near you today."
+      "summary_source": "BODYATTACK is a high-energy sports-inspired cardio workout. Burn calories, build stamina, and get fit with this dynamic group fitness class."
     },
     "GRIT": {
       "name": "LES MILLS GRIT",
