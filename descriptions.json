@@ -23,6 +23,16 @@
       "source_text_fetched": "2026-09-21",
       "summary_source": "BODYATTACK is a high-energy sports-inspired cardio workout. Burn calories, build stamina, and get fit with this dynamic group fitness class."
     },
+    "BODYBALANCE": {
+      "name": "Les Mills Body Balance",
+      "summary": "A low-impact class blending yoga, tai chi and Pilates, set to music. Flowing movements, stretches and controlled breathing build strength, flexibility and balance while helping you relax and focus. Instructors offer options for different abilities, including beginners.",
+      "url": "https://www.lesmills.com/us/workouts/bodybalance",
+      "source_text": "BODYBALANCE combines yoga, tai chi and Pilates for a holistic mind-body workout. Improve flexibility, strength and mental wellbeing. Find a class near you.",
+      "source_text_fetched": "2026-09-26",
+      "summary_source": "BODYBALANCE combines yoga, tai chi and Pilates for a holistic mind-body workout. Improve flexibility, strength and mental wellbeing. Find a class near you.",
+      "summary_updated": "2026-09-26",
+      "summary_origin": "agent"
+    },
     "GRIT": {
       "name": "LES MILLS GRIT",
       "summary": "A 30-minute high-intensity interval workout that pushes you hard. Offered in Strength, Cardio and Athletic styles, it builds lean muscle, speed and stamina in a focused, coach-led session.",

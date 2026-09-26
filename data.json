@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-21T11:57:27-05:00",
-  "updatedHuman": "September 21, 2026 at 11:57 AM Central Time",
+  "updated": "2026-09-26T11:44:17-05:00",
+  "updatedHuman": "September 26, 2026 at 11:44 AM Central Time",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -19,7 +19,7 @@
     {
       "family": "CYCLING",
       "label": "Cycling",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "count": 12
     },
     {
@@ -51,6 +51,13 @@
       "descKey": "HOT_CARDIO_SCULPT"
     },
     {
+      "family": "BODYBALANCE",
+      "label": "Les Mills Body Balance",
+      "color": "#facc15",
+      "count": 1,
+      "descKey": "BODYBALANCE"
+    },
+    {
       "family": "BODYATTACK",
       "label": "Les Mills BODYATTACK",
       "color": "#d946ef",
@@ -67,8 +74,8 @@
     {
       "family": "CEREMONY",
       "label": "Les Mills Ceremony",
-      "color": "#f59e0b",
-      "count": 12,
+      "color": "#f97316",
+      "count": 13,
       "descKey": "CEREMONY"
     },
     {
@@ -105,18 +112,6 @@
       "color": "#fb7185",
       "count": 2,
       "descKey": "TONE"
-    },
-    {
-      "family": "LM BODY BALANCE",
-      "label": "LM BODY BALANCE",
-      "color": "#facc15",
-      "count": 1
-    },
-    {
-      "family": "LM CEREMONY HYROX",
-      "label": "LM CEREMONY HYROX",
-      "color": "#a3e635",
-      "count": 1
     },
     {
       "family": "PILATES",
@@ -281,7 +276,7 @@
         "Sharon"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f59e0b"
     },
     {
       "day": "MON",
@@ -320,7 +315,7 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -537,7 +532,7 @@
         "Jennifer C."
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -597,7 +592,7 @@
         "Liz"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f59e0b"
     },
     {
       "day": "TUE",
@@ -616,7 +611,7 @@
         "Kim P."
       ],
       "studio": "Large",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -655,7 +650,7 @@
         "Ashley F."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -754,7 +749,7 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -853,7 +848,7 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "SPRINT"
     },
     {
@@ -892,7 +887,7 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -932,7 +927,7 @@
         "Susan"
       ],
       "studio": "Large",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -962,25 +957,6 @@
       "time": "5:30 PM",
       "timeMin": 1050,
       "bucket": "evening",
-      "classRaw": "LM CEREMONY HYROX",
-      "family": "LM CEREMONY HYROX",
-      "familyLabel": "LM CEREMONY HYROX",
-      "displayName": "LM CEREMONY HYROX",
-      "reservationRequired": false,
-      "instructor": "Ashley F.",
-      "instructors": [
-        "Ashley F."
-      ],
-      "studio": "WAYMO",
-      "color": "#a3e635"
-    },
-    {
-      "day": "TUE",
-      "dayFull": "Tuesday",
-      "dayIdx": 1,
-      "time": "5:30 PM",
-      "timeMin": 1050,
-      "bucket": "evening",
       "classRaw": "LM BODY PUMP",
       "family": "BODYPUMP",
       "familyLabel": "Les Mills BODYPUMP",
@@ -993,6 +969,26 @@
       "studio": "Large",
       "color": "#ef4444",
       "descKey": "BODYPUMP"
+    },
+    {
+      "day": "TUE",
+      "dayFull": "Tuesday",
+      "dayIdx": 1,
+      "time": "5:30 PM",
+      "timeMin": 1050,
+      "bucket": "evening",
+      "classRaw": "LM CEREMONY HYROX",
+      "family": "CEREMONY",
+      "familyLabel": "Les Mills Ceremony",
+      "displayName": "Les Mills Ceremony — Hyrox",
+      "reservationRequired": false,
+      "instructor": "Ashley F.",
+      "instructors": [
+        "Ashley F."
+      ],
+      "studio": "WAYMO",
+      "color": "#f97316",
+      "descKey": "CEREMONY"
     },
     {
       "day": "TUE",
@@ -1130,7 +1126,7 @@
         "Sharon"
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f59e0b"
     },
     {
       "day": "WED",
@@ -1169,7 +1165,7 @@
         "Susan"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -1406,7 +1402,7 @@
         "Steve V."
       ],
       "studio": "Cycle",
-      "color": "#f97316"
+      "color": "#f59e0b"
     },
     {
       "day": "THU",
@@ -1464,7 +1460,7 @@
         "Susan"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -1523,7 +1519,7 @@
         "Rayna"
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -1662,7 +1658,7 @@
         "Jennifer C."
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -1701,7 +1697,7 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -1741,7 +1737,7 @@
         "Caroline"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -1761,7 +1757,7 @@
         "Steve"
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -1939,7 +1935,7 @@
         "Jennifer R."
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -2009,25 +2005,6 @@
       "time": "Noon",
       "timeMin": 720,
       "bucket": "midday",
-      "classRaw": "LM BODY BALANCE",
-      "family": "LM BODY BALANCE",
-      "familyLabel": "LM BODY BALANCE",
-      "displayName": "LM BODY BALANCE",
-      "reservationRequired": false,
-      "instructor": "Tasha",
-      "instructors": [
-        "Tasha"
-      ],
-      "studio": "Small",
-      "color": "#facc15"
-    },
-    {
-      "day": "FRI",
-      "dayFull": "Friday",
-      "dayIdx": 4,
-      "time": "Noon",
-      "timeMin": 720,
-      "bucket": "midday",
       "classRaw": "LM BODY PUMP",
       "family": "BODYPUMP",
       "familyLabel": "Les Mills BODYPUMP",
@@ -2040,6 +2017,26 @@
       "studio": "Large",
       "color": "#ef4444",
       "descKey": "BODYPUMP"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
+      "classRaw": "LM BODY BALANCE",
+      "family": "BODYBALANCE",
+      "familyLabel": "Les Mills Body Balance",
+      "displayName": "Les Mills Body Balance",
+      "reservationRequired": false,
+      "instructor": "Tasha",
+      "instructors": [
+        "Tasha"
+      ],
+      "studio": "Small",
+      "color": "#facc15",
+      "descKey": "BODYBALANCE"
     },
     {
       "day": "FRI",
@@ -2098,7 +2095,7 @@
         "Tiffany"
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -2138,7 +2135,7 @@
         "Betsy"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -2258,7 +2255,7 @@
         "Shannon"
       ],
       "studio": "WAYMO",
-      "color": "#f59e0b",
+      "color": "#f97316",
       "descKey": "CEREMONY"
     },
     {
@@ -2298,7 +2295,7 @@
         "Jennifer C."
       ],
       "studio": "Cycle",
-      "color": "#f97316",
+      "color": "#f59e0b",
       "descKey": "RPM"
     },
     {
@@ -2430,6 +2427,15 @@
       "source": {
         "label": "Les Mills",
         "url": "https://www.lesmills.com/us/workouts/les-mills-core"
+      }
+    },
+    "BODYBALANCE": {
+      "name": "Les Mills Body Balance",
+      "text": "A low-impact class blending yoga, tai chi and Pilates, set to music. Flowing movements, stretches and controlled breathing build strength, flexibility and balance while helping you relax and focus. Instructors offer options for different abilities, including beginners.",
+      "url": "https://www.lesmills.com/us/workouts/bodybalance",
+      "source": {
+        "label": "Les Mills",
+        "url": "https://www.lesmills.com/us/workouts/bodybalance"
       }
     },
     "WAYMO_HYROX": {

@@ -299,6 +299,8 @@ _M = {
     # --- BODYATTACK -------------------------------------------------------- #
     "LM BODY ATTACK": ("BODYATTACK", "Les Mills BODYATTACK", "Les Mills BODYATTACK"),
     "LM ATTACK 45": ("BODYATTACK", "Les Mills BODYATTACK", "Les Mills BODYATTACK (45)"),
+    # --- BODYBALANCE ------------------------------------------------------- #
+    "LM BODY BALANCE": ("BODYBALANCE", "Les Mills Body Balance", "Les Mills Body Balance"),
     # --- CYCLING ----------------------------------------------------------- #
     "LM RPM": ("CYCLING", "Cycling", "Les Mills RPM"),
     "LM SPRINT": ("CYCLING", "Cycling", "Les Mills SPRINT"),
@@ -313,6 +315,7 @@ _M = {
     "LM STRENGTH DEVELOPMENT": ("STRENGTH_DEV", "Les Mills Strength Development", "Les Mills Strength Development"),
     "LM TONE": ("TONE", "Les Mills TONE", "Les Mills TONE"),
     "LM CEREMONY H": ("CEREMONY", "Les Mills Ceremony", "Les Mills Ceremony — Hyrox"),
+    "LM CEREMONY HYROX": ("CEREMONY", "Les Mills Ceremony", "Les Mills Ceremony — Hyrox"),
     "LM CEREMONY S": ("CEREMONY", "Les Mills Ceremony", "Les Mills Ceremony — Stations"),
     # --- WAYMO HYROX ------------------------------------------------------- #
     "WAYMO HYROX": ("WAYMO_HYROX", "WAYMO HYROX", "WAYMO HYROX"),
@@ -354,6 +357,7 @@ _M = {
 _FAMILY_PROGRAM = {
     "BODYPUMP": "BODYPUMP",
     "BODYATTACK": "BODYATTACK",
+    "BODYBALANCE": "BODYBALANCE",
     "GRIT": "GRIT",
     "CORE": "CORE",
     "SHAPES": "SHAPES",

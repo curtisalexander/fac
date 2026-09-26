@@ -96,6 +96,11 @@ PROGRAMS = {
         "aliases": ["BODYATTACK", "BODY ATTACK"],
         "url": "https://www.lesmills.com/us/workouts/group-fitness/bodyattack/",
     },
+    "BODYBALANCE": {
+        "name": "Les Mills Body Balance",
+        "aliases": ["BODYBALANCE", "BODY BALANCE"],
+        "url": "https://www.lesmills.com/us/workouts/bodybalance",
+    },
     "GRIT": {
         "name": "LES MILLS GRIT",
         "aliases": ["GRIT", "LES MILLS GRIT"],
