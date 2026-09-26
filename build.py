@@ -300,7 +300,7 @@ _M = {
     "LM BODY ATTACK": ("BODYATTACK", "Les Mills BODYATTACK", "Les Mills BODYATTACK"),
     "LM ATTACK 45": ("BODYATTACK", "Les Mills BODYATTACK", "Les Mills BODYATTACK (45)"),
     # --- BODYBALANCE ------------------------------------------------------- #
-    "LM BODY BALANCE": ("BODYBALANCE", "Les Mills Body Balance", "Les Mills Body Balance"),
+    "LM BODY BALANCE": ("BODYBALANCE", "Les Mills BODYBALANCE", "Les Mills BODYBALANCE"),
     # --- CYCLING ----------------------------------------------------------- #
     "LM RPM": ("CYCLING", "Cycling", "Les Mills RPM"),
     "LM SPRINT": ("CYCLING", "Cycling", "Les Mills SPRINT"),

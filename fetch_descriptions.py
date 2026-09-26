@@ -97,7 +97,7 @@ PROGRAMS = {
         "url": "https://www.lesmills.com/us/workouts/group-fitness/bodyattack/",
     },
     "BODYBALANCE": {
-        "name": "Les Mills Body Balance",
+        "name": "LES MILLS BODYBALANCE",
         "aliases": ["BODYBALANCE", "BODY BALANCE"],
         "url": "https://www.lesmills.com/us/workouts/bodybalance",
     },

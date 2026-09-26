@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-26T11:44:17-05:00",
-  "updatedHuman": "September 26, 2026 at 11:44 AM Central Time",
+  "updated": "2026-09-26T11:58:39-05:00",
+  "updatedHuman": "September 26, 2026 at 11:58 AM Central Time",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -51,18 +51,18 @@
       "descKey": "HOT_CARDIO_SCULPT"
     },
     {
-      "family": "BODYBALANCE",
-      "label": "Les Mills Body Balance",
-      "color": "#facc15",
-      "count": 1,
-      "descKey": "BODYBALANCE"
-    },
-    {
       "family": "BODYATTACK",
       "label": "Les Mills BODYATTACK",
       "color": "#d946ef",
       "count": 2,
       "descKey": "BODYATTACK"
+    },
+    {
+      "family": "BODYBALANCE",
+      "label": "Les Mills BODYBALANCE",
+      "color": "#facc15",
+      "count": 1,
+      "descKey": "BODYBALANCE"
     },
     {
       "family": "BODYPUMP",
@@ -2005,6 +2005,26 @@
       "time": "Noon",
       "timeMin": 720,
       "bucket": "midday",
+      "classRaw": "LM BODY BALANCE",
+      "family": "BODYBALANCE",
+      "familyLabel": "Les Mills BODYBALANCE",
+      "displayName": "Les Mills BODYBALANCE",
+      "reservationRequired": false,
+      "instructor": "Tasha",
+      "instructors": [
+        "Tasha"
+      ],
+      "studio": "Small",
+      "color": "#facc15",
+      "descKey": "BODYBALANCE"
+    },
+    {
+      "day": "FRI",
+      "dayFull": "Friday",
+      "dayIdx": 4,
+      "time": "Noon",
+      "timeMin": 720,
+      "bucket": "midday",
       "classRaw": "LM BODY PUMP",
       "family": "BODYPUMP",
       "familyLabel": "Les Mills BODYPUMP",
@@ -2017,26 +2037,6 @@
       "studio": "Large",
       "color": "#ef4444",
       "descKey": "BODYPUMP"
-    },
-    {
-      "day": "FRI",
-      "dayFull": "Friday",
-      "dayIdx": 4,
-      "time": "Noon",
-      "timeMin": 720,
-      "bucket": "midday",
-      "classRaw": "LM BODY BALANCE",
-      "family": "BODYBALANCE",
-      "familyLabel": "Les Mills Body Balance",
-      "displayName": "Les Mills Body Balance",
-      "reservationRequired": false,
-      "instructor": "Tasha",
-      "instructors": [
-        "Tasha"
-      ],
-      "studio": "Small",
-      "color": "#facc15",
-      "descKey": "BODYBALANCE"
     },
     {
       "day": "FRI",
@@ -2430,7 +2430,7 @@
       }
     },
     "BODYBALANCE": {
-      "name": "Les Mills Body Balance",
+      "name": "LES MILLS BODYBALANCE",
       "text": "A low-impact class blending yoga, tai chi and Pilates, set to music. Flowing movements, stretches and controlled breathing build strength, flexibility and balance while helping you relax and focus. Instructors offer options for different abilities, including beginners.",
       "url": "https://www.lesmills.com/us/workouts/bodybalance",
       "source": {
