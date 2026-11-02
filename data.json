@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-26T12:15:06-05:00",
-  "updatedHuman": "October 26, 2026 at 12:15 PM Central Time",
+  "updated": "2026-11-02T14:42:28-06:00",
+  "updatedHuman": "November 2, 2026 at 2:42 PM Central Time",
   "source": "https://www.fayac.com/strength-and-cardio/",
   "families": [
     {
@@ -31,8 +31,8 @@
     {
       "family": "DANCEFIIT",
       "label": "DanceFIIT",
-      "color": "#14b8a6",
-      "count": 4,
+      "color": "#10b981",
+      "count": 5,
       "descKey": "DANCEFIIT"
     },
     {
@@ -101,7 +101,7 @@
     {
       "family": "SHAPES",
       "label": "Les Mills SHAPES",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "count": 5,
       "descKey": "SHAPES"
     },
@@ -229,7 +229,7 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "descKey": "SHAPES"
     },
     {
@@ -558,12 +558,12 @@
       "familyLabel": "DanceFIIT",
       "displayName": "DanceFIIT",
       "reservationRequired": false,
-      "instructor": "Ashley K.",
+      "instructor": "Anna B.",
       "instructors": [
-        "Ashley K."
+        "Anna B."
       ],
       "studio": "Large",
-      "color": "#14b8a6",
+      "color": "#10b981",
       "descKey": "DANCEFIIT"
     },
     {
@@ -740,7 +740,7 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "descKey": "SHAPES"
     },
     {
@@ -780,7 +780,7 @@
         "Bianca"
       ],
       "studio": "Large",
-      "color": "#14b8a6",
+      "color": "#10b981",
       "descKey": "DANCEFIIT"
     },
     {
@@ -1077,7 +1077,7 @@
         "Amanda"
       ],
       "studio": "Small",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "descKey": "SHAPES"
     },
     {
@@ -1388,12 +1388,32 @@
       "familyLabel": "Yoga",
       "displayName": "Hot Yoga Flow",
       "reservationRequired": false,
-      "instructor": "Emily Ann",
+      "instructor": "Lara",
       "instructors": [
-        "Emily Ann"
+        "Lara"
       ],
       "studio": "Small",
       "color": "#eab308"
+    },
+    {
+      "day": "WED",
+      "dayFull": "Wednesday",
+      "dayIdx": 2,
+      "time": "6:30 PM",
+      "timeMin": 1110,
+      "bucket": "evening",
+      "classRaw": "DanceFiit",
+      "family": "DANCEFIIT",
+      "familyLabel": "DanceFIIT",
+      "displayName": "DanceFIIT",
+      "reservationRequired": false,
+      "instructor": "Ashley K.",
+      "instructors": [
+        "Ashley K."
+      ],
+      "studio": "Large",
+      "color": "#10b981",
+      "descKey": "DANCEFIIT"
     },
     {
       "day": "THU",
@@ -1569,7 +1589,7 @@
         "Susan"
       ],
       "studio": "Small",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "descKey": "SHAPES"
     },
     {
@@ -1589,7 +1609,7 @@
         "Anne"
       ],
       "studio": "Large",
-      "color": "#14b8a6",
+      "color": "#10b981",
       "descKey": "DANCEFIIT"
     },
     {
@@ -1986,7 +2006,7 @@
         "Betsy"
       ],
       "studio": "Small",
-      "color": "#10b981",
+      "color": "#14b8a6",
       "descKey": "SHAPES"
     },
     {
@@ -2244,7 +2264,7 @@
         "Ashley K."
       ],
       "studio": "Large",
-      "color": "#14b8a6",
+      "color": "#10b981",
       "descKey": "DANCEFIIT"
     },
     {
